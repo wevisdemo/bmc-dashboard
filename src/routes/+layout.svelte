@@ -10,7 +10,10 @@
 	let { children } = $props();
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<svelte:head>
+	<link rel="icon" href={favicon} />
+	<title>BMC Dashboard</title>
+</svelte:head>
 
 <div class="wv-ibmplex flex h-full min-h-lvh flex-col">
 	<WvNavbar title="BMC Dashboard" />
