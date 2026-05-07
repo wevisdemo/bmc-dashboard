@@ -1,9 +1,21 @@
 <script lang="ts">
-	import './layout.css';
+	import WvNavbar from '@wevisdemo/ui/svelte/navbar.svelte';
+	import WvFooter from '@wevisdemo/ui/svelte/footer.svelte';
 	import favicon from '$lib/assets/favicon.svg';
+
+	import './layout.css';
+	import '@wevisdemo/ui/styles/navbar.css';
+	import '@wevisdemo/ui/styles/footer.css';
 
 	let { children } = $props();
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-{@render children()}
+
+<div class="wv-ibmplex flex h-full min-h-lvh flex-col">
+	<WvNavbar title="BMC Dashboard" />
+	<main class="flex-1">
+		{@render children()}
+	</main>
+	<WvFooter />
+</div>
