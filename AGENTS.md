@@ -9,3 +9,4 @@
   - Check type with `pnpm run check`
   - Lint with `pnpm run lint`, all errors and warnings must be fixed
   - Format code with `pnpm run format` before declaring task as done
+- Human will get in the loop and edit some file along the way. If you spot it, please respect those changes.
