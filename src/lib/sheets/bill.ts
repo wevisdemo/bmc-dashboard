@@ -22,7 +22,6 @@ const billSchema = Obj({
 	reason: Column('Reason', asString()),
 	output: Column('Output', asString()),
 	title: Column('Bill_Title', asString()),
-	mainTopics: Column('Topic_Main', asArray(asString())),
 	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
 	district: Column('District', asString()),
 	proposedDate: Column('Proposed_Date', asDate()),

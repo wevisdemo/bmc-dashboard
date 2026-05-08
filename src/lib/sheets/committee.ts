@@ -7,7 +7,6 @@ const committeeSchema = Object({
 	year: Column('year', asNumber()),
 	output: Column('Output', asString()),
 	committeeOutput: Column('committee_output', asString()),
-	mainTopics: Column('Topic_Main', asArray(asString()).optional()),
 	secondaryTopics: Column('Topic_Secondary', asArray(asString()).optional()),
 	district: Column('District', asString()),
 	committeeSuggestion: Column('Commitee_Suggestion', asString()),

@@ -5,7 +5,6 @@ const motionSchema = Object({
 	id: Column('id', asString()),
 	output: Column('Output', asString()),
 	title: Column('Motion_Title', asString()),
-	mainTopics: Column('Topic_Main', asArray(asString())),
 	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
 	district: Column('District', asString()),
 	proposer: Column('Proposer', asString()),
