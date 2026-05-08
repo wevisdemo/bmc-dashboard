@@ -20,7 +20,6 @@
 
 <a
 	{href}
-	target="_blank"
 	rel="external noopener noreferrer"
 	class="flex flex-row rounded border border-gray-300 bg-white p-4 transition-shadow hover:shadow-md"
 >
