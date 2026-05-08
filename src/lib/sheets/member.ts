@@ -7,7 +7,7 @@ const memberSchema = Object({
 	district: Column('District', asString()),
 	note: Column('Note', asString().optional()),
 	party: Column('Party', asString().optional()),
-	imageLink: Column('image_link', asString())
+	imageUrl: Column('image_link', asString().optional())
 });
 
 export type Member = StaticDecode<typeof memberSchema>;

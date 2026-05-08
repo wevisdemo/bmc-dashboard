@@ -37,7 +37,7 @@
 	<div class="relative">
 		<Combobox.Input
 			oninput={(e) => (searchValue = e.currentTarget.value)}
-			class="w-full border border-black px-2 py-1 placeholder:text-black"
+			class="w-full rounded-xs border border-black px-2 py-1 placeholder:text-black"
 			aria-label={label}
 			placeholder={value}
 			onclick={() => (open = true)}

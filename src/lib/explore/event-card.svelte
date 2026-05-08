@@ -5,13 +5,13 @@
 		title: string;
 		district: string;
 		topics: string[];
-		proposer: {
+		proposer?: {
 			name: string;
 			party?: string;
 			district?: string;
 			imageUrl?: string;
 		};
-		proposedDate: Date;
+		proposedDate?: Date;
 		href: string;
 	}
 
@@ -38,27 +38,35 @@
 
 		<h4 class="wv-h9 font-bold">{title}</h4>
 
-		<div class="flex flex-col gap-1">
-			<h5 class="font-bold text-neutral-600">ผู้เสนอ</h5>
-			<div class="flex flex-row items-center gap-2 text-sm text-gray-600">
-				{#if proposer.imageUrl}
-					<img src={proposer.imageUrl} alt={proposer.name} class="size-8 rounded-full" />
-				{/if}
-				<div class="flex flex-col gap-0.5">
-					<div class="flex flex-row gap-2">
-						<span class="wv-b5 font-bold">{proposer.name}</span>
-						{#if proposer.party}
-							<span class="rounded border border-neutral-400 px-1 pt-0.5">{proposer.party}</span>
-						{/if}
+		{#if proposer}
+			<div class="flex flex-col gap-1">
+				<h5 class="font-bold text-neutral-600">ผู้เสนอ</h5>
+				<div class="flex flex-row items-center gap-2 text-sm text-gray-600">
+					{#if proposer.imageUrl}
+						<img
+							src={proposer.imageUrl}
+							alt={proposer.name}
+							class="size-8 rounded-full object-cover object-top"
+						/>
+					{:else}
+						<div class="size-8 rounded-full bg-neutral-300"></div>
+					{/if}
+					<div class="flex flex-col gap-0.5">
+						<div class="flex flex-row gap-2">
+							<span class="wv-b5 font-bold">{proposer.name}</span>
+							{#if proposer.party}
+								<span class="rounded border border-neutral-400 px-1 pt-0.5">{proposer.party}</span>
+							{/if}
+						</div>
+						<p>
+							สก.เขต {proposer.district}{#if proposedDate}
+								| วันที่เสนอ {proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}
+							{/if}
+						</p>
 					</div>
-					<p>
-						สก.เขต {proposer.district} | วันที่เสนอ {proposedDate.toLocaleDateString('th-TH', {
-							dateStyle: 'long'
-						})}
-					</p>
 				</div>
 			</div>
-		</div>
+		{/if}
 	</div>
 	<ArrowUpRightIcon class="size-4 self-end" />
 </a>

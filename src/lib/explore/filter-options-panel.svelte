@@ -9,17 +9,21 @@
 		topicGroups: TopicGroup[];
 		selectedDistrict?: string;
 		selectedSecondaryTopics?: string[];
+		totalEvents: number;
 	}
 
 	let {
 		districts,
 		topicGroups,
 		selectedDistrict = $bindable(''),
-		selectedSecondaryTopics = $bindable([] as string[])
+		selectedSecondaryTopics = $bindable([] as string[]),
+		totalEvents
 	}: Props = $props();
 </script>
 
 <div class="flex w-72 flex-col gap-4">
+	<p class="wv-b6">รายการทั้งหมด <span class="font-bold">{totalEvents}</span></p>
+
 	<h4 class="wv-b5 font-bold">สำรวจตามเขตพื้นที่</h4>
 	<Combobox
 		name="district"
