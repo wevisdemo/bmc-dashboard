@@ -1,7 +1,6 @@
 <script lang="ts">
 	import WvNavbar from '@wevisdemo/ui/svelte/navbar.svelte';
 	import WvFooter from '@wevisdemo/ui/svelte/footer.svelte';
-	import favicon from '$lib/assets/favicon.svg';
 
 	import './layout.css';
 	import '@wevisdemo/ui/styles/navbar.css';
@@ -11,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/favicon.png" />
 	<title>BMC Dashboard</title>
 </svelte:head>
 
