@@ -36,10 +36,10 @@
 			{/each}
 		</div>
 
-		<h4 class="wv-h9 font-bold">{title}</h4>
+		<h4 class="wv-h9 wv-kondolar font-bold">{title}</h4>
 
 		{#if proposer}
-			<div class="flex flex-col gap-1">
+			<div class="flex flex-col">
 				<h5 class="font-bold text-neutral-600">ผู้เสนอ</h5>
 				<div class="flex flex-row items-center gap-2 text-sm text-gray-600">
 					{#if proposer.imageUrl}

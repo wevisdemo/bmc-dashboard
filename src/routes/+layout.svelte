@@ -14,9 +14,9 @@
 	<title>BMC Dashboard</title>
 </svelte:head>
 
-<div class="wv-ibmplex flex h-full min-h-lvh flex-col">
+<div class="flex h-full min-h-lvh flex-col">
 	<WvNavbar title="BMC Dashboard" />
-	<main class="flex-1">
+	<main class="wv-ibmplexlooped flex-1">
 		{@render children()}
 	</main>
 	<WvFooter />

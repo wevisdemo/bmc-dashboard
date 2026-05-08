@@ -29,7 +29,7 @@
 		bind:selectedSecondaryTopics
 	/>
 	<div class="flex flex-1 flex-col gap-3">
-		<h2 class="wv-h6 font-bold">กระทู้</h2>
+		<h2 class="wv-h6 wv-kondolar font-bold">กระทู้</h2>
 		{#each filteredEvents as event (event.id)}
 			<EventCard {...event} />
 		{/each}
