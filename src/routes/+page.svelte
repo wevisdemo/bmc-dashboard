@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { watch } from 'runed';
 	import FilterOptionsPanel from '$lib/explore/filter-options-panel.svelte';
+	import Overview from '$lib/explore/overview.svelte';
 	import EventCard from '$lib/explore/event-card.svelte';
 	import Pagination from '$lib/inputs/pagination.svelte';
 
@@ -22,6 +23,21 @@
 
 	let paginatedEvents = $derived(
 		filteredEvents.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE)
+	);
+
+	let mainTopicCounts = $derived(
+		Object.entries(
+			filteredEvents
+				.flatMap((e) => e.topics)
+				.reduce(
+					(acc, t) => {
+						const main = data.secondaryToMain.get(t);
+						if (main) acc[main] = (acc[main] ?? 0) + 1;
+						return acc;
+					},
+					{} as Record<string, number>
+				)
+		).map(([topic, count]) => ({ topic, count }))
 	);
 
 	watch.pre(
@@ -46,6 +62,7 @@
 		bind:selectedSecondaryTopics
 	/>
 	<div class="flex flex-1 flex-col gap-3">
+		<Overview {mainTopicCounts} {selectedDistrict} />
 		<h2 class="wv-h6 wv-kondolar font-bold">กระทู้</h2>
 		{#each paginatedEvents as event (event.id)}
 			<EventCard {...event} />
