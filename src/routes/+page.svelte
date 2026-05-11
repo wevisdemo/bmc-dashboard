@@ -51,7 +51,7 @@
 		<div class="grid grid-cols-2 rounded-lg border border-gray-300">
 			<div class="flex flex-col gap-6 border-r border-gray-300 px-4 py-3">
 				<h3 class="wv-b3 wv-kondolar font-bold">แบ่งตามเขต</h3>
-				<DistrictOverview events={filteredEvents} />
+				<DistrictOverview events={filteredEvents} bind:selectedDistrict />
 			</div>
 			<div class="wv-b6 flex flex-col gap-6 px-4 py-3">
 				<div class="flex flex-col gap-1">
@@ -59,7 +59,11 @@
 					<p class="text-gray-500">*1 หัวข้อ เกี่ยวข้องได้มากกว่า 1 ประเด็น</p>
 					<p class="font-bold">• {selectedDistrict}</p>
 				</div>
-				<TopicOverview events={filteredEvents} secondaryToMainTopic={data.secondaryToMainTopic} />
+				<TopicOverview
+					events={filteredEvents}
+					topicGroups={data.topicGroups}
+					bind:selectedSecondaryTopics
+				/>
 			</div>
 		</div>
 		<h2 class="wv-h6 wv-kondolar font-bold">กระทู้</h2>

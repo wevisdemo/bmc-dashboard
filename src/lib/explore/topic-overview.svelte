@@ -4,10 +4,17 @@
 
 	interface Props {
 		events: Event[];
-		secondaryToMainTopic: Map<string, string>;
+		topicGroups: { main: string; secondaries: string[] }[];
+		selectedSecondaryTopics: string[];
 	}
 
-	let { events, secondaryToMainTopic }: Props = $props();
+	let { events, topicGroups, selectedSecondaryTopics = $bindable() }: Props = $props();
+
+	const secondaryToMainTopic = $derived(
+		new Map(topicGroups.flatMap((g) => g.secondaries.map((s) => [s, g.main])))
+	);
+
+	const allSecondaryTopics = $derived(topicGroups.flatMap((g) => g.secondaries));
 
 	let topicCounts = $derived(
 		Object.entries(
@@ -27,19 +34,35 @@
 	let maxTopicCount = $derived(Math.max(...topicCounts.map((t) => t.count)));
 </script>
 
-<div class="mx-3 mb-6 flex flex-col gap-5">
-	{#each topicCounts.toSorted((a, b) => b.count - a.count) as item (item.topic)}
-		<div animate:flip={{ duration: 300 }} class="flex flex-col gap-1">
+<div class="mb-6 flex flex-col gap-1">
+	{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
+		{@const isActive = selectedSecondaryTopics.some(
+			(sec) => secondaryToMainTopic.get(sec) === topic
+		)}
+		<button
+			animate:flip={{ duration: 300 }}
+			class="flex flex-col gap-1 rounded-sm transition-colors border p-2 hover:bg-gray-100 {isActive
+				? 'border-gray-300'
+				: 'border-transparent'}"
+			onclick={() => {
+				if (isActive && selectedSecondaryTopics.length !== allSecondaryTopics.length) {
+					selectedSecondaryTopics = allSecondaryTopics;
+				} else {
+					const group = topicGroups.find((g) => g.main === topic);
+					if (group) selectedSecondaryTopics = group.secondaries;
+				}
+			}}
+		>
 			<div class="flex flex-row justify-between text-sm font-bold">
-				<span>{item.topic}</span>
-				<span class="tabular-nums">{item.count}</span>
+				<span>{topic}</span>
+				<span class="tabular-nums">{count}</span>
 			</div>
 			<div class="h-2 w-full rounded-xs border border-gray-300 bg-gray-200">
 				<div
 					class="h-full rounded-xs bg-gray-500 transition-[width] duration-300"
-					style="width:{(item.count / maxTopicCount) * 100}%"
+					style="width:{(count / maxTopicCount) * 100}%"
 				></div>
 			</div>
-		</div>
+		</button>
 	{/each}
 </div>
