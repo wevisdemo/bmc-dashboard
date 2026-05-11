@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { watch } from 'runed';
 	import FilterOptionsPanel from '$lib/explore/filter-options-panel.svelte';
 	import EventCard from '$lib/explore/event-card.svelte';
 	import Pagination from '$lib/inputs/pagination.svelte';
@@ -23,12 +24,13 @@
 		filteredEvents.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE)
 	);
 
-	$effect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		((..._args: unknown[]) => {})(selectedDistrict, selectedSecondaryTopics);
-		// Reset to page 1 whenever filters change
-		currentPage = 1;
-	});
+	watch.pre(
+		[() => selectedDistrict, () => $state.snapshot(selectedSecondaryTopics)],
+		() => {
+			currentPage = 1;
+		},
+		{ lazy: true }
+	);
 
 	function initTopics() {
 		return data.topicGroups.flatMap((g) => g.secondaries);
