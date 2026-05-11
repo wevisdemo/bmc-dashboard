@@ -1,10 +1,9 @@
 <script lang="ts">
-	import WvNavbar from '@wevisdemo/ui/svelte/navbar.svelte';
-	import WvFooter from '@wevisdemo/ui/svelte/footer.svelte';
-
-	import './layout.css';
-	import '@wevisdemo/ui/styles/navbar.css';
 	import '@wevisdemo/ui/styles/footer.css';
+	import '@wevisdemo/ui/styles/navbar.css';
+	import WvFooter from '@wevisdemo/ui/svelte/footer.svelte';
+	import WvNavbar from '@wevisdemo/ui/svelte/navbar.svelte';
+	import './layout.css';
 
 	let { children } = $props();
 </script>

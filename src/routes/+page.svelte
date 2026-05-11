@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { watch } from 'runed';
-	import FilterOptionsPanel from '$lib/explore/filter-options-panel.svelte';
 	import DistrictOverview from '$lib/explore/district-overview.svelte';
-	import TopicOverview from '$lib/explore/topic-overview.svelte';
 	import EventCard from '$lib/explore/event-card.svelte';
+	import FilterOptionsPanel from '$lib/explore/filter-options-panel.svelte';
+	import TopicOverview from '$lib/explore/topic-overview.svelte';
 	import Pagination from '$lib/inputs/pagination.svelte';
 
 	const PER_PAGE = 10;

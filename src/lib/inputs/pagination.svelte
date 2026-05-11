@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Pagination } from 'bits-ui';
 	import CaretLeftIcon from 'phosphor-svelte/lib/CaretLeftIcon';
 	import CaretRightIcon from 'phosphor-svelte/lib/CaretRightIcon';
+	import { Pagination } from 'bits-ui';
 
 	interface Props {
 		count: number;

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Combobox } from 'bits-ui';
 	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import type { ComponentProps } from 'svelte';
+	import { Combobox } from 'bits-ui';
 
 	interface Props {
 		name: string;

@@ -3,8 +3,8 @@
 	import { scaleLinear } from 'd3-scale';
 	import { interpolateYlGn } from 'd3-scale-chromatic';
 	import type { FeatureCollection, Feature } from 'geojson';
-	import bangkokData from './bangkok-districts.json';
 	import type { Event } from '../../routes/+page.server';
+	import bangkokData from './bangkok-districts.json';
 
 	const CANVAS_WIDTH = 280;
 	const CANVAS_HEIGHT = 220;

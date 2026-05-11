@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Checkbox, Label } from 'bits-ui';
 	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
 	import MinusIcon from 'phosphor-svelte/lib/MinusIcon';
 	import type { Snippet } from 'svelte';
+	import { Checkbox, Label } from 'bits-ui';
 
 	interface Props {
 		name: string;
