@@ -21,7 +21,7 @@
 	}: Props = $props();
 </script>
 
-<div class="flex w-72 flex-col gap-4">
+<div class="flex w-64 flex-col gap-4">
 	<p class="wv-b6">รายการทั้งหมด <span class="font-bold">{totalEvents}</span></p>
 
 	<h4 class="wv-b5 font-bold">สำรวจตามเขตพื้นที่</h4>

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { watch } from 'runed';
 	import FilterOptionsPanel from '$lib/explore/filter-options-panel.svelte';
-	import Overview from '$lib/explore/overview.svelte';
+	import DistrictOverview from '$lib/explore/district-overview.svelte';
+	import TopicOverview from '$lib/explore/topic-overview.svelte';
 	import EventCard from '$lib/explore/event-card.svelte';
 	import Pagination from '$lib/inputs/pagination.svelte';
 
@@ -25,21 +26,6 @@
 		filteredEvents.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE)
 	);
 
-	let mainTopicCounts = $derived(
-		Object.entries(
-			filteredEvents
-				.flatMap((e) => e.topics)
-				.reduce(
-					(acc, t) => {
-						const main = data.secondaryToMain.get(t);
-						if (main) acc[main] = (acc[main] ?? 0) + 1;
-						return acc;
-					},
-					{} as Record<string, number>
-				)
-		).map(([topic, count]) => ({ topic, count }))
-	);
-
 	watch.pre(
 		[() => selectedDistrict, () => $state.snapshot(selectedSecondaryTopics)],
 		() => {
@@ -53,7 +39,7 @@
 	}
 </script>
 
-<div class="mx-auto flex max-w-5xl flex-row gap-4 p-4">
+<div class="mx-auto flex max-w-6xl flex-row gap-4 p-4">
 	<FilterOptionsPanel
 		districts={data.districts}
 		topicGroups={data.topicGroups}
@@ -62,7 +48,20 @@
 		bind:selectedSecondaryTopics
 	/>
 	<div class="flex flex-1 flex-col gap-3">
-		<Overview {mainTopicCounts} {selectedDistrict} />
+		<div class="grid grid-cols-2 rounded-lg border border-gray-300">
+			<div class="flex flex-col gap-6 border-r border-gray-300 px-4 py-3">
+				<h3 class="wv-b3 wv-kondolar font-bold">แบ่งตามเขต</h3>
+				<DistrictOverview events={filteredEvents} />
+			</div>
+			<div class="wv-b6 flex flex-col gap-6 px-4 py-3">
+				<div class="flex flex-col gap-1">
+					<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
+					<p class="text-gray-500">*1 หัวข้อ เกี่ยวข้องได้มากกว่า 1 ประเด็น</p>
+					<p class="font-bold">• {selectedDistrict}</p>
+				</div>
+				<TopicOverview events={filteredEvents} secondaryToMainTopic={data.secondaryToMainTopic} />
+			</div>
+		</div>
 		<h2 class="wv-h6 wv-kondolar font-bold">กระทู้</h2>
 		{#each paginatedEvents as event (event.id)}
 			<EventCard {...event} />

@@ -52,9 +52,9 @@ export function load() {
 		};
 	});
 
-	const secondaryToMain = new Map(
+	const secondaryToMainTopic = new Map(
 		topicGroups.flatMap((g) => g.secondaries.map((s) => [s, g.main]))
 	);
 
-	return { topicGroups, districts, events, secondaryToMain };
+	return { topicGroups, secondaryToMainTopic, districts, events };
 }
