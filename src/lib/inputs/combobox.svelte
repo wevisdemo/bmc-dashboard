@@ -37,7 +37,7 @@
 	<div class="relative">
 		<Combobox.Input
 			oninput={(e) => (searchValue = e.currentTarget.value)}
-			class="w-full rounded-xs border border-black px-2 py-1 placeholder:text-black"
+			class="w-full rounded-xs border border-black p-2 placeholder:text-black wv-b6"
 			aria-label={label}
 			placeholder={value}
 			onclick={() => (open = true)}
@@ -52,7 +52,11 @@
 		>
 			<Combobox.Viewport class="p-1">
 				{#each filteredItems as { value, label } (value)}
-					<Combobox.Item class="rounded-button flex w-full px-1 py-2" {value} {label}>
+					<Combobox.Item
+						class="rounded-button flex w-full px-1 py-2 wv-ibmplexlooped wv-b6"
+						{value}
+						{label}
+					>
 						{#snippet children({ selected })}
 							{label}
 							{#if selected}

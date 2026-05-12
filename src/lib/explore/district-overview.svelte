@@ -24,7 +24,7 @@
 		new Map(
 			Object.entries(
 				events
-					.filter((e) => e.district !== AdditionalDistrictOption.BangkokOverall)
+					.filter((e) => e.district !== AdditionalDistrictOption.NotSpecified)
 					.reduce(
 						(acc, e) => {
 							acc[e.district] = (acc[e.district] ?? 0) + 1;
@@ -65,7 +65,7 @@
 	<svg
 		viewBox="0 0 {CANVAS_WIDTH} {CANVAS_HEIGHT}"
 		class="w-full"
-		onclick={() => (selectedDistrict = AdditionalDistrictOption.BangkokOverall)}
+		onclick={() => (selectedDistrict = AdditionalDistrictOption.ALL)}
 	>
 		{#each districts as { feature, name, centroid } (name)}
 			<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
@@ -79,8 +79,7 @@
 				onmouseleave={() => (hoveredDistrict = null)}
 				onclick={(e) => {
 					e.stopPropagation();
-					selectedDistrict =
-						selectedDistrict === name ? AdditionalDistrictOption.BangkokOverall : name;
+					selectedDistrict = selectedDistrict === name ? AdditionalDistrictOption.ALL : name;
 				}}
 			/>
 		{/each}

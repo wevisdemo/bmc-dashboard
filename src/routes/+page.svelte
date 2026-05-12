@@ -7,13 +7,14 @@
 
 	let { data } = $props();
 
-	let selectedDistrict = $state(AdditionalDistrictOption.BangkokOverall);
+	let selectedDistrict = $state(AdditionalDistrictOption.ALL);
 	let selectedSecondaryTopics = $state.raw<string[]>(initTopics());
 
 	let filteredEvents = $derived(
 		data.events.filter(
 			(event) =>
-				event.district === selectedDistrict &&
+				(selectedDistrict === AdditionalDistrictOption.ALL ||
+					event.district === selectedDistrict) &&
 				event.topics.some((t) => selectedSecondaryTopics.includes(t))
 		)
 	);

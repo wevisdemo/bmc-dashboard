@@ -1,5 +1,6 @@
 export enum AdditionalDistrictOption {
-	BangkokOverall = 'ภาพรวมกรุงเทพมหานคร'
+	ALL = 'ทุกพื้นที่ (ทั้งที่ระบุและไม่ระบุเขต)',
+	NotSpecified = 'ไม่ระบุเขต'
 }
 
 export enum EntityTabGroup {

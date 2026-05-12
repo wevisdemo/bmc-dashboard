@@ -28,7 +28,8 @@ export function load() {
 	].map(([main, secondaries]) => ({ main, secondaries }));
 
 	const districts = [
-		AdditionalDistrictOption.BangkokOverall,
+		AdditionalDistrictOption.ALL,
+		AdditionalDistrictOption.NotSpecified,
 		...(districtsData as unknown as FeatureCollection).features
 			.map((f) => f.properties as Record<string, string>)
 			.map((props) => props.dname.replace('เขต', ''))
