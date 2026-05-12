@@ -14,9 +14,9 @@
 </svelte:head>
 
 <div class="flex h-full min-h-lvh flex-col">
-	<WvNavbar title="BMC Dashboard" />
+	<WvNavbar title="BMC Dashboard" homeHref="/" animated dark />
 	<main class="wv-ibmplexlooped flex-1">
 		{@render children()}
 	</main>
-	<WvFooter />
+	<WvFooter dark />
 </div>
