@@ -23,7 +23,7 @@
 	let eventsByGroup = $derived(Object.groupBy(events, (e) => e.group));
 
 	let displayEvents = $derived(
-		eventsByGroup[selectedGroup]!.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE)
+		eventsByGroup[selectedGroup]?.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE) ?? []
 	);
 
 	watch.pre(
@@ -51,10 +51,10 @@
 			{#each tabs as value (value)}
 				<Tabs.Trigger
 					{value}
-					class="p-3 flex flex-row items-center gap-1 rounded-t-lg bg-neutral-100 data-[state=active]:bg-neutral-300"
+					class="p-3 flex flex-row items-center gap-1 rounded-t-lg bg-neutral-100 data-[state=active]:bg-neutral-200"
 				>
 					<h4 class="wv-h9 font-bold">{value}</h4>
-					<span class="">[{eventsByGroup[value]!.length}]</span>
+					<span>[{eventsByGroup[value]?.length ?? 0}]</span>
 				</Tabs.Trigger>
 			{/each}
 		</Tabs.List>
@@ -78,14 +78,21 @@
 		</TabContentDescription>
 	</Tabs.Root>
 
-	<div class="flex flex-col gap-3 bg-neutral-300 p-5">
-		{#each displayEvents as event (event.id)}
-			<EventCard {...event} />
-		{/each}
-		<Pagination
-			count={eventsByGroup[selectedGroup]!.length}
-			perPage={PER_PAGE}
-			bind:page={currentPage}
-		/>
-	</div>
+	{#if displayEvents.length}
+		<div class="flex flex-col gap-3 bg-neutral-200 p-5">
+			{#each displayEvents as event (event.id)}
+				<EventCard {...event} />
+			{/each}
+			<Pagination
+				count={eventsByGroup[selectedGroup]?.length ?? 0}
+				perPage={PER_PAGE}
+				bind:page={currentPage}
+			/>
+		</div>
+	{:else}
+		<div class="flex flex-col gap-3 bg-neutral-200 px-5 py-24 justify-center items-center">
+			<span class="wv-h5 font-bold">ไม่พบสิ่งที่กำลังค้นหา</span>
+			<span class="text-neutral-600">ลองค้นหาใหม่อีกครั้ง</span>
+		</div>
+	{/if}
 </div>
