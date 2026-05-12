@@ -10,9 +10,10 @@
 		items: Exclude<ComponentProps<typeof Combobox.Root>['items'], undefined>;
 		value: string;
 		emptyStateText?: string;
+		onvaluechange?: () => void;
 	}
 
-	let { name, label, items, value = $bindable(), emptyStateText }: Props = $props();
+	let { name, label, items, value = $bindable(), emptyStateText, onvaluechange }: Props = $props();
 
 	let searchValue = $state('');
 	let open = $state(false);
@@ -30,6 +31,7 @@
 	allowDeselect={false}
 	bind:value
 	bind:open
+	onValueChange={onvaluechange}
 	onOpenChangeComplete={(o) => {
 		if (!o) searchValue = '';
 	}}

@@ -14,9 +14,10 @@
 	interface Props {
 		events: Event[];
 		selectedDistrict: string;
+		ondistrictchange?: () => void;
 	}
 
-	let { events, selectedDistrict = $bindable() }: Props = $props();
+	let { events, selectedDistrict = $bindable(), ondistrictchange }: Props = $props();
 
 	let hoveredDistrict = $state<Omit<(typeof districts)[number], 'feature'> | null>(null);
 
@@ -65,7 +66,10 @@
 	<svg
 		viewBox="0 0 {CANVAS_WIDTH} {CANVAS_HEIGHT}"
 		class="w-full"
-		onclick={() => (selectedDistrict = AdditionalDistrictOption.ALL)}
+		onclick={() => {
+			selectedDistrict = AdditionalDistrictOption.ALL;
+			ondistrictchange?.();
+		}}
 	>
 		{#each districts as { feature, name, centroid } (name)}
 			<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
@@ -80,6 +84,7 @@
 				onclick={(e) => {
 					e.stopPropagation();
 					selectedDistrict = selectedDistrict === name ? AdditionalDistrictOption.ALL : name;
+					ondistrictchange?.();
 				}}
 			/>
 		{/each}

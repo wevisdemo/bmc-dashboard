@@ -10,6 +10,8 @@
 		selectedDistrict?: string;
 		selectedSecondaryTopics?: string[];
 		totalEvents: number;
+		ondistrictchange?: () => void;
+		ontopicschange?: () => void;
 	}
 
 	let {
@@ -17,7 +19,9 @@
 		topicGroups,
 		selectedDistrict = $bindable(''),
 		selectedSecondaryTopics = $bindable([] as string[]),
-		totalEvents
+		totalEvents,
+		ondistrictchange,
+		ontopicschange
 	}: Props = $props();
 </script>
 
@@ -30,6 +34,7 @@
 		label="ค้นหาเขตพื้นที่"
 		items={districts.map((value) => ({ value, label: value }))}
 		bind:value={selectedDistrict}
+		onvaluechange={ondistrictchange}
 	/>
 
 	<h4 class="wv-b5 font-bold">สำรวจตามประเด็น</h4>
@@ -48,6 +53,7 @@
 					selectedSecondaryTopics = checked
 						? [...new Set([...selectedSecondaryTopics, ...secondaries])]
 						: selectedSecondaryTopics.filter((t) => !secondaries.includes(t));
+					ontopicschange?.();
 				}}
 			>
 				<span class="font-bold">{main}</span>
@@ -62,6 +68,7 @@
 						selectedSecondaryTopics = checked
 							? [...selectedSecondaryTopics, secondary]
 							: selectedSecondaryTopics.filter((t) => t !== secondary);
+						ontopicschange?.();
 					}}
 				>
 					{secondary}

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { watch } from 'runed';
 	import { EntityTabGroup } from '$lib/constants';
 	import Pagination from '$lib/inputs/pagination.svelte';
 	import { Tabs } from 'bits-ui';
@@ -11,42 +10,26 @@
 
 	interface Props {
 		events: Event[];
-		resetPageWatchList: unknown;
+		tab: string;
+		page: number;
+		ontabchange?: () => void;
 	}
 
-	let { events, resetPageWatchList }: Props = $props();
+	let { events, tab = $bindable(), page = $bindable(), ontabchange }: Props = $props();
 
-	let selectedGroup = $state(EntityTabGroup.Subject);
-	let currentPage = $state(1);
 	let container = $state<HTMLDivElement>();
 
 	let eventsByGroup = $derived(Object.groupBy(events, (e) => e.group));
 
 	let displayEvents = $derived(
-		eventsByGroup[selectedGroup]?.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE) ?? []
-	);
-
-	watch.pre(
-		[() => resetPageWatchList, () => selectedGroup],
-		() => {
-			currentPage = 1;
-		},
-		{ lazy: true }
-	);
-
-	watch.pre(
-		() => currentPage,
-		() => {
-			container?.scrollIntoView({ behavior: 'smooth' });
-		},
-		{ lazy: true }
+		eventsByGroup[tab as EntityTabGroup]?.slice((page - 1) * PER_PAGE, page * PER_PAGE) ?? []
 	);
 
 	const tabs = Object.values(EntityTabGroup);
 </script>
 
 <div class="pt-4" bind:this={container}>
-	<Tabs.Root bind:value={selectedGroup}>
+	<Tabs.Root bind:value={tab} onValueChange={ontabchange}>
 		<Tabs.List class="flex flex-row gap-2">
 			{#each tabs as value (value)}
 				<Tabs.Trigger
@@ -84,9 +67,11 @@
 				<EventCard {...event} />
 			{/each}
 			<Pagination
-				count={eventsByGroup[selectedGroup]?.length ?? 0}
+				count={eventsByGroup[tab as EntityTabGroup]?.length ?? 0}
 				perPage={PER_PAGE}
-				bind:page={currentPage}
+				onpagechange={() =>
+					setTimeout(() => container?.scrollIntoView({ behavior: 'smooth' }), 250)}
+				bind:page
 			/>
 		</div>
 	{:else}

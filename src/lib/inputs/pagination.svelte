@@ -7,12 +7,13 @@
 		count: number;
 		perPage: number;
 		page: number;
+		onpagechange?: (p: number) => void;
 	}
 
-	let { count, perPage, page = $bindable(1) }: Props = $props();
+	let { count, perPage, page = $bindable(1), onpagechange }: Props = $props();
 </script>
 
-<Pagination.Root {count} {perPage} bind:page class="py-4">
+<Pagination.Root {count} {perPage} bind:page onPageChange={onpagechange} class="py-4">
 	{#snippet children({ pages, range })}
 		<div class="flex items-center justify-center">
 			<Pagination.PrevButton class="inline-flex size-10 items-center justify-center rounded">
@@ -25,7 +26,7 @@
 					{:else}
 						<Pagination.Page
 							{page}
-							class="size-10 items-center justify-center rounded  data-selected:bg-neutral-200"
+							class="size-10 items-center justify-center rounded  data-selected:bg-neutral-100"
 						>
 							{page.value}
 						</Pagination.Page>

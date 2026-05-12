@@ -6,9 +6,15 @@
 		events: Event[];
 		topicGroups: { main: string; secondaries: string[] }[];
 		selectedSecondaryTopics: string[];
+		ontopicschange?: () => void;
 	}
 
-	let { events, topicGroups, selectedSecondaryTopics = $bindable() }: Props = $props();
+	let {
+		events,
+		topicGroups,
+		selectedSecondaryTopics = $bindable(),
+		ontopicschange
+	}: Props = $props();
 
 	const secondaryToMainTopic = $derived(
 		new Map(topicGroups.flatMap((g) => g.secondaries.map((s) => [s, g.main])))
@@ -47,6 +53,7 @@
 			const group = topicGroups.find((g) => g.main === topic);
 			if (group) selectedSecondaryTopics = group.secondaries;
 		}
+		ontopicschange?.();
 	}
 </script>
 
