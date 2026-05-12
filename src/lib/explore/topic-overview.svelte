@@ -32,6 +32,22 @@
 	);
 
 	let maxTopicCount = $derived(Math.max(...topicCounts.map((t) => t.count)));
+
+	function onTopicClick(topic: string, isActive: boolean) {
+		const secondaries = topicGroups.find((g) => g.main === topic)?.secondaries;
+		if (!secondaries) return;
+
+		if (
+			isActive &&
+			selectedSecondaryTopics.length === secondaries.length &&
+			selectedSecondaryTopics.every((t) => secondaries.includes(t))
+		) {
+			selectedSecondaryTopics = allSecondaryTopics;
+		} else {
+			const group = topicGroups.find((g) => g.main === topic);
+			if (group) selectedSecondaryTopics = group.secondaries;
+		}
+	}
 </script>
 
 <div class="mb-6 flex flex-col gap-1">
@@ -41,25 +57,18 @@
 		)}
 		<button
 			animate:flip={{ duration: 300 }}
-			class="flex flex-col gap-1 rounded-sm transition-colors border p-2 hover:bg-gray-100 {isActive
-				? 'border-gray-300'
+			class="flex flex-col gap-1 rounded-sm transition-colors border p-2 hover:bg-neutral-100 {isActive
+				? 'border-neutral-300'
 				: 'border-transparent'}"
-			onclick={() => {
-				if (isActive && selectedSecondaryTopics.length !== allSecondaryTopics.length) {
-					selectedSecondaryTopics = allSecondaryTopics;
-				} else {
-					const group = topicGroups.find((g) => g.main === topic);
-					if (group) selectedSecondaryTopics = group.secondaries;
-				}
-			}}
+			onclick={() => onTopicClick(topic, isActive)}
 		>
 			<div class="flex flex-row justify-between text-sm font-bold">
 				<span>{topic}</span>
 				<span class="tabular-nums">{count}</span>
 			</div>
-			<div class="h-2 w-full rounded-xs border border-gray-300 bg-gray-200">
+			<div class="h-2 w-full rounded-xs border border-neutral-300 bg-neutral-200">
 				<div
-					class="h-full rounded-xs bg-gray-500 transition-[width] duration-300"
+					class="h-full rounded-xs bg-neutral-500 transition-[width] duration-300"
 					style="width:{(count / maxTopicCount) * 100}%"
 				></div>
 			</div>
