@@ -9,7 +9,7 @@ const billCommitteeSchema = Object({
 	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
 	district: Column('District', asString()),
 	committeeSuggestion: Column('Commitee_Suggestion', asString().optional()),
-	pdfLink: Column('pdf_link', asString())
+	link: Column('pdf_link', asString())
 });
 
 export type BillCommittee = StaticDecode<typeof billCommitteeSchema>;
