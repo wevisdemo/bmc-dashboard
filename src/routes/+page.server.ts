@@ -3,6 +3,7 @@ import type { ComponentProps } from 'svelte';
 import { AdditionalDistrictOption, EntityTabGroup } from '$lib/constants';
 import districtsData from '$lib/explore/bangkok-districts.json';
 import type EventCard from '$lib/explore/event-card.svelte';
+import { outputs } from '$lib/output';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
 import { committees } from '$lib/sheets/committee';
@@ -36,6 +37,7 @@ export function load() {
 			.sort((a, b) => a.localeCompare(b, 'th'))
 	];
 
+	const idToHref = new Map(outputs.flatMap((o) => o.ids.map((id) => [id, `/outputs/${o.slug}`])));
 	const memberByName = new Map(members.map((m) => [m.name, m]));
 
 	function resolveProposer(name: string) {
@@ -54,76 +56,64 @@ export function load() {
 		return new Date(year, 0, 1);
 	}
 
-	const subjectEvents: Event[] = subjects.map((subject) => ({
-		id: subject.id,
-		title: subject.title,
-		district: subject.district,
-		topics: subject.secondaryTopics,
-		proposer: resolveProposer(subject.proposer),
-		proposedDate: subject.proposedDate,
-		href: '#',
-		group: EntityTabGroup.Subject
-	}));
-
-	const motionEvents: Event[] = motions.map((motion) => ({
-		id: motion.id,
-		title: motion.title,
-		district: motion.district,
-		topics: motion.secondaryTopics,
-		proposer: resolveProposer(motion.proposer),
-		proposedDate: motion.proposedDate,
-		href: '#',
-		group: EntityTabGroup.Motion
-	}));
-
-	const committeeEvents: Event[] = committees.map((committee) => ({
-		id: committee.id,
-		title: committee.committeeOutput,
-		district: committee.district,
-		topics: committee.secondaryTopics,
-		proposedDate: yearToDate(committee.year),
-		href: '#',
-		group: EntityTabGroup.CommitteeStudy
-	}));
-
-	const billCommitteeEvents: Event[] = billCommittees.map((bc) => ({
-		id: bc.id,
-		title: bc.title,
-		district: bc.district,
-		topics: bc.secondaryTopics,
-		proposedDate: yearToDate(bc.year),
-		href: '#',
-		group: EntityTabGroup.CommitteeStudy
-	}));
-
-	const generalCommitteeEvents: Event[] = generalCommittees.map((gc) => ({
-		id: gc.id,
-		title: gc.title,
-		district: gc.district,
-		topics: gc.secondaryTopics,
-		proposedDate: yearToDate(gc.year),
-		href: '#',
-		group: EntityTabGroup.CommitteeStudy
-	}));
-
-	const billEvents: Event[] = bills.map((bill) => ({
-		id: bill.id,
-		title: bill.title,
-		district: bill.district,
-		topics: bill.secondaryTopics,
-		proposedDate: bill.proposedDate,
-		href: '#',
-		group: EntityTabGroup.Bill,
-		status: bill.status
-	}));
-
 	const events: Event[] = [
-		...subjectEvents,
-		...motionEvents,
-		...committeeEvents,
-		...billCommitteeEvents,
-		...generalCommitteeEvents,
-		...billEvents
+		...subjects.map((s) => ({
+			id: s.id,
+			title: s.title,
+			district: s.district,
+			topics: s.secondaryTopics,
+			proposer: resolveProposer(s.proposer),
+			proposedDate: s.proposedDate,
+			href: idToHref.get(s.id) ?? '#',
+			group: EntityTabGroup.Subject
+		})),
+		...motions.map((m) => ({
+			id: m.id,
+			title: m.title,
+			district: m.district,
+			topics: m.secondaryTopics,
+			proposer: resolveProposer(m.proposer),
+			proposedDate: m.proposedDate,
+			href: idToHref.get(m.id) ?? '#',
+			group: EntityTabGroup.Motion
+		})),
+		...committees.map((c) => ({
+			id: c.id,
+			title: c.committeeOutput,
+			district: c.district,
+			topics: c.secondaryTopics,
+			proposedDate: yearToDate(c.year),
+			href: idToHref.get(c.id) ?? '#',
+			group: EntityTabGroup.CommitteeStudy
+		})),
+		...billCommittees.map((bc) => ({
+			id: bc.id,
+			title: bc.title,
+			district: bc.district,
+			topics: bc.secondaryTopics,
+			proposedDate: yearToDate(bc.year),
+			href: idToHref.get(bc.id) ?? '#',
+			group: EntityTabGroup.CommitteeStudy
+		})),
+		...generalCommittees.map((gc) => ({
+			id: gc.id,
+			title: gc.title,
+			district: gc.district,
+			topics: gc.secondaryTopics,
+			proposedDate: yearToDate(gc.year),
+			href: idToHref.get(gc.id) ?? '#',
+			group: EntityTabGroup.CommitteeStudy
+		})),
+		...bills.map((b) => ({
+			id: b.id,
+			title: b.title,
+			district: b.district,
+			topics: b.secondaryTopics,
+			proposedDate: b.proposedDate,
+			href: idToHref.get(b.id) ?? '#',
+			group: EntityTabGroup.Bill,
+			status: b.status
+		}))
 	];
 
 	return { topicGroups, districts, events };
