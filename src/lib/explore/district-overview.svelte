@@ -4,6 +4,7 @@
 	import { interpolateYlGn } from 'd3-scale-chromatic';
 	import type { FeatureCollection, Feature } from 'geojson';
 	import { fade } from 'svelte/transition';
+	import { AdditionalDistrictOption } from '$lib/constants';
 	import type { Event } from '../../routes/+page.server';
 	import bangkokData from './bangkok-districts.json';
 
@@ -23,7 +24,7 @@
 		new Map(
 			Object.entries(
 				events
-					.filter((e) => e.district !== 'ภาพรวมกรุงเทพมหานคร')
+					.filter((e) => e.district !== AdditionalDistrictOption.BangkokOverall)
 					.reduce(
 						(acc, e) => {
 							acc[e.district] = (acc[e.district] ?? 0) + 1;

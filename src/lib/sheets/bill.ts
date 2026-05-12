@@ -19,7 +19,7 @@ export enum BillStatus {
 const billSchema = Obj({
 	id: Column('id', asString()),
 	status: Column('Status', asOneOf(Object.values(BillStatus))),
-	reason: Column('Reason', asString()),
+	reason: Column('Reason', asString().optional()),
 	output: Column('Output', asString()),
 	title: Column('Bill_Title', asString()),
 	secondaryTopics: Column('Topic_Secondary', asArray(asString())),

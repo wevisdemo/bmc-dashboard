@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ArrowUpRightIcon } from 'phosphor-svelte';
+	import { BillStatus } from '$lib/sheets/bill';
 
 	interface Props {
 		title: string;
@@ -13,6 +14,7 @@
 		};
 		proposedDate?: Date;
 		href: string;
+		status?: BillStatus;
 	}
 
 	let { title, district, topics, proposer, proposedDate, href }: Props = $props();
@@ -21,7 +23,7 @@
 <a
 	{href}
 	rel="external noopener noreferrer"
-	class="flex flex-row rounded border border-gray-300 bg-white p-4 transition-shadow hover:shadow-md"
+	class="flex flex-row rounded-lg border border-gray-300 bg-white p-4 transition-shadow hover:shadow-md"
 >
 	<div class="wv-b6 flex flex-1 flex-col gap-3">
 		<div class="flex flex-wrap gap-1">

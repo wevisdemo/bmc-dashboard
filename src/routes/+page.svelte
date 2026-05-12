@@ -1,18 +1,14 @@
 <script lang="ts">
-	import { watch } from 'runed';
+	import { AdditionalDistrictOption } from '$lib/constants.js';
 	import DistrictOverview from '$lib/explore/district-overview.svelte';
-	import EventCard from '$lib/explore/event-card.svelte';
 	import FilterOptionsPanel from '$lib/explore/filter-options-panel.svelte';
+	import TabList from '$lib/explore/tab-list.svelte';
 	import TopicOverview from '$lib/explore/topic-overview.svelte';
-	import Pagination from '$lib/inputs/pagination.svelte';
-
-	const PER_PAGE = 10;
 
 	let { data } = $props();
 
-	let selectedDistrict = $state('ภาพรวมกรุงเทพมหานคร');
+	let selectedDistrict = $state(AdditionalDistrictOption.BangkokOverall);
 	let selectedSecondaryTopics = $state.raw<string[]>(initTopics());
-	let currentPage = $state(1);
 
 	let filteredEvents = $derived(
 		data.events.filter(
@@ -20,18 +16,6 @@
 				event.district === selectedDistrict &&
 				event.topics.some((t) => selectedSecondaryTopics.includes(t))
 		)
-	);
-
-	let paginatedEvents = $derived(
-		filteredEvents.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE)
-	);
-
-	watch.pre(
-		[() => selectedDistrict, () => $state.snapshot(selectedSecondaryTopics)],
-		() => {
-			currentPage = 1;
-		},
-		{ lazy: true }
 	);
 
 	function initTopics() {
@@ -66,10 +50,9 @@
 				/>
 			</div>
 		</div>
-		<h2 class="wv-h6 wv-kondolar font-bold">กระทู้</h2>
-		{#each paginatedEvents as event (event.id)}
-			<EventCard {...event} />
-		{/each}
-		<Pagination count={filteredEvents.length} perPage={PER_PAGE} bind:page={currentPage} />
+		<TabList
+			events={filteredEvents}
+			resetPageWatchList={[selectedDistrict, $state.snapshot(selectedSecondaryTopics)]}
+		/>
 	</div>
 </div>

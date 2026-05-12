@@ -6,12 +6,12 @@ const committeeSchema = Object({
 	title: Column('Commitee_Title', asString()),
 	year: Column('year', asNumber()),
 	output: Column('Output', asString()),
-	committeeOutput: Column('committee_output', asString()),
-	secondaryTopics: Column('Topic_Secondary', asArray(asString()).optional()),
+	committeeOutput: Column('Committee_output_title', asString()),
+	secondaryTopics: Column('Topic_Secondary', asArray(asString()).optional([])),
 	district: Column('District', asString()),
-	committeeSuggestion: Column('Commitee_Suggestion', asString()),
+	committeeSuggestion: Column('Commitee_Suggestion', asString().optional()),
 	url: Column('url', asString()),
-	mentionMotion: Column('mention_motion', asArray(asString()))
+	mentionMotion: Column('mention_motion', asArray(asString()).optional([]))
 });
 
 export type Committee = StaticDecode<typeof committeeSchema>;
