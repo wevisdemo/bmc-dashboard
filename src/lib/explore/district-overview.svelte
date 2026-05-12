@@ -53,11 +53,7 @@
 		centroid: pathGen.centroid(feature)
 	}));
 
-	let layeredDistricts = $derived(
-		districts.toSorted((a, z) =>
-			`${a.name === selectedDistrict}`.localeCompare(`${z.name === selectedDistrict}`)
-		)
-	);
+	let selectedFeature = $derived(districts.find((d) => d.name === selectedDistrict)?.feature);
 
 	function getDistrictName(feature: Feature): string {
 		return feature.properties?.dname.replace('เขต', '');
@@ -65,32 +61,48 @@
 </script>
 
 <div class="flex flex-col">
-	<svg viewBox="0 0 {CANVAS_WIDTH} {CANVAS_HEIGHT}" class="w-full">
-		{#each layeredDistricts as { feature, name, centroid } (name)}
+	<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
+	<svg
+		viewBox="0 0 {CANVAS_WIDTH} {CANVAS_HEIGHT}"
+		class="w-full"
+		onclick={() => (selectedDistrict = AdditionalDistrictOption.BangkokOverall)}
+	>
+		{#each districts as { feature, name, centroid } (name)}
 			<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
 			<path
-				d={pathGen(feature) ?? ''}
-				class="cursor-pointer transition-colors {selectedDistrict === name
-					? 'stroke-black stroke-1'
-					: 'stroke-gray-400 stroke-[0.5]'}"
-				fill={interpolateYlGn(colorDomain(districtCountMap.get(name) ?? minDistrictCount))}
+				d={pathGen(feature)}
+				class="cursor-pointer transition-colors stroke-gray-400 stroke-[0.5]"
+				style="fill: {interpolateYlGn(
+					colorDomain(districtCountMap.get(name) ?? minDistrictCount)
+				)};"
 				onmouseenter={() => (hoveredDistrict = { name, centroid })}
 				onmouseleave={() => (hoveredDistrict = null)}
-				onclick={() => (selectedDistrict = name)}
+				onclick={(e) => {
+					e.stopPropagation();
+					selectedDistrict =
+						selectedDistrict === name ? AdditionalDistrictOption.BangkokOverall : name;
+				}}
 			/>
 		{/each}
+		{#if selectedFeature}
+			{#key selectedDistrict}
+				<path
+					transition:fade={{ duration: 150 }}
+					d={pathGen(selectedFeature)}
+					class="stroke-gray-800 stroke-1 fill-none"
+				/>
+			{/key}
+		{/if}
 		{#if hoveredDistrict}
 			{@const [x, y] = hoveredDistrict.centroid}
 			<text
-				transition:fade={{ duration: 200 }}
+				transition:fade={{ duration: 150 }}
 				{x}
 				{y}
 				text-anchor="middle"
 				dominant-baseline="central"
-				class="pointer-events-none fill-white text-[8px] font-bold"
-				paint-order="stroke"
-				stroke="#374151"
-				stroke-width="2">{hoveredDistrict.name}</text
+				class="pointer-events-none fill-white text-[8px] font-bold stroke-2 stroke-neutral-800"
+				paint-order="stroke">{hoveredDistrict.name}</text
 			>
 		{/if}
 	</svg>
