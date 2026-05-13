@@ -17,6 +17,7 @@
 
 	let searchValue = $state('');
 	let open = $state(false);
+	let inputElement = $state<HTMLInputElement>();
 
 	const filteredItems = $derived(
 		searchValue
@@ -32,21 +33,26 @@
 	bind:value
 	bind:open
 	onValueChange={onvaluechange}
-	onOpenChangeComplete={(o) => {
-		if (!o) searchValue = '';
+	onOpenChangeComplete={() => {
+		searchValue = '';
+		inputElement?.blur();
 	}}
 >
 	<div class="relative">
-		<Combobox.Input
-			oninput={(e) => (searchValue = e.currentTarget.value)}
+		<input
+			bind:this={inputElement}
+			bind:value={searchValue}
+			placeholder={value}
+			type="text"
 			class="w-full rounded-xs border border-black p-2 placeholder:text-black wv-b6"
 			aria-label={label}
-			placeholder={value}
 			onclick={() => (open = true)}
 		/>
-		<Combobox.Trigger class="absolute inset-e-1 top-1/2 size-6 -translate-y-1/2 touch-none">
+		<div class="absolute inset-e-1 top-1/2 size-6 -translate-y-1/2 pointer-events-none">
 			<CaretDownIcon class="size-5 transition-transform {open ? 'rotate-180' : ''}" />
-		</Combobox.Trigger>
+		</div>
+		<!-- Can't clear Bits Comboboc.Input when select. Keep for dropdown rendering reference -->
+		<Combobox.Input class="absolute h-0 w-full" />
 	</div>
 	<Combobox.Portal>
 		<Combobox.Content
