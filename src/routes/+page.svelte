@@ -4,20 +4,23 @@
 	import { z } from 'zod';
 	import { AdditionalDistrictOption, EntityTabGroup } from '$lib/constants.js';
 	import DistrictOverview from '$lib/explore/district-overview.svelte';
+	import FilterChipsBar from '$lib/explore/filter-chips-bar.svelte';
 	import FilterOptionsPanel from '$lib/explore/filter-options-panel.svelte';
 	import TabList from '$lib/explore/tab-list.svelte';
 	import TopicOverview from '$lib/explore/topic-overview.svelte';
 
+	const DEFAULT_DISTRICT = AdditionalDistrictOption.ALL;
+
 	let { data } = $props();
 
-	const allTopics = untrack(() => data.topicGroups.flatMap((g) => g.secondaries).sort());
+	const allSecondaryTopics = untrack(() => data.topicGroups.flatMap((g) => g.secondaries).sort());
 
 	const schema = z.object({
-		district: z.string().default(AdditionalDistrictOption.ALL),
+		district: z.string().default(DEFAULT_DISTRICT),
 		topics: z
 			.array(z.string())
 			.transform((arr) => arr.toSorted())
-			.default(allTopics),
+			.default(allSecondaryTopics),
 		tab: z.string().default(EntityTabGroup.Subject),
 		page: z.number().int().positive().default(1)
 	});
@@ -57,6 +60,14 @@
 			ontopicschange={resetPageNumber}
 		/>
 		<div class="flex flex-1 flex-col gap-3">
+			<FilterChipsBar
+				defaultDistrict={DEFAULT_DISTRICT}
+				{allSecondaryTopics}
+				bind:selectedDistrict={params.district}
+				bind:selectedSecondaryTopics={params.topics}
+				ondistrictchange={resetPageNumber}
+				ontopicschange={resetPageNumber}
+			/>
 			<div class="grid grid-cols-2 rounded-lg border border-gray-300">
 				<div class="flex flex-col gap-6 border-r border-gray-300 px-4 py-3">
 					<h3 class="wv-b3 wv-kondolar font-bold">แบ่งตามเขต</h3>
@@ -74,7 +85,7 @@
 					</div>
 					<TopicOverview
 						events={filteredEvents}
-						topicGroups={data.topicGroups}
+						{allSecondaryTopics}
 						bind:selectedSecondaryTopics={params.topics}
 						ontopicschange={resetPageNumber}
 					/>

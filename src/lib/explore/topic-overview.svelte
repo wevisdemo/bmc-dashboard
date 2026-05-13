@@ -4,19 +4,17 @@
 
 	interface Props {
 		events: Event[];
-		topicGroups: { main: string; secondaries: string[] }[];
+		allSecondaryTopics: string[];
 		selectedSecondaryTopics: string[];
 		ontopicschange?: () => void;
 	}
 
 	let {
 		events,
-		topicGroups,
+		allSecondaryTopics,
 		selectedSecondaryTopics = $bindable(),
 		ontopicschange
 	}: Props = $props();
-
-	const allSecondaryTopics = $derived(topicGroups.flatMap((g) => g.secondaries));
 
 	let topicCounts = $derived(
 		Object.entries(

@@ -7,8 +7,8 @@
 	interface Props {
 		districts: string[];
 		topicGroups: TopicGroup[];
-		selectedDistrict?: string;
-		selectedSecondaryTopics?: string[];
+		selectedDistrict: string;
+		selectedSecondaryTopics: string[];
 		totalEvents: number;
 		ondistrictchange?: () => void;
 		ontopicschange?: () => void;
@@ -18,7 +18,7 @@
 		districts,
 		topicGroups,
 		selectedDistrict = $bindable(''),
-		selectedSecondaryTopics = $bindable([] as string[]),
+		selectedSecondaryTopics = $bindable([]),
 		totalEvents,
 		ondistrictchange,
 		ontopicschange
