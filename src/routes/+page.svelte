@@ -63,7 +63,7 @@
 					ondistrictchange={resetPageNumber}
 				/>
 			</div>
-			<div class="wv-b6 flex flex-col gap-6 px-4 py-3">
+			<div class="wv-b6 flex flex-col gap-4 px-4 py-3">
 				<div class="flex flex-col gap-1">
 					<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
 					<p class="text-gray-500">*1 หัวข้อ เกี่ยวข้องได้มากกว่า 1 ประเด็น</p>
