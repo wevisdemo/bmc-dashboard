@@ -43,45 +43,49 @@
 	}
 </script>
 
-<div class="mx-auto flex max-w-6xl flex-row gap-4 p-4">
-	<FilterOptionsPanel
-		districts={data.districts}
-		topicGroups={data.topicGroups}
-		totalEvents={filteredEvents.length}
-		bind:selectedDistrict={params.district}
-		bind:selectedSecondaryTopics={params.topics}
-		ondistrictchange={resetPageNumber}
-		ontopicschange={resetPageNumber}
-	/>
-	<div class="flex flex-1 flex-col gap-3">
-		<div class="grid grid-cols-2 rounded-lg border border-gray-300">
-			<div class="flex flex-col gap-6 border-r border-gray-300 px-4 py-3">
-				<h3 class="wv-b3 wv-kondolar font-bold">แบ่งตามเขต</h3>
-				<DistrictOverview
-					events={filteredEvents}
-					bind:selectedDistrict={params.district}
-					ondistrictchange={resetPageNumber}
-				/>
-			</div>
-			<div class="wv-b6 flex flex-col gap-4 px-4 py-3">
-				<div class="flex flex-col gap-1">
-					<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
-					<p class="text-gray-500">*1 หัวข้อ เกี่ยวข้องได้มากกว่า 1 ประเด็น</p>
-					<p class="font-bold">• {params.district}</p>
-				</div>
-				<TopicOverview
-					events={filteredEvents}
-					topicGroups={data.topicGroups}
-					bind:selectedSecondaryTopics={params.topics}
-					ontopicschange={resetPageNumber}
-				/>
-			</div>
-		</div>
-		<TabList
-			events={filteredEvents}
-			bind:tab={params.tab}
-			bind:page={params.page}
-			ontabchange={resetPageNumber}
+<div class="mx-auto flex flex-col max-w-7xl p-4 gap-6">
+	<h2 class="wv-h6 wv-kondolar font-bold">สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568</h2>
+
+	<div class="flex flex-row gap-4">
+		<FilterOptionsPanel
+			districts={data.districts}
+			topicGroups={data.topicGroups}
+			totalEvents={filteredEvents.length}
+			bind:selectedDistrict={params.district}
+			bind:selectedSecondaryTopics={params.topics}
+			ondistrictchange={resetPageNumber}
+			ontopicschange={resetPageNumber}
 		/>
+		<div class="flex flex-1 flex-col gap-3">
+			<div class="grid grid-cols-2 rounded-lg border border-gray-300">
+				<div class="flex flex-col gap-6 border-r border-gray-300 px-4 py-3">
+					<h3 class="wv-b3 wv-kondolar font-bold">แบ่งตามเขต</h3>
+					<DistrictOverview
+						events={filteredEvents}
+						bind:selectedDistrict={params.district}
+						ondistrictchange={resetPageNumber}
+					/>
+				</div>
+				<div class="wv-b6 flex flex-col gap-4 px-4 py-3">
+					<div class="flex flex-col gap-1">
+						<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
+						<p class="text-gray-500">*1 หัวข้อ เกี่ยวข้องได้มากกว่า 1 ประเด็น</p>
+						<p class="font-bold">• {params.district}</p>
+					</div>
+					<TopicOverview
+						events={filteredEvents}
+						topicGroups={data.topicGroups}
+						bind:selectedSecondaryTopics={params.topics}
+						ontopicschange={resetPageNumber}
+					/>
+				</div>
+			</div>
+			<TabList
+				events={filteredEvents}
+				bind:tab={params.tab}
+				bind:page={params.page}
+				ontabchange={resetPageNumber}
+			/>
+		</div>
 	</div>
 </div>
