@@ -10,7 +10,7 @@ import { topics } from '$lib/sheets/topic';
 
 export type OutputEvent = Omit<
 	Subject | Motion | Bill | Committee | BillCommittee | GeneralCommittee,
-	'output' | 'secondaryTopics' | 'district'
+	'output' | 'secondaryTopics' | 'districts'
 >;
 
 export function entries() {
@@ -29,9 +29,9 @@ export function load({ params }) {
 		const raw = getTableFromPrefix(id.split('_')[0])?.find((t) => t.id === id);
 		if (raw) {
 			for (const t of raw.secondaryTopics) allSecondaryTopics.add(t);
-			allDistricts.add(raw.district);
+			for (const d of raw.districts) allDistricts.add(d);
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const { secondaryTopics, district, output, ...event } = raw;
+			const { secondaryTopics, districts, output, ...event } = raw;
 			events.push(event as OutputEvent);
 		} else {
 			console.warn(`[outputs/${entry.slug}] event id "${id}" not found`);

@@ -24,15 +24,16 @@
 	let districtCountMap = $derived(
 		new Map(
 			Object.entries(
-				events
-					.filter((e) => e.district !== AdditionalDistrictOption.NotSpecified)
-					.reduce(
-						(acc, e) => {
-							acc[e.district] = (acc[e.district] ?? 0) + 1;
-							return acc;
-						},
-						{} as Record<string, number>
-					)
+				events.reduce(
+					(acc, e) => {
+						for (const d of e.districts) {
+							if (d === AdditionalDistrictOption.NotSpecified) continue;
+							acc[d] = (acc[d] ?? 0) + 1;
+						}
+						return acc;
+					},
+					{} as Record<string, number>
+				)
 			)
 		)
 	);

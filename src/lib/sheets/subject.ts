@@ -6,7 +6,7 @@ const subjectSchema = Object({
 	output: Column('Output', asString()),
 	title: Column('Subject_Title', asString()),
 	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
-	district: Column('District', asString()),
+	districts: Column('District', asArray(asString())),
 	proposer: Column('Proposer', asString()),
 	proposerDistrict: Column('Proposser_District', asString()),
 	proposedDate: Column('Proposed_Date', asDate().optional()),

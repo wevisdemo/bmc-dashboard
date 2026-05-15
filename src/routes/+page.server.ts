@@ -60,7 +60,7 @@ export function load() {
 		...subjects.map((s) => ({
 			id: s.id,
 			title: s.title,
-			district: s.district,
+			districts: s.districts,
 			topics: s.secondaryTopics,
 			proposer: resolveProposer(s.proposer),
 			proposedDate: s.proposedDate,
@@ -70,7 +70,7 @@ export function load() {
 		...motions.map((m) => ({
 			id: m.id,
 			title: m.title,
-			district: m.district,
+			districts: m.districts,
 			topics: m.secondaryTopics,
 			proposer: resolveProposer(m.proposer),
 			proposedDate: m.proposedDate,
@@ -80,7 +80,7 @@ export function load() {
 		...committees.map((c) => ({
 			id: c.id,
 			title: c.committeeOutput,
-			district: c.district,
+			districts: c.districts,
 			topics: c.secondaryTopics,
 			proposedDate: yearToDate(c.year),
 			href: idToHref.get(c.id) ?? '#',
@@ -89,7 +89,7 @@ export function load() {
 		...billCommittees.map((bc) => ({
 			id: bc.id,
 			title: bc.title,
-			district: bc.district,
+			districts: bc.districts,
 			topics: bc.secondaryTopics,
 			proposedDate: yearToDate(bc.year),
 			href: idToHref.get(bc.id) ?? '#',
@@ -98,7 +98,7 @@ export function load() {
 		...generalCommittees.map((gc) => ({
 			id: gc.id,
 			title: gc.title,
-			district: gc.district,
+			districts: gc.districts,
 			topics: gc.secondaryTopics,
 			proposedDate: yearToDate(gc.year),
 			href: idToHref.get(gc.id) ?? '#',
@@ -107,7 +107,7 @@ export function load() {
 		...bills.map((b) => ({
 			id: b.id,
 			title: b.title,
-			district: b.district,
+			districts: b.districts,
 			topics: b.secondaryTopics,
 			proposedDate: b.proposedDate,
 			href: idToHref.get(b.id) ?? '#',

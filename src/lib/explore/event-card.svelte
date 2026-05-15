@@ -5,7 +5,7 @@
 
 	interface Props {
 		title: string;
-		district: string;
+		districts: string[];
 		topics: string[];
 		proposer?: {
 			name: string;
@@ -18,7 +18,7 @@
 		status?: BillStatus;
 	}
 
-	let { title, district, topics, proposer, proposedDate, href }: Props = $props();
+	let { title, districts, topics, proposer, proposedDate, href }: Props = $props();
 </script>
 
 <a
@@ -39,7 +39,7 @@
 			class="rounded bg-gray-100 border-gray-300 border p-2 gap-1 py-0.5 flex flex-row items-center"
 		>
 			<MapPinIcon />
-			{district}
+			{districts.join(', ')}
 		</span>
 	</div>
 

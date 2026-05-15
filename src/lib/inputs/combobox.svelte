@@ -38,7 +38,7 @@
 		inputElement?.blur();
 	}}
 >
-	<div class="relative">
+	<div class="relative flex flex-col">
 		<input
 			bind:this={inputElement}
 			bind:value={searchValue}
@@ -51,8 +51,8 @@
 		<div class="absolute inset-e-1 top-1/2 size-6 -translate-y-1/2 pointer-events-none">
 			<CaretDownIcon class="size-5 transition-transform {open ? 'rotate-180' : ''}" />
 		</div>
-		<!-- Can't clear Bits Comboboc.Input when select. Keep for dropdown rendering reference -->
-		<Combobox.Input class="absolute h-0 w-full" />
+		<!-- Can't clear Bits Combobox.Input when select. Keep for dropdown rendering reference -->
+		<Combobox.Input class="h-0 w-full" />
 	</div>
 	<Combobox.Portal>
 		<Combobox.Content

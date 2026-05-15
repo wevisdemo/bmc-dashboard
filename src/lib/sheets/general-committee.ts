@@ -7,7 +7,7 @@ const generalCommitteeSchema = Object({
 	output: Column('Output', asString()),
 	title: Column('GenCommitee_Title', asString()),
 	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
-	district: Column('District', asString()),
+	districts: Column('District', asArray(asString())),
 	committeeSuggestion: Column('Commitee_Suggestion', asString().optional()),
 	link: Column('pdf_link', asString())
 });

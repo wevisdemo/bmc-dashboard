@@ -30,13 +30,15 @@
 	const params = useSearchParams(schema, {
 		showDefaults: false,
 		pushHistory: false,
-		noScroll: true
+		noScroll: true,
+		debounce: 100
 	});
 
 	let filteredEvents = $derived(
 		data.events.filter(
 			(event) =>
-				(params.district === AdditionalDistrictOption.ALL || event.district === params.district) &&
+				(params.district === AdditionalDistrictOption.ALL ||
+					event.districts.some((d) => d === params.district)) &&
 				event.topics.some((t) => params.topics.length === 0 || params.topics.includes(t))
 		)
 	);
