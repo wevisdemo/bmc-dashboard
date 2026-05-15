@@ -34,7 +34,7 @@
 			{#each tabs as value (value)}
 				<Tabs.Trigger
 					{value}
-					class="p-3 flex flex-row items-center gap-1 rounded-t-lg bg-neutral-100 data-[state=active]:bg-neutral-200"
+					class="p-3 flex flex-row items-center gap-1 rounded-t-lg bg-neutral-100 data-[state=active]:bg-neutral-300"
 				>
 					<h4 class="wv-h9 font-bold">{value}</h4>
 					<span>[{eventsByGroup[value]?.length ?? 0}]</span>
@@ -62,7 +62,7 @@
 	</Tabs.Root>
 
 	{#if displayEvents.length}
-		<div class="flex flex-col gap-3 bg-neutral-200 p-5">
+		<div class="flex flex-col gap-4 bg-neutral-300 py-3 px-6">
 			{#each displayEvents as event (event.id)}
 				<EventCard {...event} />
 			{/each}
@@ -75,7 +75,7 @@
 			/>
 		</div>
 	{:else}
-		<div class="flex flex-col gap-3 bg-neutral-200 px-5 py-24 justify-center items-center">
+		<div class="flex flex-col gap-3 bg-neutral-300 px-5 py-24 justify-center items-center">
 			<span class="wv-h5 font-bold">ไม่พบสิ่งที่กำลังค้นหา</span>
 			<span class="text-neutral-600">ลองค้นหาใหม่อีกครั้ง</span>
 		</div>

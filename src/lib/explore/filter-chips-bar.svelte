@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { XCircleIcon } from 'phosphor-svelte';
+	import { topicColorMap } from '$lib/sheets/topic';
 
 	interface Props {
 		selectedDistrict: string;
@@ -33,22 +34,24 @@
 	}
 </script>
 
-{#snippet optionChip(label: string, className: string, onclick?: () => void)}
-	<div class="flex flex-row gap-1 items-center rounded-full px-2 py-1 {className}">
+{#snippet optionChip(label: string, bgColor?: string, onclick?: () => void)}
+	<button
+		class="flex flex-row gap-1 items-center rounded-full px-2 py-0.5 border-2 border-transparent hover:border-black"
+		style="background-color: {bgColor}"
+		{onclick}
+	>
 		<span class="wv-b6 font-bold ml-1">{label}</span>
-		<button class="hover:opacity-50" {onclick}>
-			<XCircleIcon class="size-4" />
-		</button>
-	</div>
+		<XCircleIcon class="size-4" />
+	</button>
 {/snippet}
 
 <div class="flex flex-row flex-wrap gap-2 items-center">
 	{#if isShowingDistrict}
-		{@render optionChip(selectedDistrict, 'bg-neutral-100', () => setDistrict(defaultDistrict))}
+		{@render optionChip(selectedDistrict, '#f5f5f5', () => setDistrict(defaultDistrict))}
 	{/if}
 	{#if isShowingTopics}
 		{#each selectedSecondaryTopics as topic (topic)}
-			{@render optionChip(topic, 'bg-neutral-200', () =>
+			{@render optionChip(topic, topicColorMap.get(topic), () =>
 				setTopics(selectedSecondaryTopics.filter((st) => st !== topic))
 			)}
 		{/each}

@@ -13,13 +13,15 @@
 
 	let { data } = $props();
 
-	const allSecondaryTopics = untrack(() => data.topicGroups.flatMap((g) => g.secondaries).sort());
+	const allSecondaryTopics = untrack(() => data.topicGroups.flatMap((g) => g.secondaries));
 
 	const schema = z.object({
 		district: z.string().default(DEFAULT_DISTRICT),
 		topics: z
 			.array(z.string())
-			.transform((arr) => arr.toSorted())
+			.transform((arr) =>
+				arr.toSorted((a, z) => allSecondaryTopics.indexOf(a) - allSecondaryTopics.indexOf(z))
+			)
 			.default(allSecondaryTopics),
 		tab: z.string().default(EntityTabGroup.Subject),
 		page: z.number().int().positive().default(1)
@@ -46,7 +48,7 @@
 	}
 </script>
 
-<div class="mx-auto flex flex-col max-w-7xl p-4 gap-6">
+<div class="mx-auto flex flex-col max-w-7xl px-4 py-12 gap-6">
 	<h2 class="wv-h6 wv-kondolar font-bold">สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568</h2>
 
 	<div class="flex flex-row gap-4">
@@ -77,7 +79,7 @@
 						ondistrictchange={resetPageNumber}
 					/>
 				</div>
-				<div class="wv-b6 flex flex-col gap-4 px-4 py-3">
+				<div class="wv-b6 flex flex-col gap-3 px-4 py-3">
 					<div class="flex flex-col gap-1">
 						<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
 						<p class="text-gray-500">*1 หัวข้อ เกี่ยวข้องได้มากกว่า 1 ประเด็น</p>
@@ -89,6 +91,7 @@
 						bind:selectedSecondaryTopics={params.topics}
 						ontopicschange={resetPageNumber}
 					/>
+					<p class="text-gray-500 mt-1">คลิกแถบเพื่อกรองตามประเด็น</p>
 				</div>
 			</div>
 			<TabList

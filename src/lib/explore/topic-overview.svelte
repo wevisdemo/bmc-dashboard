@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { flip } from 'svelte/animate';
+	import { topicColorMap } from '$lib/sheets/topic';
 	import type { Event } from '../../routes/+page.server';
 
 	interface Props {
@@ -46,32 +47,28 @@
 	}
 </script>
 
-<div>
-	<div class="flex flex-row justify-between">
-		<span>ประเด็นทั้งหมด</span>
-		<span>{topicCounts.length}</span>
-	</div>
-	<div class="flex flex-col gap-1 max-h-96 overflow-y-scroll border-neutral-200 border-t py-2">
-		{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
-			{@const isActive = selectedSecondaryTopics.includes(topic)}
-			<button
-				animate:flip={{ duration: 300 }}
-				class="flex flex-col gap-1 rounded-sm transition-colors border p-2 hover:bg-neutral-100 {isActive
-					? 'border-neutral-300'
-					: 'border-transparent'}"
-				onclick={() => onTopicClick(topic)}
-			>
-				<div class="flex flex-row justify-between text-sm font-bold">
-					<span>{topic}</span>
-					<span class="tabular-nums">{count}</span>
-				</div>
-				<div class="h-2 w-full rounded-xs border border-neutral-300 bg-neutral-200">
-					<div
-						class="h-full rounded-xs bg-neutral-500 transition-[width] duration-300"
-						style="width:{(count / maxTopicCount) * 100}%"
-					></div>
-				</div>
-			</button>
-		{/each}
-	</div>
+<div class="flex flex-col gap-1 max-h-96 overflow-y-scroll">
+	{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
+		{@const isActive = selectedSecondaryTopics.includes(topic)}
+		<button
+			animate:flip={{ duration: 300 }}
+			class="flex flex-col gap-1 rounded-sm transition-colors border p-2 hover:bg-neutral-100 {isActive
+				? 'border-neutral-400'
+				: 'border-transparent'}"
+			onclick={() => onTopicClick(topic)}
+		>
+			<div class="flex flex-row justify-between text-sm font-bold">
+				<span>{topic}</span>
+				<span class="tabular-nums">{count}</span>
+			</div>
+			<div class="h-2 w-full rounded-xs border border-neutral-200 bg-neutral-100">
+				<div
+					class="h-full rounded-xs transition-[width] duration-300"
+					style="width:{(count / maxTopicCount) * 100}%; background-color: {topicColorMap.get(
+						topic
+					)};"
+				></div>
+			</div>
+		</button>
+	{/each}
 </div>
