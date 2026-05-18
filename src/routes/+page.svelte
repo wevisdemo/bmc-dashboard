@@ -58,7 +58,6 @@
 		<FilterOptionsPanel
 			districts={data.districts}
 			topicGroups={data.topicGroups}
-			totalEvents={filteredEvents.length}
 			bind:selectedDistrict={params.district}
 			bind:selectedSecondaryTopics={params.topics}
 			ondistrictchange={resetPageNumber}
@@ -68,6 +67,7 @@
 			<FilterChipsBar
 				defaultDistrict={DEFAULT_DISTRICT}
 				{allSecondaryTopics}
+				totalEvents={filteredEvents.length}
 				bind:selectedDistrict={params.district}
 				bind:selectedSecondaryTopics={params.topics}
 				ondistrictchange={resetPageNumber}

@@ -7,6 +7,7 @@
 		selectedSecondaryTopics: string[];
 		defaultDistrict: string;
 		allSecondaryTopics: string[];
+		totalEvents: number;
 		ondistrictchange?: (district: string) => void;
 		ontopicschange?: (topics: string[]) => void;
 	}
@@ -16,6 +17,7 @@
 		selectedSecondaryTopics = $bindable([]),
 		defaultDistrict,
 		allSecondaryTopics,
+		totalEvents,
 		ondistrictchange,
 		ontopicschange
 	}: Props = $props();
@@ -45,24 +47,27 @@
 	</button>
 {/snippet}
 
-<div class="flex flex-row flex-wrap gap-2 items-center">
-	{#if isShowingDistrict}
-		{@render optionChip(selectedDistrict, '#f5f5f5', () => setDistrict(defaultDistrict))}
-	{/if}
-	{#if isShowingTopics}
-		{#each selectedSecondaryTopics as topic (topic)}
-			{@render optionChip(topic, topicColorMap.get(topic), () =>
-				setTopics(selectedSecondaryTopics.filter((st) => st !== topic))
-			)}
-		{/each}
-	{/if}
-	{#if isShowingDistrict || isShowingTopics}
-		<button
-			class="px-2 py-1 wv-b6 text-blue-700 hover:text-blue-400"
-			onclick={() => {
-				setDistrict(defaultDistrict);
-				setTopics([...allSecondaryTopics]);
-			}}>ล้างทั้งหมด</button
-		>
-	{/if}
+<div class="flex flex-col gap-2">
+	<p class="wv-b6 flex-1">รายการทั้งหมด <span class="font-bold">{totalEvents}</span></p>
+	<div class="flex flex-row flex-wrap gap-2 items-center">
+		{#if isShowingDistrict}
+			{@render optionChip(selectedDistrict, '#f5f5f5', () => setDistrict(defaultDistrict))}
+		{/if}
+		{#if isShowingTopics}
+			{#each selectedSecondaryTopics as topic (topic)}
+				{@render optionChip(topic, topicColorMap.get(topic), () =>
+					setTopics(selectedSecondaryTopics.filter((st) => st !== topic))
+				)}
+			{/each}
+		{/if}
+		{#if isShowingDistrict || isShowingTopics}
+			<button
+				class="px-2 py-1 wv-b6 text-blue-700 hover:text-blue-400"
+				onclick={() => {
+					setDistrict(defaultDistrict);
+					setTopics([...allSecondaryTopics]);
+				}}>ล้างทั้งหมด</button
+			>
+		{/if}
+	</div>
 </div>
