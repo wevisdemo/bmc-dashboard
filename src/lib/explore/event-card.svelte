@@ -24,19 +24,19 @@
 <a
 	{href}
 	rel="external noopener noreferrer"
-	class="relative wv-b6 flex flex-1 flex-col gap-4 rounded-lg border-2 border-neutral-200 bg-white p-4 hover:border-neutral-400"
+	class="wv-b6 relative flex flex-1 flex-col gap-4 rounded-lg border-2 border-neutral-200 bg-white p-4 hover:border-neutral-400"
 >
 	<div class="flex flex-wrap gap-2">
 		{#each topics as topic (topic)}
 			<span
-				class="rounded-full flex items-center px-2 py-0.5 font-bold text-black"
+				class="flex items-center rounded-full px-2 py-0.5 font-bold text-black"
 				style="background-color: {topicColorMap.get(topic)}"
 			>
 				{topic}
 			</span>
 		{/each}
 		<span
-			class="rounded flex items-center bg-gray-100 border-gray-300 border p-2 gap-1 py-0.5 flex flex-row items-center"
+			class="flex flex-row items-center gap-1 rounded border border-gray-300 bg-gray-100 p-2 py-0.5"
 		>
 			<MapPinIcon />
 			{districts.join(', ')}
@@ -76,5 +76,5 @@
 			</div>
 		</div>
 	{/if}
-	<ArrowUpRightIcon class="size-4 self-end absolute bottom-4 right-4" />
+	<ArrowUpRightIcon class="absolute right-4 bottom-4 size-4 self-end" />
 </a>

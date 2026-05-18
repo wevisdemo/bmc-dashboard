@@ -38,18 +38,18 @@
 
 {#snippet optionChip(label: string, bgColor?: string, onclick?: () => void)}
 	<button
-		class="flex flex-row gap-1 items-center rounded-full px-2 py-0.5 border-2 border-transparent hover:border-black"
+		class="flex flex-row items-center gap-1 rounded-full border-2 border-transparent px-2 py-0.5 hover:border-black"
 		style="background-color: {bgColor}"
 		{onclick}
 	>
-		<span class="wv-b6 font-bold ml-1">{label}</span>
+		<span class="wv-b6 ml-1 font-bold">{label}</span>
 		<XCircleIcon class="size-4" />
 	</button>
 {/snippet}
 
 <div class="flex flex-col gap-2">
 	<p class="wv-b6 flex-1">รายการทั้งหมด <span class="font-bold">{totalEvents}</span></p>
-	<div class="flex flex-row flex-wrap gap-2 items-center">
+	<div class="flex flex-row flex-wrap items-center gap-2">
 		{#if isShowingDistrict}
 			{@render optionChip(selectedDistrict, '#f5f5f5', () => setDistrict(defaultDistrict))}
 		{/if}
@@ -62,7 +62,7 @@
 		{/if}
 		{#if isShowingDistrict || isShowingTopics}
 			<button
-				class="px-2 py-1 wv-b6 text-blue-700 hover:text-blue-400"
+				class="wv-b6 px-2 py-1 text-blue-700 hover:text-blue-400"
 				onclick={() => {
 					setDistrict(defaultDistrict);
 					setTopics([...allSecondaryTopics]);

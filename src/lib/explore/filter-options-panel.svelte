@@ -36,7 +36,7 @@
 		onvaluechange={ondistrictchange}
 	/>
 
-	<div class="h-0 border-neutral-300 border-t my-1"></div>
+	<div class="my-1 h-0 border-t border-neutral-300"></div>
 
 	<h4 class="wv-b5 font-bold">สำรวจตามประเด็น</h4>
 	<div class="flex gap-3 text-sm">

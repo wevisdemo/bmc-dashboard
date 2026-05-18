@@ -51,7 +51,7 @@
 	}
 </script>
 
-<div class="mx-auto flex flex-col max-w-7xl px-4 py-12 gap-6">
+<div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12">
 	<h2 class="wv-h6 wv-kondolar font-bold">สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568</h2>
 
 	<div class="flex flex-row gap-4">
@@ -86,7 +86,7 @@
 					<div class="flex flex-col gap-2">
 						<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
 						<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
-							<WarningIcon class="size-4 mt-0.5" />
+							<WarningIcon class="mt-0.5 size-4" />
 							<p class="flex-1">
 								1 รายการ สามารถเกี่ยวข้องได้มากกว่า 1 ประเด็น หากในประเด็นที่คุณเลือก
 								มีรายการที่เกี่ยวข้องกับประเด็นอื่น ๆ ด้วย ตัวกรองของประเด็นอื่น ๆ
@@ -101,7 +101,7 @@
 						bind:selectedSecondaryTopics={params.topics}
 						ontopicschange={resetPageNumber}
 					/>
-					<p class="text-gray-500 mt-1">คลิกแถบเพื่อกรองตามประเด็น</p>
+					<p class="mt-1 text-gray-500">คลิกแถบเพื่อกรองตามประเด็น</p>
 				</div>
 			</div>
 			<TabList

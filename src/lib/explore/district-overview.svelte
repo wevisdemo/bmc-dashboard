@@ -76,7 +76,7 @@
 			<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
 			<path
 				d={pathGen(feature)}
-				class="cursor-pointer transition-colors stroke-gray-400 stroke-[0.5]"
+				class="cursor-pointer stroke-gray-400 stroke-[0.5] transition-colors"
 				style="fill: {interpolateYlGn(
 					colorDomain(districtCountMap.get(name) ?? minDistrictCount)
 				)};"
@@ -94,7 +94,7 @@
 				<path
 					transition:fade={{ duration: 150 }}
 					d={pathGen(selectedFeature)}
-					class="stroke-gray-800 stroke-1 fill-none"
+					class="fill-none stroke-gray-800 stroke-1"
 				/>
 			{/key}
 		{/if}
@@ -106,7 +106,7 @@
 				{y}
 				text-anchor="middle"
 				dominant-baseline="central"
-				class="pointer-events-none fill-white text-[8px] font-bold stroke-2 stroke-neutral-800"
+				class="pointer-events-none fill-white stroke-neutral-800 stroke-2 text-[8px] font-bold"
 				paint-order="stroke">{hoveredDistrict.name}</text
 			>
 		{/if}

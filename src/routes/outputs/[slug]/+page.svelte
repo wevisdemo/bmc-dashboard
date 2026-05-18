@@ -2,4 +2,4 @@
 	let { data } = $props();
 </script>
 
-<pre class="whitespace-pre-wrap p-4">{JSON.stringify(data, null, 2)}</pre>
+<pre class="p-4 whitespace-pre-wrap">{JSON.stringify(data, null, 2)}</pre>
