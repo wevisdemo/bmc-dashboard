@@ -17,5 +17,3 @@ export const topicColorMap = new Map(
 		[t.main, t.color]
 	])
 );
-
-console.log(topicColorMap);
