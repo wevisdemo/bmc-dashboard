@@ -1,42 +1,53 @@
-# sv
+# BMC Dashboard
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Deployments
 
-## Creating a project
+| Name       | URL                              | Host/Pipeline    |
+| ---------- | -------------------------------- | ---------------- |
+| Production | -                                | -                |
+| Staging    | https://bmc-dashboard.pages.dev/ | Cloudflare Pages |
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Tech Stack
 
-```sh
-# create a new project
-npx sv create my-app
-```
+- [Svelte 5](https://svelte.dev/) / [SvelteKit](https://svelte.dev/docs/kit)
+- [Bits UI](https://bits-ui.com/) with [Phosphor Icons](https://phosphoricons.com/)
+- [TailwindCSS 4](https://tailwindcss.com/)
+- [D3.js](https://d3js.org/) (geo, scale, scale-chromatic)
+- [Runed](https://runed.dev/) and [Zod](https://zod.dev/)
+- [Sheethuahua](https://punchupworld.github.io/sheethuahua/)
 
-To recreate this project with the same configuration:
+## Usage
 
-```sh
-# recreate this project
-pnpm dlx sv@0.15.1 create --template minimal --types ts --add prettier eslint tailwindcss="plugins:none" sveltekit-adapter="adapter:static" --install pnpm bmc-dashboard
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Requirements: [Node.js](https://nodejs.org/) 24+, [pnpm](https://pnpm.io/)
 
 ```sh
-npm run dev
+# Install packages
+pnpm install
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# Start local dev server
+pnpm run dev
+
+# Build for production
+pnpm run build
+
+# Preview production build
+pnpm run preview
+
+# Type check
+pnpm run check
+
+# Lint
+pnpm run lint
+
+# Format
+pnpm run format
 ```
 
-## Building
+## Related resources
 
-To create a production version of your app:
+- [Data Sheets](https://docs.google.com/spreadsheets/d/1vm2kIqOrKyPjWvlK9GjMAo9mFTcZEK1GSkJ3gM1gNb8/edit?usp=sharing)
+- [Figma](https://www.figma.com/design/aSpOB74URAuZqIcFcq2H9q/BMC-Dashboard)
 
-```sh
-npm run build
-```
+## License
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
