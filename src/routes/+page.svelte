@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { WarningIcon } from 'phosphor-svelte';
 	import { useSearchParams } from 'runed/kit';
 	import { untrack } from 'svelte';
 	import { z } from 'zod';
@@ -82,9 +83,16 @@
 					/>
 				</div>
 				<div class="wv-b6 flex flex-col gap-3 px-4 py-3">
-					<div class="flex flex-col gap-1">
+					<div class="flex flex-col gap-2">
 						<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
-						<p class="text-gray-500">*1 หัวข้อ เกี่ยวข้องได้มากกว่า 1 ประเด็น</p>
+						<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
+							<WarningIcon class="size-4 mt-0.5" />
+							<p class="flex-1">
+								1 รายการ สามารถเกี่ยวข้องได้มากกว่า 1 ประเด็น หากในประเด็นที่คุณเลือก
+								มีรายการที่เกี่ยวข้องกับประเด็นอื่น ๆ ด้วย ตัวกรองของประเด็นอื่น ๆ
+								นั้นจะถูกเลือกโดยอัตโนมัติ
+							</p>
+						</div>
 						<p class="font-bold">• {params.district}</p>
 					</div>
 					<TopicOverview
