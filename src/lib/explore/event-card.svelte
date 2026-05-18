@@ -29,14 +29,14 @@
 	<div class="flex flex-wrap gap-2">
 		{#each topics as topic (topic)}
 			<span
-				class="rounded-full px-2 py-0.5 font-bold text-black"
+				class="rounded-full flex items-center px-2 py-0.5 font-bold text-black"
 				style="background-color: {topicColorMap.get(topic)}"
 			>
 				{topic}
 			</span>
 		{/each}
 		<span
-			class="rounded bg-gray-100 border-gray-300 border p-2 gap-1 py-0.5 flex flex-row items-center"
+			class="rounded flex items-center bg-gray-100 border-gray-300 border p-2 gap-1 py-0.5 flex flex-row items-center"
 		>
 			<MapPinIcon />
 			{districts.join(', ')}
