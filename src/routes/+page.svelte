@@ -101,7 +101,6 @@
 						bind:selectedSecondaryTopics={params.topics}
 						ontopicschange={resetPageNumber}
 					/>
-					<p class="mt-1 text-gray-500">คลิกแถบเพื่อกรองตามประเด็น</p>
 				</div>
 			</div>
 			<TabList

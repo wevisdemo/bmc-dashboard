@@ -2,6 +2,7 @@
 	import { flip } from 'svelte/animate';
 	import { topicColorMap } from '$lib/sheets/topic';
 	import type { Event } from '../../routes/+page.server';
+	import EmptyListLabel from './empty-list-label.svelte';
 
 	interface Props {
 		events: Event[];
@@ -47,28 +48,34 @@
 	}
 </script>
 
-<div class="flex max-h-96 flex-col gap-1 overflow-y-scroll">
-	{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
-		{@const isActive = selectedSecondaryTopics.length === 1 && selectedSecondaryTopics[0] === topic}
-		<button
-			animate:flip={{ duration: 300 }}
-			class="flex flex-col gap-1 rounded-sm border p-2 transition-colors hover:bg-neutral-100 {isActive
-				? 'border-neutral-400'
-				: 'border-transparent'}"
-			onclick={() => onTopicClick(topic)}
-		>
-			<div class="flex flex-row justify-between text-sm font-bold">
-				<span>{topic}</span>
-				<span class="tabular-nums">{count}</span>
-			</div>
-			<div class="h-2 w-full rounded-xs border border-neutral-200 bg-neutral-100">
-				<div
-					class="h-full rounded-xs transition-[width] duration-300"
-					style="width:{(count / maxTopicCount) * 100}%; background-color: {topicColorMap.get(
-						topic
-					)};"
-				></div>
-			</div>
-		</button>
-	{/each}
-</div>
+{#if topicCounts.length === 0}
+	<EmptyListLabel class="py-12" />
+{:else}
+	<div class="flex h-full max-h-96 flex-col gap-1 overflow-y-scroll">
+		{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
+			{@const isActive =
+				selectedSecondaryTopics.length === 1 && selectedSecondaryTopics[0] === topic}
+			<button
+				animate:flip={{ duration: 300 }}
+				class="flex flex-col gap-1 rounded-sm border p-2 transition-colors hover:bg-neutral-100 {isActive
+					? 'border-neutral-400'
+					: 'border-transparent'}"
+				onclick={() => onTopicClick(topic)}
+			>
+				<div class="flex flex-row justify-between text-sm font-bold">
+					<span>{topic}</span>
+					<span class="tabular-nums">{count}</span>
+				</div>
+				<div class="h-2 w-full rounded-xs border border-neutral-200 bg-neutral-100">
+					<div
+						class="h-full rounded-xs transition-[width] duration-300"
+						style="width:{(count / maxTopicCount) * 100}%; background-color: {topicColorMap.get(
+							topic
+						)};"
+					></div>
+				</div>
+			</button>
+		{/each}
+	</div>
+	<p class="mt-1 text-gray-500">คลิกแถบเพื่อกรองตามประเด็น</p>
+{/if}

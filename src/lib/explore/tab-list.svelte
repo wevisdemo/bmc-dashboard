@@ -3,6 +3,7 @@
 	import Pagination from '$lib/inputs/pagination.svelte';
 	import { Tabs } from 'bits-ui';
 	import type { Event } from '../../routes/+page.server';
+	import EmptyListLabel from './empty-list-label.svelte';
 	import EventCard from './event-card.svelte';
 	import TabContentDescription from './tab-content-description.svelte';
 
@@ -75,9 +76,6 @@
 			/>
 		</div>
 	{:else}
-		<div class="flex flex-col items-center justify-center gap-3 bg-neutral-300 px-5 py-24">
-			<span class="wv-h5 font-bold">ไม่พบสิ่งที่กำลังค้นหา</span>
-			<span class="text-neutral-600">ลองค้นหาใหม่อีกครั้ง</span>
-		</div>
+		<EmptyListLabel class="bg-neutral-300 px-5 py-24" />
 	{/if}
 </div>
