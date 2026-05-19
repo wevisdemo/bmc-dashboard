@@ -1,6 +1,6 @@
 import type { FeatureCollection } from 'geojson';
 import type { ComponentProps } from 'svelte';
-import { AdditionalDistrictOption, EntityTabGroup } from '$lib/constants';
+import { AdditionalDistrictOption, EventGroup } from '$lib/constants';
 import districtsData from '$lib/explore/bangkok-districts.json';
 import type EventCard from '$lib/explore/event-card.svelte';
 import { outputs } from '$lib/output';
@@ -19,7 +19,7 @@ export type TopicGroup = {
 	secondaries: Topic['secondary'][];
 };
 
-export type Event = ComponentProps<typeof EventCard> & { id: string; group: EntityTabGroup };
+export type Event = ComponentProps<typeof EventCard> & { id: string; group: EventGroup };
 
 export function load() {
 	const topicGroups: TopicGroup[] = [
@@ -63,7 +63,7 @@ export function load() {
 			proposer: resolveProposer(s.proposer),
 			date: s.year ? `ปีที่เสนอ พ.ศ. ${s.year}` : undefined,
 			href: idToHref.get(s.id) ?? '#',
-			group: EntityTabGroup.Subject
+			group: EventGroup.Subject
 		})),
 		...motions.map((m) => ({
 			id: m.id,
@@ -73,34 +73,37 @@ export function load() {
 			proposer: resolveProposer(m.proposer),
 			date: m.year ? `ปีที่เสนอ พ.ศ. ${m.year}` : undefined,
 			href: idToHref.get(m.id) ?? '#',
-			group: EntityTabGroup.Motion
+			group: EventGroup.Motion
 		})),
 		...committees.map((c) => ({
 			id: c.id,
 			title: c.committeeOutput,
 			districts: c.districts,
 			topics: c.secondaryTopics,
+			proposer: { name: c.committee },
 			date: `ปีที่ศึกษา พ.ศ. ${c.year}`,
 			href: idToHref.get(c.id) ?? '#',
-			group: EntityTabGroup.CommitteeStudy
+			group: EventGroup.CommitteeStudy
 		})),
 		...billCommittees.map((bc) => ({
 			id: bc.id,
-			title: bc.title,
+			title: bc.output,
 			districts: bc.districts,
 			topics: bc.secondaryTopics,
+			proposer: { name: bc.committee },
 			date: `ปีที่ศึกษา พ.ศ. ${bc.year}`,
 			href: idToHref.get(bc.id) ?? '#',
-			group: EntityTabGroup.CommitteeStudy
+			group: EventGroup.CommitteeStudy
 		})),
 		...generalCommittees.map((gc) => ({
 			id: gc.id,
-			title: gc.title,
+			title: gc.committeeOutput,
 			districts: gc.districts,
 			topics: gc.secondaryTopics,
+			proposer: { name: gc.committee },
 			date: `ปีที่ศึกษา พ.ศ. ${gc.year}`,
 			href: idToHref.get(gc.id) ?? '#',
-			group: EntityTabGroup.CommitteeStudy
+			group: EventGroup.CommitteeStudy
 		})),
 		...bills.map((b) => ({
 			id: b.id,
@@ -112,7 +115,7 @@ export function load() {
 					? `วันที่ประกาศใช้ ${b.enactedDate?.toLocaleDateString('th-TH', { dateStyle: 'long' })} | `
 					: '') + `วันที่เสนอ ${b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}`,
 			href: idToHref.get(b.id) ?? '#',
-			group: EntityTabGroup.Bill,
+			group: EventGroup.Bill,
 			status: b.status
 		}))
 	];

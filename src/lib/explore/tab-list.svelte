@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { EntityTabGroup } from '$lib/constants';
+	import { EventGroup } from '$lib/constants';
 	import Pagination from '$lib/inputs/pagination.svelte';
 	import { Tabs } from 'bits-ui';
 	import type { Event } from '../../routes/+page.server';
@@ -23,10 +23,10 @@
 	let eventsByGroup = $derived(Object.groupBy(events, (e) => e.group));
 
 	let displayEvents = $derived(
-		eventsByGroup[tab as EntityTabGroup]?.slice((page - 1) * PER_PAGE, page * PER_PAGE) ?? []
+		eventsByGroup[tab as EventGroup]?.slice((page - 1) * PER_PAGE, page * PER_PAGE) ?? []
 	);
 
-	const tabs = Object.values(EntityTabGroup);
+	const tabs = Object.values(EventGroup);
 </script>
 
 <div class="pt-4" bind:this={container}>
@@ -42,7 +42,7 @@
 				</Tabs.Trigger>
 			{/each}
 		</Tabs.List>
-		<TabContentDescription value={EntityTabGroup.Subject}>
+		<TabContentDescription value={EventGroup.Subject}>
 			<li>
 				สก. จะตั้งกระทู้ถาม เมื่อต้องการ <strong>ผลักดัน</strong> หรือ
 				<strong>ติดตามความคืบหน้า</strong>
@@ -53,7 +53,7 @@
 				<strong>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong>
 			</li>
 		</TabContentDescription>
-		<TabContentDescription value={EntityTabGroup.Motion}>
+		<TabContentDescription value={EventGroup.Motion}>
 			<li>
 				สก. จะตั้งญัตติ เมื่อต้องการเสนอประเด็นหนึ่ง ๆ เข้าสู่สภา โดยทั่วไปญัตติจะเกี่ยวกับ<strong
 					>ประเด็นที่ครอบคลุมทั้ง กทม.</strong
@@ -64,13 +64,13 @@
 				<strong>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong>
 			</li>
 		</TabContentDescription>
-		<TabContentDescription value={EntityTabGroup.CommitteeStudy}>
+		<TabContentDescription value={EventGroup.CommitteeStudy}>
 			<li>
 				คณะกรรมการสามัญและวิสามัญจะ<strong>เสนอแผนงานใหม่และตั้งทีมศึกษาข้อมูลอย่างละเอียด</strong
 				>ก่อนส่งต่อให้ฝ่ายบริหารนำไปดำเนินการต่อ
 			</li>
 		</TabContentDescription>
-		<TabContentDescription value={EntityTabGroup.Bill}>
+		<TabContentDescription value={EventGroup.Bill}>
 			<li>
 				เปรียบเสมือน<strong>กฎหมาย</strong>ที่บังคับใช้ทั่วทั้ง กทม. ซึ่ง สก.
 				สามารถเสนอร่างกฎหมายได้เช่นเดียวกับฝ่ายบริหาร
@@ -88,7 +88,7 @@
 				<EventCard {...event} />
 			{/each}
 			<Pagination
-				count={eventsByGroup[tab as EntityTabGroup]?.length ?? 0}
+				count={eventsByGroup[tab as EventGroup]?.length ?? 0}
 				perPage={PER_PAGE}
 				onpagechange={() =>
 					setTimeout(() => container?.scrollIntoView({ behavior: 'smooth' }), 250)}

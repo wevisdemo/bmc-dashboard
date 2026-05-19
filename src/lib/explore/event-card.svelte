@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ArrowUpRightIcon } from 'phosphor-svelte';
+	import { ArrowUpRightIcon, UserIcon, UsersThreeIcon } from 'phosphor-svelte';
+	import { EventGroup } from '$lib/constants';
 	import type { BillStatus } from '$lib/sheets/bill';
 	import DistrictChip from '$lib/tags/district-tag.svelte';
 	import StatusChip from '$lib/tags/status-tag.svelte';
@@ -18,9 +19,12 @@
 		date?: string;
 		href: string;
 		status?: BillStatus;
+		group?: EventGroup;
 	}
 
-	let { title, districts, topics, proposer, date, href, status }: Props = $props();
+	let { title, districts, topics, proposer, date, href, status, group }: Props = $props();
+
+	let isCommittee = $derived(group === EventGroup.CommitteeStudy);
 </script>
 
 <a
@@ -57,7 +61,7 @@
 		<div class="h-px bg-neutral-300"></div>
 
 		<div class="flex flex-col">
-			<h5 class="font-bold text-neutral-600">ผู้เสนอ</h5>
+			<h5 class="font-bold text-neutral-600">{isCommittee ? 'คณะกรรมการ' : 'ผู้เสนอ'}</h5>
 			<div class="flex flex-row items-center gap-2 text-sm text-gray-600">
 				{#if proposer.imageUrl}
 					<img
@@ -66,7 +70,15 @@
 						class="size-8 rounded-full object-cover object-top"
 					/>
 				{:else}
-					<div class="size-8 rounded-full bg-neutral-300"></div>
+					<div
+						class="flex size-8 items-center justify-center rounded-full border border-neutral-200 bg-neutral-100"
+					>
+						{#if isCommittee}
+							<UsersThreeIcon class="size-5" />
+						{:else}
+							<UserIcon class="size-4" />
+						{/if}
+					</div>
 				{/if}
 				<div class="flex flex-col gap-0.5">
 					<div class="flex flex-row items-center gap-2">
@@ -77,9 +89,11 @@
 							>
 						{/if}
 					</div>
-					<p>
-						สก.เขต {proposer.district}
-					</p>
+					{#if proposer.district}
+						<p>
+							สก.เขต {proposer.district}
+						</p>
+					{/if}
 				</div>
 			</div>
 		</div>

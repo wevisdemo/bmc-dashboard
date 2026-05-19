@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { InfoIcon } from 'phosphor-svelte';
 	import type { Snippet } from 'svelte';
-	import type { EntityTabGroup } from '$lib/constants';
+	import type { EventGroup } from '$lib/constants';
 	import { Tabs } from 'bits-ui';
 
 	interface Props {
-		value: EntityTabGroup;
+		value: EventGroup;
 		children: Snippet;
 	}
 

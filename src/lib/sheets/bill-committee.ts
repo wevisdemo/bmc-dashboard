@@ -5,7 +5,7 @@ const billCommitteeSchema = Object({
 	id: Column('id', asString()),
 	year: Column('year', asNumber()),
 	output: Column('Output', asString()),
-	title: Column('BillCommitee_Title', asString()),
+	committee: Column('BillCommitee_Title', asString()),
 	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
 	districts: Column('District', asArray(asString())),
 	committeeSuggestion: Column('Commitee_Suggestion', asString().optional()),

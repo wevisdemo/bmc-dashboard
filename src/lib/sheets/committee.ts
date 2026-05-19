@@ -3,7 +3,7 @@ import { sheets } from './spreadsheet';
 
 const committeeSchema = Object({
 	id: Column('id', asString()),
-	title: Column('Commitee_Title', asString()),
+	committee: Column('Commitee_Title', asString()),
 	year: Column('year', asNumber()),
 	output: Column('Output', asString()),
 	committeeOutput: Column('Committee_output_title', asString()),

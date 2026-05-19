@@ -3,7 +3,7 @@ export enum AdditionalDistrictOption {
 	NotSpecified = 'ไม่ระบุเขต'
 }
 
-export enum EntityTabGroup {
+export enum EventGroup {
 	Subject = 'กระทู้ถาม',
 	Motion = 'ญัตติ',
 	CommitteeStudy = 'เรื่องที่ศึกษาโดยคณะกรรมการ',

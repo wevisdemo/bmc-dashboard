@@ -3,7 +3,7 @@
 	import { useSearchParams } from 'runed/kit';
 	import { untrack } from 'svelte';
 	import { z } from 'zod';
-	import { AdditionalDistrictOption, EntityTabGroup } from '$lib/constants.js';
+	import { AdditionalDistrictOption, EventGroup } from '$lib/constants.js';
 	import DistrictOverview from '$lib/explore/district-overview.svelte';
 	import FilterChipsBar from '$lib/explore/filter-chips-bar.svelte';
 	import FilterOptionsPanel from '$lib/explore/filter-options-panel.svelte';
@@ -24,7 +24,7 @@
 				arr.toSorted((a, z) => allSecondaryTopics.indexOf(a) - allSecondaryTopics.indexOf(z))
 			)
 			.default(allSecondaryTopics),
-		tab: z.string().default(EntityTabGroup.Subject),
+		tab: z.string().default(EventGroup.Subject),
 		page: z.number().int().positive().default(1)
 	});
 
