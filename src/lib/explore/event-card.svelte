@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ArrowUpRightIcon, MapPinIcon } from 'phosphor-svelte';
+	import { billStatusConfig } from '$lib/constants';
 	import { BillStatus } from '$lib/sheets/bill';
 	import { topicColorMap } from '$lib/sheets/topic';
 
@@ -18,7 +19,9 @@
 		status?: BillStatus;
 	}
 
-	let { title, districts, topics, proposer, date, href }: Props = $props();
+	let { title, districts, topics, proposer, date, href, status }: Props = $props();
+
+	let statusChip = $derived(status ? billStatusConfig[status] : null);
 </script>
 
 <a
@@ -26,21 +29,30 @@
 	rel="external noopener noreferrer"
 	class="wv-b6 relative flex flex-1 flex-col gap-4 rounded-lg border-2 border-neutral-200 bg-white p-4 hover:border-neutral-400"
 >
-	<div class="flex flex-wrap gap-2">
-		{#each topics as topic (topic)}
+	<div class="flex flex-row">
+		<div class="flex flex-1 flex-wrap gap-2">
+			{#each topics as topic (topic)}
+				<span
+					class="flex items-center rounded-full px-2 py-0.5 font-bold text-black"
+					style="background-color: {topicColorMap.get(topic)}"
+				>
+					{topic}
+				</span>
+			{/each}
 			<span
-				class="flex items-center rounded-full px-2 py-0.5 font-bold text-black"
-				style="background-color: {topicColorMap.get(topic)}"
+				class="flex flex-row items-center gap-1 rounded border border-gray-300 bg-gray-100 px-2 py-0.5"
 			>
-				{topic}
+				<MapPinIcon />
+				{districts.join(', ')}
 			</span>
-		{/each}
-		<span
-			class="flex flex-row items-center gap-1 rounded border border-gray-300 bg-gray-100 px-2 py-0.5"
-		>
-			<MapPinIcon />
-			{districts.join(', ')}
-		</span>
+		</div>
+
+		{#if statusChip}
+			<span class="wv-b6 flex items-center gap-1.5 rounded px-3 py-1 {statusChip.classes}">
+				<span class="size-2 rounded-full {statusChip.dot}"></span>
+				{statusChip.label}
+			</span>
+		{/if}
 	</div>
 
 	<div class="space-y-1">
