@@ -75,7 +75,7 @@
 			<FilterChipsBar
 				defaultDistrict={DEFAULT_DISTRICT}
 				{allSecondaryTopics}
-				totalEvents={filteredEvents.length}
+				events={filteredEvents}
 				bind:selectedDistrict={params.district}
 				bind:selectedSecondaryTopics={params.topics}
 				ondistrictchange={resetPageNumber}
