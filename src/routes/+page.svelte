@@ -53,7 +53,15 @@
 
 <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12">
 	<h2 class="wv-h6 wv-kondolar font-bold">สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568</h2>
-
+	<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
+		<WarningIcon class="mt-0.5 size-4" />
+		<p class="wv-b6 flex-1">
+			1 รายการ สามารถเกี่ยวข้องได้ <strong>มากกว่า 1 ประเด็น</strong> และ
+			<strong>มากกว่า 1 เขตพื้นที่</strong>
+			หากประเด็นหรือเขตพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือเขตพื้นที่อื่น ๆ ด้วย
+			<strong>ตัวกรองของประเด็นหรือเขตพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
+		</p>
+	</div>
 	<div class="flex flex-row gap-4">
 		<FilterOptionsPanel
 			districts={data.districts}
@@ -85,14 +93,6 @@
 				<div class="wv-b6 flex flex-col gap-3 px-4 py-3">
 					<div class="flex flex-col gap-2">
 						<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
-						<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
-							<WarningIcon class="mt-0.5 size-4" />
-							<p class="flex-1">
-								1 รายการ สามารถเกี่ยวข้องได้มากกว่า 1 ประเด็น หากในประเด็นที่คุณเลือก
-								มีรายการที่เกี่ยวข้องกับประเด็นอื่น ๆ ด้วย ตัวกรองของประเด็นอื่น ๆ
-								นั้นจะถูกเลือกโดยอัตโนมัติ
-							</p>
-						</div>
 						<p class="font-bold">• {params.district}</p>
 					</div>
 					<TopicOverview
