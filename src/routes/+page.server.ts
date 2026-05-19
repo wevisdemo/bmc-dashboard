@@ -9,6 +9,7 @@ import { billCommittees } from '$lib/sheets/bill-committee';
 import { committees } from '$lib/sheets/committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { members } from '$lib/sheets/member';
+import memberImageMap from '$lib/sheets/member-images.json';
 import { motions } from '$lib/sheets/motion';
 import { subjects } from '$lib/sheets/subject';
 import { topics, type Topic } from '$lib/sheets/topic';
@@ -42,12 +43,13 @@ export function load() {
 
 	function resolveProposer(name: string) {
 		const member = memberByName.get(name);
+
 		return member
 			? {
 					name: member.name,
 					party: member.party,
 					district: member.district,
-					imageUrl: member.imageUrl || undefined
+					imageUrl: memberImageMap[name as keyof typeof memberImageMap]
 				}
 			: undefined;
 	}
