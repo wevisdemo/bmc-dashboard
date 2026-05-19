@@ -49,7 +49,7 @@
 
 <div class="flex max-h-96 flex-col gap-1 overflow-y-scroll">
 	{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
-		{@const isActive = selectedSecondaryTopics.includes(topic)}
+		{@const isActive = selectedSecondaryTopics.length === 1 && selectedSecondaryTopics[0] === topic}
 		<button
 			animate:flip={{ duration: 300 }}
 			class="flex flex-col gap-1 rounded-sm border p-2 transition-colors hover:bg-neutral-100 {isActive
