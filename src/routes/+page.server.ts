@@ -52,10 +52,6 @@ export function load() {
 			: undefined;
 	}
 
-	function yearToDate(year: number) {
-		return new Date(year, 0, 1);
-	}
-
 	const events: Event[] = [
 		...subjects.map((s) => ({
 			id: s.id,
@@ -63,7 +59,7 @@ export function load() {
 			districts: s.districts,
 			topics: s.secondaryTopics,
 			proposer: resolveProposer(s.proposer),
-			proposedDate: s.proposedDate,
+			date: s.year ? `ปีที่เสนอ พ.ศ. ${s.year}` : undefined,
 			href: idToHref.get(s.id) ?? '#',
 			group: EntityTabGroup.Subject
 		})),
@@ -73,7 +69,7 @@ export function load() {
 			districts: m.districts,
 			topics: m.secondaryTopics,
 			proposer: resolveProposer(m.proposer),
-			proposedDate: m.proposedDate,
+			date: m.year ? `ปีที่เสนอ พ.ศ. ${m.year}` : undefined,
 			href: idToHref.get(m.id) ?? '#',
 			group: EntityTabGroup.Motion
 		})),
@@ -82,7 +78,7 @@ export function load() {
 			title: c.committeeOutput,
 			districts: c.districts,
 			topics: c.secondaryTopics,
-			proposedDate: yearToDate(c.year),
+			date: `ปีที่ศึกษา พ.ศ. ${c.year}`,
 			href: idToHref.get(c.id) ?? '#',
 			group: EntityTabGroup.CommitteeStudy
 		})),
@@ -91,7 +87,7 @@ export function load() {
 			title: bc.title,
 			districts: bc.districts,
 			topics: bc.secondaryTopics,
-			proposedDate: yearToDate(bc.year),
+			date: `ปีที่ศึกษา พ.ศ. ${bc.year}`,
 			href: idToHref.get(bc.id) ?? '#',
 			group: EntityTabGroup.CommitteeStudy
 		})),
@@ -100,7 +96,7 @@ export function load() {
 			title: gc.title,
 			districts: gc.districts,
 			topics: gc.secondaryTopics,
-			proposedDate: yearToDate(gc.year),
+			date: `ปีที่ศึกษา พ.ศ. ${gc.year}`,
 			href: idToHref.get(gc.id) ?? '#',
 			group: EntityTabGroup.CommitteeStudy
 		})),
@@ -109,7 +105,10 @@ export function load() {
 			title: b.title,
 			districts: b.districts,
 			topics: b.secondaryTopics,
-			proposedDate: b.proposedDate,
+			date:
+				(b.enactedDate
+					? `วันที่ประกาศใช้ ${b.enactedDate?.toLocaleDateString('th-TH', { dateStyle: 'long' })} | `
+					: '') + `วันที่เสนอ ${b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}`,
 			href: idToHref.get(b.id) ?? '#',
 			group: EntityTabGroup.Bill,
 			status: b.status

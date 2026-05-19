@@ -1,4 +1,4 @@
-import { asArray, Column, Object, asDate, asString, type StaticDecode } from 'sheethuahua';
+import { asArray, asNumber, Column, Object, asString, type StaticDecode } from 'sheethuahua';
 import { sheets } from './spreadsheet';
 
 const subjectSchema = Object({
@@ -9,7 +9,7 @@ const subjectSchema = Object({
 	districts: Column('District', asArray(asString())),
 	proposer: Column('Proposer', asString()),
 	proposerDistrict: Column('Proposser_District', asString()),
-	proposedDate: Column('Proposed_Date', asDate().optional()),
+	year: Column('year', asNumber().optional()),
 	link: Column('Link_Doc', asString())
 });
 

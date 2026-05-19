@@ -13,12 +13,12 @@
 			district?: string;
 			imageUrl?: string;
 		};
-		proposedDate?: Date;
+		date?: string;
 		href: string;
 		status?: BillStatus;
 	}
 
-	let { title, districts, topics, proposer, proposedDate, href }: Props = $props();
+	let { title, districts, topics, proposer, date, href }: Props = $props();
 </script>
 
 <a
@@ -43,7 +43,15 @@
 		</span>
 	</div>
 
-	<h4 class="wv-h9 wv-kondolar font-bold">{title}</h4>
+	<div class="space-y-1">
+		<h4 class="wv-h9 wv-kondolar font-bold">{title}</h4>
+
+		{#if date}
+			<p class="wv-b6 text-neutral-500">
+				{date}
+			</p>
+		{/if}
+	</div>
 
 	{#if proposer}
 		<div class="h-px bg-neutral-300"></div>
@@ -70,9 +78,7 @@
 						{/if}
 					</div>
 					<p>
-						สก.เขต {proposer.district}{#if proposedDate}
-							| วันที่เสนอ {proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}
-						{/if}
+						สก.เขต {proposer.district}
 					</p>
 				</div>
 			</div>

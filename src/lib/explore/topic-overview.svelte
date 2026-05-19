@@ -62,8 +62,8 @@
 					: 'border-transparent'}"
 				onclick={() => onTopicClick(topic)}
 			>
-				<div class="flex flex-row justify-between text-sm font-bold">
-					<span>{topic}</span>
+				<div class="flex flex-row text-sm font-bold">
+					<span class="flex-1 text-left">{topic}</span>
 					<span class="tabular-nums">{count}</span>
 				</div>
 				<div class="h-2 w-full rounded-xs border border-neutral-200 bg-neutral-100">
