@@ -36,7 +36,7 @@
 			</span>
 		{/each}
 		<span
-			class="flex flex-row items-center gap-1 rounded border border-gray-300 bg-gray-100 p-2 py-0.5"
+			class="flex flex-row items-center gap-1 rounded border border-gray-300 bg-gray-100 px-2 py-0.5"
 		>
 			<MapPinIcon />
 			{districts.join(', ')}
@@ -61,10 +61,12 @@
 					<div class="size-8 rounded-full bg-neutral-300"></div>
 				{/if}
 				<div class="flex flex-col gap-0.5">
-					<div class="flex flex-row gap-2">
+					<div class="flex flex-row items-center gap-2">
 						<span class="wv-b5 font-bold">{proposer.name}</span>
 						{#if proposer.party}
-							<span class="rounded border border-neutral-400 px-1 pt-0.5">{proposer.party}</span>
+							<span class="rounded-lg border border-gray-300 bg-gray-100 px-2 py-0.5"
+								>{proposer.party}</span
+							>
 						{/if}
 					</div>
 					<p>
