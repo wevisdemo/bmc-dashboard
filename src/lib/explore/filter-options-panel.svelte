@@ -41,7 +41,7 @@
 	<h4 class="wv-b5 font-bold">สำรวจตามประเด็น</h4>
 	<div class="flex gap-3 text-sm">
 		<button
-			class="text-blue-600 underline not-disabled:hover:text-blue-400 disabled:cursor-not-allowed disabled:text-neutral-400"
+			class="text-blue-600 not-disabled:underline not-disabled:hover:text-blue-400 disabled:cursor-not-allowed disabled:text-neutral-400"
 			disabled={selectedSecondaryTopics.length === allSecondaries.length}
 			onclick={() => {
 				selectedSecondaryTopics = [...allSecondaries];
@@ -49,12 +49,12 @@
 			}}>เลือกทั้งหมด</button
 		>
 		<button
-			class="text-blue-600 underline not-disabled:hover:text-blue-400 disabled:cursor-not-allowed disabled:text-neutral-400"
+			class="text-blue-600 not-disabled:underline not-disabled:hover:text-blue-400 disabled:cursor-not-allowed disabled:text-neutral-400"
 			disabled={selectedSecondaryTopics.length === 0}
 			onclick={() => {
 				selectedSecondaryTopics = [];
 				ontopicschange?.();
-			}}>ไม่เลือกอะไรเลย</button
+			}}>ล้างทั้งหมด</button
 		>
 	</div>
 	<div class="wv-b6 flex flex-col gap-1.5">
