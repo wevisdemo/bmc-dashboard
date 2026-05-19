@@ -14,5 +14,10 @@
 
 <Tabs.Content {value} class="wv-b6 flex flex-row gap-1 bg-neutral-300 p-5 pb-0">
 	<InfoIcon class="mt-0.5" />
-	<p class="flex-1"><strong>คำอธิบาย:</strong> {@render children()}</p>
+	<div class="flex-1">
+		<span class="font-bold">คำอธิบาย</span>
+		<ul class="flex-1 list-disc">
+			{@render children()}
+		</ul>
+	</div>
 </Tabs.Content>
