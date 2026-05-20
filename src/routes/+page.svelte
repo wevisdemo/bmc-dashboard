@@ -2,6 +2,7 @@
 	import { CaretUpIcon, SlidersIcon, WarningIcon } from 'phosphor-svelte';
 	import { useSearchParams } from 'runed/kit';
 	import { untrack } from 'svelte';
+	import { slide } from 'svelte/transition';
 	import { z } from 'zod';
 	import { AdditionalDistrictOption, EventGroup } from '$lib/constants.js';
 	import CountStats from '$lib/explore/count-stats.svelte';
@@ -65,7 +66,7 @@
 			<strong>ตัวกรองของประเด็นหรือเขตพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
 		</p>
 	</div>
-	<div class="flex flex-col md:flex-row-reverse md:gap-4">
+	<div class="flex flex-col md:gap-4 lg:flex-row-reverse">
 		<div class="flex flex-1 flex-col gap-3">
 			<div class="hidden flex-col gap-2 md:flex">
 				<CountStats events={filteredEvents} />
@@ -78,7 +79,7 @@
 					ontopicschange={resetPageNumber}
 				/>
 			</div>
-			<div class="grid grid-cols-1 rounded-lg border border-gray-300 md:grid-cols-2">
+			<div class="grid grid-cols-1 rounded-lg border border-gray-300 sm:grid-cols-2">
 				<div
 					class="flex flex-col gap-3 border-b border-gray-300 p-3 md:gap-6 md:border-r md:border-b-0 md:px-4"
 				>
@@ -111,9 +112,9 @@
 		</div>
 
 		<div
-			class="sticky inset-x-0 bottom-0 z-20 -mx-3 flex max-h-dvh flex-col border-t border-neutral-400 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.07)] md:static md:top-0 md:m-0 md:max-h-none md:w-72 md:border-none md:p-0 md:shadow-none"
+			class="sticky inset-x-0 bottom-0 z-20 -mx-3 flex max-h-dvh flex-col border-t border-neutral-400 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.07)] lg:static lg:top-0 lg:m-0 lg:max-h-none lg:w-72 lg:border-none lg:p-0 lg:shadow-none"
 		>
-			<div class="flex flex-col md:hidden">
+			<div class="flex flex-col lg:hidden">
 				<button
 					class="flex flex-row items-center gap-2 p-2"
 					onclick={() => (isMobileFilterExpanded = !isMobileFilterExpanded)}
@@ -128,7 +129,10 @@
 				</button>
 				<div class="h-0 border-t border-neutral-300"></div>
 				{#if !isMobileFilterExpanded}
-					<div class="flex flex-1 flex-col gap-2 p-2">
+					<div
+						transition:slide={{ axis: 'y', delay: 50, duration: 100 }}
+						class="flex flex-1 flex-col gap-2 overflow-hidden p-2"
+					>
 						<CountStats events={filteredEvents} />
 						<FilterChipsBar
 							class="border-t border-neutral-300 pt-2"
@@ -144,7 +148,9 @@
 			</div>
 
 			<FilterOptions
-				class="p-2 md:flex md:p-0 {isMobileFilterExpanded ? 'overflow-y-auto' : 'hidden'}"
+				class="px-2 transition-[max-height] duration-250 ease-in-out lg:flex lg:max-h-none lg:p-0 {isMobileFilterExpanded
+					? 'max-h-lvh overflow-y-auto py-2'
+					: 'max-h-0 overflow-y-hidden'}"
 				districts={data.districts}
 				topicGroups={data.topicGroups}
 				bind:selectedDistrict={params.district}
