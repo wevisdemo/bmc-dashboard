@@ -1,13 +1,8 @@
 <script lang="ts">
 	import { EventGroup } from '$lib/constants';
-	import Pagination from '$lib/inputs/pagination.svelte';
 	import { Tabs } from 'bits-ui';
 	import type { Event } from '../../routes/+page.server';
-	import EmptyListLabel from './empty-list-label.svelte';
-	import EventCard from './event-card.svelte';
-	import TabContentDescription from './tab-content-description.svelte';
-
-	const PER_PAGE = 10;
+	import TabContent from './tab-content.svelte';
 
 	interface Props {
 		events: Event[];
@@ -21,10 +16,6 @@
 	let container = $state<HTMLDivElement>();
 
 	let eventsByGroup = $derived(Object.groupBy(events, (e) => e.group));
-
-	let displayEvents = $derived(
-		eventsByGroup[tab as EventGroup]?.slice((page - 1) * PER_PAGE, page * PER_PAGE) ?? []
-	);
 
 	const tabs = Object.values(EventGroup);
 </script>
@@ -45,7 +36,12 @@
 			{/each}
 		</Tabs.List>
 
-		<TabContentDescription value={EventGroup.Subject}>
+		<TabContent
+			value={EventGroup.Subject}
+			events={eventsByGroup[EventGroup.Subject] ?? []}
+			{page}
+			{container}
+		>
 			<li>
 				สก. จะตั้งกระทู้ถาม เมื่อต้องการ <strong>ผลักดัน</strong> หรือ
 				<strong>ติดตามความคืบหน้า</strong>
@@ -55,8 +51,13 @@
 				พรรคที่ สก. สังกัด อ้างอิงตาม
 				<strong>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong>
 			</li>
-		</TabContentDescription>
-		<TabContentDescription value={EventGroup.Motion}>
+		</TabContent>
+		<TabContent
+			value={EventGroup.Motion}
+			events={eventsByGroup[EventGroup.Motion] ?? []}
+			{page}
+			{container}
+		>
 			<li>
 				สก. จะตั้งญัตติ เมื่อต้องการเสนอประเด็นหนึ่ง ๆ เข้าสู่สภา โดยทั่วไปญัตติจะเกี่ยวกับ<strong
 					>ประเด็นที่ครอบคลุมทั้ง กทม.</strong
@@ -66,14 +67,24 @@
 				พรรคที่ สก. สังกัด อ้างอิงตาม
 				<strong>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong>
 			</li>
-		</TabContentDescription>
-		<TabContentDescription value={EventGroup.CommitteeStudy}>
+		</TabContent>
+		<TabContent
+			value={EventGroup.CommitteeStudy}
+			events={eventsByGroup[EventGroup.CommitteeStudy] ?? []}
+			{page}
+			{container}
+		>
 			<li>
 				คณะกรรมการสามัญและวิสามัญจะ<strong>เสนอแผนงานใหม่และตั้งทีมศึกษาข้อมูลอย่างละเอียด</strong
 				>ก่อนส่งต่อให้ฝ่ายบริหารนำไปดำเนินการต่อ
 			</li>
-		</TabContentDescription>
-		<TabContentDescription value={EventGroup.Bill}>
+		</TabContent>
+		<TabContent
+			value={EventGroup.Bill}
+			events={eventsByGroup[EventGroup.Bill] ?? []}
+			{page}
+			{container}
+		>
 			<li>
 				เปรียบเสมือน<strong>กฎหมาย</strong>ที่บังคับใช้ทั่วทั้ง กทม. ซึ่ง สก.
 				สามารถเสนอร่างกฎหมายได้เช่นเดียวกับฝ่ายบริหาร
@@ -82,23 +93,6 @@
 				พรรคที่ สก. สังกัด อ้างอิงตาม
 				<strong>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong>
 			</li>
-		</TabContentDescription>
-
-		{#if displayEvents.length}
-			<div class="flex flex-col gap-3 p-3 md:gap-4 md:px-6">
-				{#each displayEvents as event (event.id)}
-					<EventCard {...event} />
-				{/each}
-				<Pagination
-					count={eventsByGroup[tab as EventGroup]?.length ?? 0}
-					perPage={PER_PAGE}
-					onpagechange={() =>
-						setTimeout(() => container?.scrollIntoView({ behavior: 'smooth' }), 250)}
-					bind:page
-				/>
-			</div>
-		{:else}
-			<EmptyListLabel class="px-5 py-24" />
-		{/if}
+		</TabContent>
 	</Tabs.Root>
 </div>
