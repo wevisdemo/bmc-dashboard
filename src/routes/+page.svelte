@@ -55,8 +55,11 @@
 	}
 </script>
 
-<div class="mx-auto flex max-w-7xl flex-col gap-3 p-3 pb-0 md:gap-6 md:px-4 md:py-12">
-	<h2 class="wv-h6 wv-kondolar font-bold">สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568</h2>
+<div class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:py-12">
+	<h1 class="wv-h4 wv-kondolar my-4 text-center font-bold md:my-8">รู้ไหม สก. ทำอะไรได้บ้าง ?</h1>
+	<p class="wv-h6 wv-kondolar text-center font-bold">
+		สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568
+	</p>
 	<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
 		<WarningIcon class="mt-0.5 size-4" />
 		<p class="wv-b6 flex-1">
@@ -127,7 +130,7 @@
 							: 'rotate-0'}"
 					/>
 				</button>
-				<div class="h-0 border-t border-neutral-300"></div>
+				<div class="mx-2 h-0 border-t border-neutral-300"></div>
 				{#if !isMobileFilterExpanded}
 					<div
 						transition:slide={{ axis: 'y', delay: 50, duration: 100 }}
