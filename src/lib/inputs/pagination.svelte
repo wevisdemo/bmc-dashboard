@@ -15,8 +15,10 @@
 
 <Pagination.Root {count} {perPage} bind:page onPageChange={onpagechange} class="py-4">
 	{#snippet children({ pages, range })}
-		<div class="flex items-center justify-center">
-			<Pagination.PrevButton class="inline-flex size-10 items-center justify-center rounded">
+		<div class="flex items-center justify-center gap-2">
+			<Pagination.PrevButton
+				class="inline-flex size-6 items-center justify-center rounded hover:text-neutral-500"
+			>
 				<CaretLeftIcon class="size-6" />
 			</Pagination.PrevButton>
 			<div class="flex items-center gap-2">
@@ -26,14 +28,16 @@
 					{:else}
 						<Pagination.Page
 							{page}
-							class="size-10 items-center justify-center rounded  data-selected:bg-neutral-100"
+							class="wv-b5 size-8 items-center justify-center rounded hover:text-neutral-500 data-selected:bg-neutral-100"
 						>
 							{page.value}
 						</Pagination.Page>
 					{/if}
 				{/each}
 			</div>
-			<Pagination.NextButton class="inline-flex size-10 items-center justify-center rounded">
+			<Pagination.NextButton
+				class="inline-flex size-6 items-center justify-center rounded hover:text-neutral-500"
+			>
 				<CaretRightIcon class="size-6" />
 			</Pagination.NextButton>
 		</div>
