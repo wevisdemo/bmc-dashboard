@@ -8,7 +8,7 @@
 	import type { Event } from '../../routes/+page.server';
 	import bangkokData from './bangkok-districts.json';
 
-	const CANVAS_WIDTH = 280;
+	const CANVAS_WIDTH = 300;
 	const CANVAS_HEIGHT = 220;
 
 	interface Props {
@@ -76,7 +76,7 @@
 			<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
 			<path
 				d={pathGen(feature)}
-				class="cursor-pointer stroke-gray-400 stroke-[0.5] transition-colors"
+				class="stroke-gray-400 stroke-[0.5] transition-colors"
 				style="fill: {interpolateYlGn(
 					colorDomain(districtCountMap.get(name) ?? minDistrictCount)
 				)};"
