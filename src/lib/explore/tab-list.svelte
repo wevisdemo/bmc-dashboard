@@ -29,19 +29,22 @@
 	const tabs = Object.values(EventGroup);
 </script>
 
-<div class="pt-4" bind:this={container}>
+<div class="-mx-3 bg-neutral-300 md:m-0" bind:this={container}>
 	<Tabs.Root bind:value={tab} onValueChange={ontabchange}>
-		<Tabs.List class="flex flex-row gap-2">
+		<Tabs.List
+			class="sticky top-0 z-10 flex flex-row gap-2 overflow-x-auto border-b-12 border-neutral-300 bg-white px-3 pt-2 md:border-b-24 md:p-0"
+		>
 			{#each tabs as value (value)}
 				<Tabs.Trigger
 					{value}
 					class="flex flex-row items-center gap-1 rounded-t-lg bg-neutral-100 p-3 data-[state=active]:bg-neutral-300"
 				>
-					<h4 class="wv-h9 font-bold">{value}</h4>
+					<h4 class="wv-h9 font-bold whitespace-nowrap">{value}</h4>
 					<span>[{eventsByGroup[value]?.length ?? 0}]</span>
 				</Tabs.Trigger>
 			{/each}
 		</Tabs.List>
+
 		<TabContentDescription value={EventGroup.Subject}>
 			<li>
 				สก. จะตั้งกระทู้ถาม เมื่อต้องการ <strong>ผลักดัน</strong> หรือ
@@ -80,22 +83,22 @@
 				<strong>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong>
 			</li>
 		</TabContentDescription>
-	</Tabs.Root>
 
-	{#if displayEvents.length}
-		<div class="flex flex-col gap-4 bg-neutral-300 px-6 py-3">
-			{#each displayEvents as event (event.id)}
-				<EventCard {...event} />
-			{/each}
-			<Pagination
-				count={eventsByGroup[tab as EventGroup]?.length ?? 0}
-				perPage={PER_PAGE}
-				onpagechange={() =>
-					setTimeout(() => container?.scrollIntoView({ behavior: 'smooth' }), 250)}
-				bind:page
-			/>
-		</div>
-	{:else}
-		<EmptyListLabel class="bg-neutral-300 px-5 py-24" />
-	{/if}
+		{#if displayEvents.length}
+			<div class="flex flex-col gap-3 p-3 md:gap-4 md:px-6">
+				{#each displayEvents as event (event.id)}
+					<EventCard {...event} />
+				{/each}
+				<Pagination
+					count={eventsByGroup[tab as EventGroup]?.length ?? 0}
+					perPage={PER_PAGE}
+					onpagechange={() =>
+						setTimeout(() => container?.scrollIntoView({ behavior: 'smooth' }), 250)}
+					bind:page
+				/>
+			</div>
+		{:else}
+			<EmptyListLabel class="px-5 py-24" />
+		{/if}
+	</Tabs.Root>
 </div>

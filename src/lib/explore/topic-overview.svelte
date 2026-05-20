@@ -51,7 +51,7 @@
 {#if topicCounts.length === 0}
 	<EmptyListLabel class="py-12" />
 {:else}
-	<div class="flex h-full max-h-96 flex-col gap-1 overflow-y-scroll">
+	<div class="flex h-full max-h-96 flex-col gap-1 overflow-y-auto">
 		{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
 			{@const isActive =
 				selectedSecondaryTopics.length === 1 && selectedSecondaryTopics[0] === topic}

@@ -12,7 +12,7 @@
 	let { value, children }: Props = $props();
 </script>
 
-<Tabs.Content {value} class="wv-b6 flex flex-row gap-1 bg-neutral-300 p-5 pb-0">
+<Tabs.Content {value} class="wv-b6 flex flex-row gap-1 px-3 md:px-5">
 	<InfoIcon class="mt-0.5" />
 	<div class="flex-1">
 		<span class="font-bold">คำอธิบาย</span>

@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { XCircleIcon } from 'phosphor-svelte';
-	import { AdditionalDistrictOption } from '$lib/constants';
 	import { topicColorMap } from '$lib/sheets/topic';
-	import type { Event } from '../../routes/+page.server';
 
 	interface Props {
 		selectedDistrict: string;
 		selectedSecondaryTopics: string[];
 		defaultDistrict: string;
 		allSecondaryTopics: string[];
-		events: Event[];
 		ondistrictchange?: (district: string) => void;
 		ontopicschange?: (topics: string[]) => void;
+		class?: string;
 	}
 
 	let {
@@ -19,17 +17,14 @@
 		selectedSecondaryTopics = $bindable([]),
 		defaultDistrict,
 		allSecondaryTopics,
-		events,
 		ondistrictchange,
-		ontopicschange
+		ontopicschange,
+		class: className = ''
 	}: Props = $props();
 
 	let isShowingDistrict = $derived(selectedDistrict !== defaultDistrict);
-	let isShowingTopics = $derived(selectedSecondaryTopics.length !== allSecondaryTopics.length);
-
-	let eventInDistrictCount = $derived(
-		events.filter((e) => e.districts.some((d) => d !== AdditionalDistrictOption.NotSpecified))
-			.length
+	let isShowingTopics = $derived(
+		selectedSecondaryTopics.length && selectedSecondaryTopics.length !== allSecondaryTopics.length
 	);
 
 	function setDistrict(district: string) {
@@ -54,15 +49,8 @@
 	</button>
 {/snippet}
 
-<div class="flex flex-col gap-2">
-	<p class="wv-b6 flex-1">
-		รายการทั้งหมด <strong>{events.length}</strong> (ระบุเขตได้
-		<strong>{eventInDistrictCount}</strong>,
-		<span class="text-neutral-500"
-			>ไม่ระบุเขต <strong>{events.length - eventInDistrictCount}</strong></span
-		>)
-	</p>
-	<div class="flex flex-row flex-wrap items-center gap-2">
+{#if isShowingDistrict || isShowingTopics}
+	<div class="flex flex-row flex-wrap items-center gap-2 {className}">
 		{#if isShowingDistrict}
 			{@render optionChip(selectedDistrict, '#f5f5f5', () => setDistrict(defaultDistrict))}
 		{/if}
@@ -73,14 +61,12 @@
 				)}
 			{/each}
 		{/if}
-		{#if isShowingDistrict || isShowingTopics}
-			<button
-				class="wv-b6 px-2 py-1 text-blue-700 hover:text-blue-400"
-				onclick={() => {
-					setDistrict(defaultDistrict);
-					setTopics([...allSecondaryTopics]);
-				}}>ล้างทั้งหมด</button
-			>
-		{/if}
+		<button
+			class="wv-b6 px-2 py-1 text-blue-700 hover:text-blue-400"
+			onclick={() => {
+				setDistrict(defaultDistrict);
+				setTopics([...allSecondaryTopics]);
+			}}>ล้างทั้งหมด</button
+		>
 	</div>
-</div>
+{/if}

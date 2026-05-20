@@ -12,6 +12,7 @@
 		selectedSecondaryTopics: string[];
 		ondistrictchange?: () => void;
 		ontopicschange?: () => void;
+		class?: string;
 	}
 
 	let {
@@ -20,13 +21,14 @@
 		selectedDistrict = $bindable(''),
 		selectedSecondaryTopics = $bindable([]),
 		ondistrictchange,
-		ontopicschange
+		ontopicschange,
+		class: className = ''
 	}: Props = $props();
 
 	let allSecondaries = $derived(topicGroups.flatMap((g) => g.secondaries));
 </script>
 
-<div class="flex w-72 flex-col gap-2">
+<div class="flex flex-col gap-2 {className}">
 	<h4 class="wv-b5 font-bold">สำรวจตามเขตพื้นที่</h4>
 	<Combobox
 		name="district"

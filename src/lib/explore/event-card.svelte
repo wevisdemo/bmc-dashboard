@@ -30,7 +30,7 @@
 <a
 	{href}
 	rel="external noopener noreferrer"
-	class="wv-b6 relative flex flex-1 flex-col gap-4 rounded-lg border-2 border-neutral-200 bg-white p-4 hover:border-neutral-400"
+	class="wv-b6 relative flex flex-1 flex-col gap-3 rounded-lg border-2 border-neutral-200 bg-white p-3 hover:border-neutral-400 md:gap-4 md:p-4"
 >
 	<div class="flex flex-row">
 		<div class="flex flex-1 flex-wrap gap-2">
