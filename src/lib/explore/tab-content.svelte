@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { Tabs } from 'bits-ui';
 	import { InfoIcon } from 'phosphor-svelte';
-	import type { Snippet } from 'svelte';
 	import type { EventGroup } from '$lib/constants';
 	import Pagination from '$lib/inputs/pagination.svelte';
-	import { Tabs } from 'bits-ui';
-	import type { Event } from '../../routes/+page.server';
 	import EmptyListLabel from './empty-list-label.svelte';
 	import EventCard from './event-card.svelte';
+	import type { Event } from '../../routes/+page.server';
+	import type { Snippet } from 'svelte';
 
 	const PER_PAGE = 10;
 

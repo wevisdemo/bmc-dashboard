@@ -2,11 +2,11 @@
 	import { geoMercator, geoPath } from 'd3-geo';
 	import { scaleLinear } from 'd3-scale';
 	import { interpolateYlGn } from 'd3-scale-chromatic';
-	import type { FeatureCollection, Feature } from 'geojson';
 	import { fade } from 'svelte/transition';
 	import { AdditionalDistrictOption } from '$lib/constants';
-	import type { Event } from '../../routes/+page.server';
 	import bangkokData from './bangkok-districts.json';
+	import type { Event } from '../../routes/+page.server';
+	import type { FeatureCollection, Feature } from 'geojson';
 
 	const CANVAS_WIDTH = 300;
 	const CANVAS_HEIGHT = 220;

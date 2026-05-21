@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { EventGroup } from '$lib/constants';
 	import { Tabs } from 'bits-ui';
-	import type { Event } from '../../routes/+page.server';
+	import { EventGroup } from '$lib/constants';
 	import TabContent from './tab-content.svelte';
+	import type { Event } from '../../routes/+page.server';
 
 	interface Props {
 		events: Event[];

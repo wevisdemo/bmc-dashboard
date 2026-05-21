@@ -1,10 +1,10 @@
 <script lang="ts">
 	import '@wevisdemo/ui/styles/footer.css';
 	import '@wevisdemo/ui/styles/navbar.css';
-	import WvFooter from '@wevisdemo/ui/svelte/footer.svelte';
-	import WvNavbar from '@wevisdemo/ui/svelte/navbar.svelte';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/stores';
+	import WvFooter from '@wevisdemo/ui/svelte/footer.svelte';
+	import WvNavbar from '@wevisdemo/ui/svelte/navbar.svelte';
 	import './layout.css';
 
 	let { children } = $props();

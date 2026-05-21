@@ -1,5 +1,3 @@
-import type { FeatureCollection } from 'geojson';
-import type { ComponentProps } from 'svelte';
 import { AdditionalDistrictOption, EventGroup } from '$lib/constants';
 import districtsData from '$lib/explore/bangkok-districts.json';
 import type EventCard from '$lib/explore/event-card.svelte';
@@ -13,6 +11,8 @@ import memberImageMap from '$lib/sheets/member-images.json';
 import { motions } from '$lib/sheets/motion';
 import { subjects } from '$lib/sheets/subject';
 import { topics, type Topic } from '$lib/sheets/topic';
+import type { FeatureCollection } from 'geojson';
+import type { ComponentProps } from 'svelte';
 
 export type TopicGroup = {
 	main: Topic['main'];

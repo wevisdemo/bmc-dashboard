@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { flip } from 'svelte/animate';
 	import { topicColorMap } from '$lib/sheets/topic';
-	import type { Event } from '../../routes/+page.server';
 	import EmptyListLabel from './empty-list-label.svelte';
+	import type { Event } from '../../routes/+page.server';
 
 	interface Props {
 		events: Event[];
