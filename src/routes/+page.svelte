@@ -5,7 +5,6 @@
 	import { slide } from 'svelte/transition';
 	import { z } from 'zod';
 	import { AdditionalDistrictOption, EventGroup } from '$lib/constants.js';
-	import CountStats from '$lib/explore/count-stats.svelte';
 	import DistrictOverview from '$lib/explore/district-overview.svelte';
 	import FilterChipsBar from '$lib/explore/filter-chips-bar.svelte';
 	import FilterOptions from '$lib/explore/filter-options.svelte';
@@ -48,6 +47,12 @@
 		)
 	);
 
+	let eventInDistrictCount = $derived(
+		filteredEvents.filter((e) =>
+			e.districts.some((d) => d !== AdditionalDistrictOption.NotSpecified)
+		).length
+	);
+
 	function resetPageNumber() {
 		if (params.page !== 1) {
 			params.page = 1;
@@ -72,7 +77,7 @@
 	<div class="flex flex-col md:gap-4 lg:flex-row-reverse">
 		<div class="flex min-w-0 flex-col gap-3">
 			<div class="hidden flex-col gap-2 lg:flex">
-				<CountStats events={filteredEvents} />
+				<p class="wv-b6">รายการทั้งหมด <strong>{filteredEvents.length}</strong></p>
 				<FilterChipsBar
 					defaultDistrict={DEFAULT_DISTRICT}
 					{allSecondaryTopics}
@@ -86,7 +91,16 @@
 				<div
 					class="flex flex-col gap-3 border-b border-gray-300 p-3 md:gap-6 md:border-r md:border-b-0 md:px-4"
 				>
-					<h3 class="wv-b3 wv-kondolar font-bold">แบ่งตามเขต</h3>
+					<div>
+						<h3 class="wv-b3 wv-kondolar font-bold">แบ่งตามพื้นที่</h3>
+						<p class="wv-b6">
+							<span class="text-lime-700">(ระบุเขตได้ <strong>{eventInDistrictCount}</strong></span
+							>,
+							<span class="text-neutral-500"
+								>ไม่ระบุเขต <strong>{filteredEvents.length - eventInDistrictCount}</strong>)</span
+							>
+						</p>
+					</div>
 					<DistrictOverview
 						events={filteredEvents}
 						bind:selectedDistrict={params.district}
@@ -136,7 +150,7 @@
 						transition:slide={{ axis: 'y', delay: 50, duration: 100 }}
 						class="flex flex-1 flex-col gap-2 overflow-hidden p-2"
 					>
-						<CountStats events={filteredEvents} />
+						<p class="wv-b6">รายการทั้งหมด <strong>{filteredEvents.length}</strong></p>
 						<FilterChipsBar
 							class="border-t border-neutral-300 pt-2"
 							defaultDistrict={DEFAULT_DISTRICT}
