@@ -70,8 +70,8 @@
 		</p>
 	</div>
 	<div class="flex flex-col md:gap-4 lg:flex-row-reverse">
-		<div class="flex flex-1 flex-col gap-3">
-			<div class="hidden flex-col gap-2 md:flex">
+		<div class="flex min-w-0 flex-col gap-3">
+			<div class="hidden flex-col gap-2 lg:flex">
 				<CountStats events={filteredEvents} />
 				<FilterChipsBar
 					defaultDistrict={DEFAULT_DISTRICT}
@@ -115,7 +115,7 @@
 		</div>
 
 		<div
-			class="sticky inset-x-0 bottom-0 z-20 -mx-3 flex max-h-dvh flex-col border-t border-neutral-400 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.07)] lg:static lg:top-0 lg:m-0 lg:max-h-none lg:w-72 lg:border-none lg:p-0 lg:shadow-none"
+			class="sticky inset-x-0 bottom-0 z-20 -mx-3 flex max-h-dvh shrink-0 flex-col border-t border-neutral-400 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.07)] lg:relative lg:m-0 lg:max-h-none lg:w-72 lg:border-none lg:p-0 lg:shadow-none"
 		>
 			<div class="flex flex-col lg:hidden">
 				<button

@@ -40,7 +40,7 @@
 
 {#snippet optionChip(label: string, bgColor?: string, onclick?: () => void)}
 	<button
-		class="flex flex-row items-center gap-1 rounded-full border-2 border-transparent px-2 py-0.5 hover:border-black"
+		class="flex shrink-0 flex-row items-center gap-1 rounded-full border-2 border-transparent px-2 py-0.5 hover:border-black"
 		style="background-color: {bgColor}"
 		{onclick}
 	>
@@ -50,19 +50,21 @@
 {/snippet}
 
 {#if isShowingDistrict || isShowingTopics}
-	<div class="flex flex-row flex-wrap items-center gap-2 {className}">
-		{#if isShowingDistrict}
-			{@render optionChip(selectedDistrict, '#f5f5f5', () => setDistrict(defaultDistrict))}
-		{/if}
-		{#if isShowingTopics}
-			{#each selectedSecondaryTopics as topic (topic)}
-				{@render optionChip(topic, topicColorMap.get(topic), () =>
-					setTopics(selectedSecondaryTopics.filter((st) => st !== topic))
-				)}
-			{/each}
-		{/if}
+	<div class="flex flex-col items-start gap-2 {className}">
+		<div class="flex w-full flex-row gap-2 overflow-x-auto">
+			{#if isShowingDistrict}
+				{@render optionChip(selectedDistrict, '#f5f5f5', () => setDistrict(defaultDistrict))}
+			{/if}
+			{#if isShowingTopics}
+				{#each selectedSecondaryTopics as topic (topic)}
+					{@render optionChip(topic, topicColorMap.get(topic), () =>
+						setTopics(selectedSecondaryTopics.filter((st) => st !== topic))
+					)}
+				{/each}
+			{/if}
+		</div>
 		<button
-			class="wv-b6 px-2 py-1 text-blue-700 hover:text-blue-400"
+			class="wv-b6 text-blue-700 hover:text-blue-400"
 			onclick={() => {
 				setDistrict(defaultDistrict);
 				setTopics([...allSecondaryTopics]);
