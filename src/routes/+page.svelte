@@ -75,7 +75,7 @@
 		</p>
 	</div>
 	<div class="flex flex-col md:gap-4 lg:flex-row-reverse">
-		<div class="flex min-w-0 flex-col gap-3">
+		<div class="flex min-w-0 flex-1 flex-col gap-3">
 			<div class="hidden flex-col gap-2 lg:flex">
 				<p class="wv-b6">รายการทั้งหมด <strong>{filteredEvents.length}</strong></p>
 				<FilterChipsBar
