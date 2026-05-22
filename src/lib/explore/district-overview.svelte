@@ -9,7 +9,7 @@
 	import type { FeatureCollection, Feature } from 'geojson';
 
 	const CANVAS_WIDTH = 300;
-	const CANVAS_HEIGHT = 220;
+	const CANVAS_HEIGHT = 210;
 
 	interface Props {
 		events: Event[];
@@ -56,6 +56,10 @@
 	}));
 
 	let selectedFeature = $derived(districts.find((d) => d.name === selectedDistrict)?.feature);
+
+	let hoveredCount = $derived(
+		hoveredDistrict ? (districtCountMap.get(hoveredDistrict.name) ?? 0) : null
+	);
 
 	function getDistrictName(feature: Feature): string {
 		return feature.properties?.dname.replace('เขต', '');
@@ -107,20 +111,37 @@
 				text-anchor="middle"
 				dominant-baseline="central"
 				class="pointer-events-none fill-white stroke-neutral-800 stroke-2 text-[8px] font-bold"
-				paint-order="stroke">{hoveredDistrict.name}</text
+				paint-order="stroke"
 			>
+				{hoveredDistrict.name}
+				{hoveredCount}
+			</text>
 		{/if}
 	</svg>
 
-	<div class="wv-b6 self-end">
+	<div class="wv-b6 flex flex-col self-end">
 		<span class="font-bold">จำนวนการเสนอประเด็น</span>
 		<div class="mt-1 flex flex-row items-center gap-2">
-			<span>น้อย</span>
+			<span>{minDistrictCount}</span>
 			<div
-				class="h-4 w-24"
+				class="relative h-4 w-36"
 				style="background:linear-gradient(to right, {interpolateYlGn(0)}, {interpolateYlGn(1)})"
-			></div>
-			<span>มาก</span>
+			>
+				{#if hoveredCount !== null}
+					<div
+						class="absolute -top-1 flex flex-col items-center"
+						style:left="{colorDomain(hoveredCount) * 100}%"
+						style:transform="translateX(-50%)"
+						transition:fade={{ duration: 150 }}
+					>
+						<div class="h-5 w-px bg-black"></div>
+						<svg class="-mt-px" width="10" height="6" viewBox="0 0 10 6">
+							<polygon points="0,6 5,0 10,6" fill="black" />
+						</svg>
+					</div>
+				{/if}
+			</div>
+			<span>{maxDistrictCount}</span>
 		</div>
 	</div>
 </div>
