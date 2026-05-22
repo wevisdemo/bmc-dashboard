@@ -11,17 +11,11 @@ type OutputEntry = { output: string; ids: string[]; slug: string };
 const FNV_OFFSET_BASIS = 14695981039346656037n;
 const FNV_PRIME = 1099511628211n;
 
-const linkedEntries: OutputEntry[] = matchedOutputs.map((entry) => {
-	const output = entry.output;
-	const ids = [
-		entry.committeeId1,
-		entry.committeeId2,
-		entry.billId,
-		entry.motionId1,
-		entry.motionId2
-	].filter((id): id is string => !!id);
-	return { output, ids, slug: fnv1a64(output) };
-});
+const linkedEntries: OutputEntry[] = matchedOutputs.map((entry) => ({
+	output: entry.output,
+	ids: entry.ids.filter((id): id is string => !!id),
+	slug: fnv1a64(entry.output)
+}));
 
 const seenIds = new Set(linkedEntries.flatMap((e) => e.ids));
 const outputMap = new Map<string, string[]>(linkedEntries.map((e) => [e.output, [...e.ids]]));

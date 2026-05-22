@@ -1,13 +1,30 @@
-import { Column, Object, asString, type StaticDecode } from 'sheethuahua';
+import { Column, Object, Tuple, asString, type StaticDecode } from 'sheethuahua';
 import { sheets } from './spreadsheet';
 
 const matchedOutputSchema = Object({
 	output: Column('output', asString()),
-	committeeId1: Column('committee_id_1', asString().optional()),
-	committeeId2: Column('committee_id_2', asString().optional()),
-	billId: Column('bill_id', asString().optional()),
-	motionId1: Column('motion_id_1', asString().optional()),
-	motionId2: Column('motion_id_2', asString().optional())
+	ids: Tuple([
+		Column('budgetcom', asString().optional()),
+		Column('committee_id_1', asString().optional()),
+		Column('committee_id_2', asString().optional()),
+		Column('committee_id_3', asString().optional()),
+		Column('committee_id_4', asString().optional()),
+		Column('committee_id_5', asString().optional()),
+		Column('committee_id_6', asString().optional()),
+		Column('committee_id_7', asString().optional()),
+		Column('committee_id_8', asString().optional()),
+		Column('committee_id_9', asString().optional()),
+		Column('committee_id_10', asString().optional()),
+		Column('committee_id_11', asString().optional()),
+		Column('committee_id_12', asString().optional()),
+		Column('committee_id_13', asString().optional()),
+		Column('committee_id_14', asString().optional()),
+		Column('bill_id', asString().optional()),
+		Column('motion_id_1', asString().optional()),
+		Column('motion_id_2', asString().optional()),
+		Column('subject_id_1', asString().optional()),
+		Column('subject_id_2', asString().optional())
+	])
 });
 
 export type MatchedOutput = StaticDecode<typeof matchedOutputSchema>;
