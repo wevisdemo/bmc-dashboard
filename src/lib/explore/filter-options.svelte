@@ -28,8 +28,8 @@
 	let allSecondaries = $derived(topicGroups.flatMap((g) => g.secondaries));
 </script>
 
-<div class="flex flex-col gap-2 {className}">
-	<h4 class="wv-b5 font-bold">สำรวจตามเขตพื้นที่</h4>
+<div class="flex flex-col gap-2 px-2 lg:px-0 {className}">
+	<h4 class="wv-b5 mt-2 font-bold md:m-0">สำรวจตามพื้นที่</h4>
 	<Combobox
 		name="district"
 		label="ค้นหาเขตพื้นที่"
@@ -59,44 +59,47 @@
 			}}>ล้างทั้งหมด</button
 		>
 	</div>
-	<div class="wv-b6 flex flex-col gap-1.5">
+
+	<div class="wv-b6 -mx-2 flex flex-col gap-1.5 overflow-y-auto px-2 pb-4">
 		{#each topicGroups as { main, secondaries } (main)}
 			{@const mainChecked =
 				secondaries.length > 0 && secondaries.every((s) => selectedSecondaryTopics.includes(s))}
 			{@const mainIndeterminate =
 				secondaries.some((s) => selectedSecondaryTopics.includes(s)) &&
 				!secondaries.every((s) => selectedSecondaryTopics.includes(s))}
-			<div class="p-1" style="background-color: {topicColorMap.get(main)};">
-				<Checkbox
-					name={main}
-					checked={mainChecked}
-					indeterminate={mainIndeterminate}
-					oncheckedchange={(checked) => {
-						selectedSecondaryTopics = checked
-							? [...new Set([...selectedSecondaryTopics, ...secondaries])]
-							: selectedSecondaryTopics.filter((t) => !secondaries.includes(t));
-						ontopicschange?.();
-					}}
-				>
-					<span class="font-bold">{main}</span>
-				</Checkbox>
-			</div>
+			<div class="relative flex flex-col gap-2">
+				<div class="sticky top-0 p-1" style="background-color: {topicColorMap.get(main)};">
+					<Checkbox
+						name={main}
+						checked={mainChecked}
+						indeterminate={mainIndeterminate}
+						oncheckedchange={(checked) => {
+							selectedSecondaryTopics = checked
+								? [...new Set([...selectedSecondaryTopics, ...secondaries])]
+								: selectedSecondaryTopics.filter((t) => !secondaries.includes(t));
+							ontopicschange?.();
+						}}
+					>
+						<span class="font-bold">{main}</span>
+					</Checkbox>
+				</div>
 
-			{#each secondaries as secondary (secondary)}
-				<Checkbox
-					name={secondary}
-					class="ml-4"
-					checked={selectedSecondaryTopics.includes(secondary)}
-					oncheckedchange={(checked) => {
-						selectedSecondaryTopics = checked
-							? [...selectedSecondaryTopics, secondary]
-							: selectedSecondaryTopics.filter((t) => t !== secondary);
-						ontopicschange?.();
-					}}
-				>
-					{secondary}
-				</Checkbox>
-			{/each}
+				{#each secondaries as secondary (secondary)}
+					<Checkbox
+						name={secondary}
+						class="ml-4"
+						checked={selectedSecondaryTopics.includes(secondary)}
+						oncheckedchange={(checked) => {
+							selectedSecondaryTopics = checked
+								? [...selectedSecondaryTopics, secondary]
+								: selectedSecondaryTopics.filter((t) => t !== secondary);
+							ontopicschange?.();
+						}}
+					>
+						{secondary}
+					</Checkbox>
+				{/each}
+			</div>
 		{/each}
 	</div>
 </div>

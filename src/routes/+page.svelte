@@ -60,7 +60,7 @@
 	}
 </script>
 
-<div class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:py-12">
+<div class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:pt-12 lg:pb-3">
 	<h1 class="wv-h4 wv-kondolar my-4 text-center font-bold md:my-8">รู้ไหม สก. ทำอะไรได้บ้าง ?</h1>
 	<p class="wv-h6 wv-kondolar text-center font-bold">
 		สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568
@@ -165,8 +165,8 @@
 			</div>
 
 			<FilterOptions
-				class="px-2 transition-[max-height] duration-250 ease-in-out lg:flex lg:max-h-none lg:p-0 {isMobileFilterExpanded
-					? 'max-h-lvh overflow-y-auto py-2'
+				class="sticky top-4 flex transition-[max-height] duration-250 ease-in-out md:overflow-y-visible lg:h-[calc(100dvh-1rem)] lg:max-h-none {isMobileFilterExpanded
+					? 'max-h-lvh overflow-y-auto'
 					: 'max-h-0 overflow-y-hidden'}"
 				districts={data.districts}
 				topicGroups={data.topicGroups}
