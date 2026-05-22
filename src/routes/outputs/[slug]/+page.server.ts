@@ -75,8 +75,6 @@ function toEventCard(
 	return {
 		id: event.id,
 		title: event.title,
-		districts: event.districts,
-		topics: event.secondaryTopics,
 		proposer: event.proposer,
 		dateDisplay: event.dateDisplay,
 		group: event.group,

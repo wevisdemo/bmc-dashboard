@@ -21,7 +21,7 @@
 	let topicCounts = $derived(
 		Object.entries(
 			events
-				.flatMap((e) => e.topics)
+				.flatMap((e) => e.topics ?? [])
 				.reduce(
 					(acc, t) => {
 						acc[t] = (acc[t] ?? 0) + 1;

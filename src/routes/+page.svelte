@@ -42,14 +42,14 @@
 		data.events.filter(
 			(event) =>
 				(params.district === AdditionalDistrictOption.ALL ||
-					event.districts.some((d) => d === params.district)) &&
-				event.topics.some((t) => params.topics.length === 0 || params.topics.includes(t))
+					event.districts?.some((d) => d === params.district)) &&
+				event.topics?.some((t) => params.topics.length === 0 || params.topics.includes(t))
 		)
 	);
 
 	let eventInDistrictCount = $derived(
 		filteredEvents.filter((e) =>
-			e.districts.some((d) => d !== AdditionalDistrictOption.NotSpecified)
+			e.districts?.some((d) => d !== AdditionalDistrictOption.NotSpecified)
 		).length
 	);
 

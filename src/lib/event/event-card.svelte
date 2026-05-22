@@ -2,14 +2,14 @@
 	import { ArrowUpRightIcon, UserIcon, UsersThreeIcon } from 'phosphor-svelte';
 	import { EventGroup } from '$lib/constants';
 	import type { BillStatus } from '$lib/sheets/bill';
-	import DistrictChip from '$lib/tags/district-tag.svelte';
-	import StatusChip from '$lib/tags/status-tag.svelte';
-	import TopicChip from '$lib/tags/topic-tag.svelte';
+	import DistrictTag from '$lib/tags/district-tag.svelte';
+	import StatusTag from '$lib/tags/status-tag.svelte';
+	import TopicTag from '$lib/tags/topic-tag.svelte';
 
 	interface Props {
 		title: string;
-		districts: string[];
-		topics: string[];
+		districts?: string[];
+		topics?: string[];
 		proposer?: {
 			name: string;
 			party?: string;
@@ -22,7 +22,16 @@
 		group?: EventGroup;
 	}
 
-	let { title, districts, topics, proposer, dateDisplay, href, status, group }: Props = $props();
+	let {
+		title,
+		districts = [],
+		topics = [],
+		proposer,
+		dateDisplay,
+		href,
+		status,
+		group
+	}: Props = $props();
 
 	const isCommittee = $derived(group === EventGroup.CommitteeStudy);
 
@@ -32,20 +41,22 @@
 </script>
 
 {#snippet content()}
-	<div class="flex flex-row">
-		<div class="flex flex-1 flex-wrap gap-2">
-			{#each topics as topic (topic)}
-				<TopicChip {topic} />
-			{/each}
-			{#each districts as district (district)}
-				<DistrictChip {district} />
-			{/each}
-		</div>
+	{#if (topics?.length ?? 0) + (districts?.length ?? 0) > 0 || status}
+		<div class="flex flex-row flex-wrap items-start gap-2">
+			<div class="flex flex-1 flex-wrap gap-2">
+				{#each topics as topic (topic)}
+					<TopicTag {topic} />
+				{/each}
+				{#each districts as district (district)}
+					<DistrictTag {district} />
+				{/each}
+			</div>
 
-		{#if status}
-			<StatusChip {status} />
-		{/if}
-	</div>
+			{#if status}
+				<StatusTag {status} />
+			{/if}
+		</div>
+	{/if}
 
 	<div class="space-y-1">
 		<h4 class="wv-h9 wv-kondolar font-bold">{title}</h4>

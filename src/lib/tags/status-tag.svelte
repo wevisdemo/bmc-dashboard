@@ -3,9 +3,10 @@
 
 	interface Props {
 		status: BillStatus;
+		class?: string;
 	}
 
-	let { status }: Props = $props();
+	let { status, class: className }: Props = $props();
 
 	const statusConfig = {
 		[BillStatus.ENACTED]: {
@@ -34,7 +35,7 @@
 </script>
 
 {#if config}
-	<span class="wv-b6 flex items-center gap-1.5 rounded px-3 py-1 {config.classes}">
+	<span class="wv-b6 flex items-center gap-1.5 rounded px-3 py-1 {config.classes} {className}">
 		<span class="size-2 rounded-full {config.dot}"></span>
 		{config.label}
 	</span>
