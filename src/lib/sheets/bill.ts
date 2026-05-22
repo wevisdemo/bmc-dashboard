@@ -7,6 +7,9 @@ import {
 	asString,
 	type StaticDecode
 } from 'sheethuahua';
+import { EventGroup } from '$lib/constants';
+import { billProposers } from './bill-proposer';
+import { resolveProposer, type Proposer } from './proposer';
 import { sheets } from './spreadsheet';
 
 export enum BillStatus {
@@ -29,6 +32,21 @@ const billSchema = Obj({
 	link: Column('Link', asString())
 });
 
-export type Bill = StaticDecode<typeof billSchema>;
+export type Bill = StaticDecode<typeof billSchema> & {
+	proposer: Proposer | undefined;
+	dateDisplay: string;
+	group: EventGroup.Bill;
+};
 
-export const bills = await sheets.get('ข้อบัญญัติ', billSchema);
+export const bills: Bill[] = (await sheets.get('ข้อบัญญัติ', billSchema)).map((b) => {
+	const proposerName = billProposers.find((bp) => bp.id === b.id)?.proposer;
+	return {
+		...b,
+		proposer: proposerName ? resolveProposer(proposerName) : undefined,
+		dateDisplay:
+			(b.enactedDate
+				? `วันที่ประกาศใช้ ${b.enactedDate?.toLocaleDateString('th-TH', { dateStyle: 'long' })} | `
+				: '') + `วันที่เสนอ ${b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}`,
+		group: EventGroup.Bill
+	};
+});

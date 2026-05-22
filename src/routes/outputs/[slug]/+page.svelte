@@ -37,7 +37,7 @@
 						districts={event.districts}
 						topics={event.topics}
 						proposer={event.proposer}
-						date={event.date}
+						dateDisplay={event.dateDisplay}
 						status={event.status}
 						group={event.group}
 					/>

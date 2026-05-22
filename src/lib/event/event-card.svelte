@@ -16,13 +16,13 @@
 			district?: string;
 			imageUrl?: string;
 		};
-		date?: string;
+		dateDisplay?: string;
 		href?: string;
 		status?: BillStatus;
 		group?: EventGroup;
 	}
 
-	let { title, districts, topics, proposer, date, href, status, group }: Props = $props();
+	let { title, districts, topics, proposer, dateDisplay, href, status, group }: Props = $props();
 
 	const isCommittee = $derived(group === EventGroup.CommitteeStudy);
 
@@ -50,9 +50,9 @@
 	<div class="space-y-1">
 		<h4 class="wv-h9 wv-kondolar font-bold">{title}</h4>
 
-		{#if date}
+		{#if dateDisplay}
 			<p class="wv-b6 text-neutral-500">
-				{date}
+				{dateDisplay}
 			</p>
 		{/if}
 	</div>
