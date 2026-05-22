@@ -4,6 +4,7 @@ import type EventCard from '$lib/explore/event-card.svelte';
 import { outputs } from '$lib/output';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
+import { billProposers } from '$lib/sheets/bill-proposer';
 import { committees } from '$lib/sheets/committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { members } from '$lib/sheets/member';
@@ -105,19 +106,23 @@ export function load() {
 			href: idToHref.get(gc.id) ?? '#',
 			group: EventGroup.CommitteeStudy
 		})),
-		...bills.map((b) => ({
-			id: b.id,
-			title: b.title,
-			districts: b.districts,
-			topics: b.secondaryTopics,
-			date:
-				(b.enactedDate
-					? `วันที่ประกาศใช้ ${b.enactedDate?.toLocaleDateString('th-TH', { dateStyle: 'long' })} | `
-					: '') + `วันที่เสนอ ${b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}`,
-			href: idToHref.get(b.id) ?? '#',
-			group: EventGroup.Bill,
-			status: b.status
-		}))
+		...bills.map((b) => {
+			const proposerName = billProposers.find((bp) => bp.id === b.id)?.proposer;
+			return {
+				id: b.id,
+				title: b.title,
+				districts: b.districts,
+				topics: b.secondaryTopics,
+				proposer: proposerName ? resolveProposer(proposerName) : undefined,
+				date:
+					(b.enactedDate
+						? `วันที่ประกาศใช้ ${b.enactedDate?.toLocaleDateString('th-TH', { dateStyle: 'long' })} | `
+						: '') + `วันที่เสนอ ${b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}`,
+				href: idToHref.get(b.id) ?? '#',
+				group: EventGroup.Bill,
+				status: b.status
+			};
+		})
 	];
 
 	return { topicGroups, districts, events };
