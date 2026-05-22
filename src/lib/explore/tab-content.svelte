@@ -3,8 +3,8 @@
 	import { InfoIcon } from 'phosphor-svelte';
 	import type { EventGroup } from '$lib/constants';
 	import Pagination from '$lib/inputs/pagination.svelte';
+	import EventCard from '../event/event-card.svelte';
 	import EmptyListLabel from './empty-list-label.svelte';
-	import EventCard from './event-card.svelte';
 	import type { Event } from '../../routes/+page.server';
 	import type { Snippet } from 'svelte';
 

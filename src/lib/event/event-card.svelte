@@ -17,21 +17,21 @@
 			imageUrl?: string;
 		};
 		date?: string;
-		href: string;
+		href?: string;
 		status?: BillStatus;
 		group?: EventGroup;
 	}
 
 	let { title, districts, topics, proposer, date, href, status, group }: Props = $props();
 
-	let isCommittee = $derived(group === EventGroup.CommitteeStudy);
+	const isCommittee = $derived(group === EventGroup.CommitteeStudy);
+
+	const baseClass =
+		'wv-b6 relative flex flex-1 flex-col gap-3 rounded-lg border-2 border-neutral-200 bg-white p-3 md:gap-4 md:p-4';
+	const hoverClass = $derived(href ? 'hover:border-neutral-400' : '');
 </script>
 
-<a
-	{href}
-	rel="external noopener noreferrer"
-	class="wv-b6 relative flex flex-1 flex-col gap-3 rounded-lg border-2 border-neutral-200 bg-white p-3 hover:border-neutral-400 md:gap-4 md:p-4"
->
+{#snippet content()}
 	<div class="flex flex-row">
 		<div class="flex flex-1 flex-wrap gap-2">
 			{#each topics as topic (topic)}
@@ -98,5 +98,18 @@
 			</div>
 		</div>
 	{/if}
-	<ArrowUpRightIcon class="absolute right-4 bottom-4 size-4 self-end" />
-</a>
+
+	{#if href}
+		<ArrowUpRightIcon class="absolute right-4 bottom-4 size-4 self-end" />
+	{/if}
+{/snippet}
+
+{#if href}
+	<a {href} rel="external noopener noreferrer" class="{baseClass} {hoverClass}">
+		{@render content()}
+	</a>
+{:else}
+	<div class="{baseClass} {hoverClass}">
+		{@render content()}
+	</div>
+{/if}

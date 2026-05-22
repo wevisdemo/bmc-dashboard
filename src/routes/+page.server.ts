@@ -1,6 +1,6 @@
 import { AdditionalDistrictOption, EventGroup } from '$lib/constants';
+import type EventCard from '$lib/event/event-card.svelte';
 import districtsData from '$lib/explore/bangkok-districts.json';
-import type EventCard from '$lib/explore/event-card.svelte';
 import { outputs } from '$lib/output';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';

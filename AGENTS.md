@@ -4,8 +4,9 @@
 - Always use pnpm as the package manager
 - Always name source code in kebab-case
 - Prefer using tailwind css for styling, and avoid using custom css as much as possible
-- Prefer Runed package if any functionality is provided and simpler then Svelte built-in functions. Avoid installing new external libraries unless necessary
+- Prefer Runed package if any functionality is provided and simpler then Svelte built-in functions Avoid installing new external libraries unless necessary
 - Activate Svelte skill before start making changes, or planning of making changes, to svelte file
+- Avoid mutating variables, prefer functional approach when possible
 - After finishing any task, run the following commands:
   - Check type with `pnpm run check --output machine`
   - Lint with `pnpm run lint --format agent`, all errors and warnings must be fixed
