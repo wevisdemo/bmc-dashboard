@@ -29,7 +29,7 @@ const billSchema = Obj({
 	districts: Column('District', asArray(asString())),
 	proposedDate: Column('Proposed_Date', asDate()),
 	enactedDate: Column('Enacted_Date', asDate().optional()),
-	link: Column('Link', asString())
+	reference: Column('Link', asString())
 });
 
 export type Bill = StaticDecode<typeof billSchema> & {

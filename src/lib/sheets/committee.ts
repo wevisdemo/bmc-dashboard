@@ -12,7 +12,7 @@ const committeeSchema = Object({
 	secondaryTopics: Column('Topic_Secondary', asArray(asString()).optional([])),
 	districts: Column('District', asArray(asString())),
 	committeeSuggestion: Column('Commitee_Suggestion', asString().optional()),
-	link: Column('url', asString()),
+	reference: Column('url', asString()),
 	mentionMotion: Column('mention_motion', asArray(asString()).optional([]))
 });
 

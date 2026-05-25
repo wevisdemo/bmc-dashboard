@@ -12,7 +12,7 @@ const generalCommitteeSchema = Object({
 	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
 	districts: Column('District', asArray(asString())),
 	committeeSuggestion: Column('Commitee_Suggestion', asString().optional()),
-	link: Column('pdf_link', asString())
+	reference: Column('pdf_link', asString())
 });
 
 export type GeneralCommittee = StaticDecode<typeof generalCommitteeSchema> & {

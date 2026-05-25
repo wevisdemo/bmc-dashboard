@@ -12,7 +12,7 @@ const motionSchema = Object({
 	proposerName: Column('Proposer', asString()),
 	proposerDistrict: Column('Proposer_District', asString()),
 	year: Column('year', asNumber().optional()),
-	link: Column('Link_Doc', asString().optional())
+	reference: Column('Link_Doc', asString().optional())
 });
 
 export type Motion = StaticDecode<typeof motionSchema> & {

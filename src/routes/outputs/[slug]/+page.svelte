@@ -40,6 +40,7 @@
 						dateDisplay={event.dateDisplay}
 						status={event.status}
 						group={event.group}
+						reference={event.reference}
 					/>
 				{/each}
 			</div>

@@ -12,7 +12,7 @@ const subjectSchema = Object({
 	proposerName: Column('Proposer', asString()),
 	proposerDistrict: Column('Proposser_District', asString()),
 	year: Column('year', asNumber().optional()),
-	link: Column('Link_Doc', asString())
+	reference: Column('Link_Doc', asString())
 });
 
 export type Subject = StaticDecode<typeof subjectSchema> & {

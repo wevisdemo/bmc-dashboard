@@ -11,9 +11,8 @@ import { subjects, type Subject } from '$lib/sheets/subject';
 import { topics } from '$lib/sheets/topic';
 import type { ComponentProps } from 'svelte';
 
-export type OutputEvent = Omit<ComponentProps<typeof EventCard>, 'group'> & {
+export type OutputEvent = ComponentProps<typeof EventCard> & {
 	id: string;
-	group: EventGroup;
 };
 
 type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
@@ -78,7 +77,8 @@ function toEventCard(
 		proposer: event.proposer,
 		dateDisplay: event.dateDisplay,
 		group: event.group,
-		...('status' in event ? { status: event.status } : {})
+		...('status' in event ? { status: event.status } : {}),
+		...('reference' in event ? { reference: event.reference } : {})
 	};
 }
 
