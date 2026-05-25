@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { Accordion } from 'bits-ui';
+	import { Idea } from 'carbon-icons-svelte';
 	import { onMount } from 'svelte';
 	import { EventGroup } from '$lib/constants';
+	import AccordionItem from '$lib/event/accordion-item.svelte';
 	import EventCard from '$lib/event/event-card.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
@@ -9,6 +12,7 @@
 	let { data } = $props();
 
 	let focusedEvent = $state('');
+	let accordionValues = $state<Record<string, string>>({});
 
 	const EventGroupAction = {
 		[EventGroup.Subject]: 'ตั้งกระทู้',
@@ -47,13 +51,34 @@
 		<section class="flex flex-col gap-4">
 			<h3 class="wv-h8 wv-kondolar font-bold text-neutral-600">{EventGroupAction[group]}</h3>
 			<div class="flex flex-col gap-3">
-				{#each events as { id, status, reason, ...event } (id)}
+				{#each events as { id, status, reason, committeeSuggestion, ...event } (id)}
 					<div class="relative">
 						<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
 						<div class={focusedEvent === id ? 'highlight-blink' : ''}>
 							<EventCard {...event}>
 								{#if status}
 									<StatusTag {status} {reason} />
+								{/if}
+								{#if committeeSuggestion}
+									<Accordion.Root
+										type="single"
+										value={accordionValues[id] ?? ''}
+										onValueChange={(v) =>
+											(accordionValues[id] = Array.isArray(v) ? (v[0] ?? '') : v)}
+									>
+										<AccordionItem
+											value="committeeSuggestion"
+											title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
+											onclose={() => (accordionValues[id] = '')}
+										>
+											{#snippet icon()}
+												<Idea />
+											{/snippet}
+											<p class="whitespace-pre-wrap">
+												{committeeSuggestion}
+											</p>
+										</AccordionItem>
+									</Accordion.Root>
 								{/if}
 							</EventCard>
 						</div>

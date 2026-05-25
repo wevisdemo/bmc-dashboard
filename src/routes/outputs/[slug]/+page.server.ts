@@ -2,18 +2,19 @@ import { error } from '@sveltejs/kit';
 import { EventGroup } from '$lib/constants';
 import type EventCard from '$lib/event/event-card.svelte';
 import { outputs } from '$lib/output';
-import { bills, type Bill } from '$lib/sheets/bill';
-import { billCommittees, type BillCommittee } from '$lib/sheets/bill-committee';
-import { committees, type Committee } from '$lib/sheets/committee';
-import { generalCommittees, type GeneralCommittee } from '$lib/sheets/general-committee';
-import { motions, type Motion } from '$lib/sheets/motion';
-import { subjects, type Subject } from '$lib/sheets/subject';
+import { bills } from '$lib/sheets/bill';
+import { billCommittees } from '$lib/sheets/bill-committee';
+import { committees } from '$lib/sheets/committee';
+import { generalCommittees } from '$lib/sheets/general-committee';
+import { motions } from '$lib/sheets/motion';
+import { subjects } from '$lib/sheets/subject';
 import { topics } from '$lib/sheets/topic';
 import type { ComponentProps } from 'svelte';
 
 export type OutputEvent = ComponentProps<typeof EventCard> & {
 	id: string;
 	reason?: string;
+	committeeSuggestion?: string;
 };
 
 type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
@@ -39,17 +40,26 @@ export function load({ params }) {
 
 	for (const id of entry.ids) {
 		const prefix = id.split('_')[0];
-		const raw = getTableFromPrefix(prefix)?.find((t) => t.id === id);
-		if (!raw) {
+		const event = getTableFromPrefix(prefix)?.find((t) => t.id === id);
+		if (!event) {
 			console.warn(`[outputs/${entry.slug}] event id "${id}" not found`);
 			continue;
 		}
 
-		for (const t of raw.secondaryTopics) allSecondaryTopics.add(t);
-		for (const d of raw.districts) allDistricts.add(d);
+		for (const t of event.secondaryTopics) allSecondaryTopics.add(t);
+		for (const d of event.districts) allDistricts.add(d);
 
-		const event = toEventCard(raw);
-		events.push(event);
+		events.push({
+			id: event.id,
+			title: event.title,
+			proposer: event.proposer,
+			dateDisplay: event.dateDisplay,
+			group: event.group,
+			...('status' in event ? { status: event.status } : {}),
+			...('reason' in event ? { reason: event.reason } : {}),
+			...('reference' in event ? { reference: event.reference } : {}),
+			...('committeeSuggestion' in event ? { committeeSuggestion: event.committeeSuggestion } : {})
+		});
 	}
 
 	const groupedEvents: GroupedEvents = [
@@ -66,21 +76,6 @@ export function load({ params }) {
 		topics: topics.filter((t) => allSecondaryTopics.has(t.secondary)),
 		districts: [...allDistricts],
 		groupedEvents
-	};
-}
-
-function toEventCard(
-	event: Subject | Motion | Committee | BillCommittee | GeneralCommittee | Bill
-): OutputEvent {
-	return {
-		id: event.id,
-		title: event.title,
-		proposer: event.proposer,
-		dateDisplay: event.dateDisplay,
-		group: event.group,
-		...('status' in event ? { status: event.status } : {}),
-		...('reason' in event ? { reason: event.reason } : {}),
-		...('reference' in event ? { reference: event.reference } : {})
 	};
 }
 
