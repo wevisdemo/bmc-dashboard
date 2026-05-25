@@ -4,7 +4,8 @@ import { sheets } from './spreadsheet';
 const matchedOutputSchema = Object({
 	output: Column('output', asString()),
 	ids: Tuple([
-		Column('budgetcom', asString().optional()),
+		// TODO: Not support budget committee yet
+		// Column('budgetcom', asString().optional()),
 		Column('committee_id_1', asString().optional()),
 		Column('committee_id_2', asString().optional()),
 		Column('committee_id_3', asString().optional()),
