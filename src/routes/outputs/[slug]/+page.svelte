@@ -24,7 +24,7 @@
 
 <div class="mx-auto flex max-w-4xl flex-col gap-6 p-3 md:gap-8 md:px-5 md:py-8">
 	<h2 class="wv-h9 wv-kondolar border-b border-neutral-400 pb-2 font-bold text-neutral-700">
-		บทบาทในสภาของ สก. ที่เกี่ยวข้องกับเรื่องนี้
+		บทบาทในสภาของ ส.ก. ที่เกี่ยวข้องกับเรื่องนี้
 	</h2>
 
 	{#each data.groupedEvents as [group, events] (group)}

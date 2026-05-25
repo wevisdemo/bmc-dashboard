@@ -63,9 +63,9 @@
 </script>
 
 <div class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:pt-12 lg:pb-3">
-	<h1 class="wv-h4 wv-kondolar my-4 text-center font-bold md:my-8">รู้ไหม สก. ทำอะไรได้บ้าง ?</h1>
+	<h1 class="wv-h4 wv-kondolar my-4 text-center font-bold md:my-8">รู้ไหม ส.ก. ทำอะไรได้บ้าง ?</h1>
 	<p class="wv-h6 wv-kondolar text-center font-bold">
-		สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568
+		ส.ก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568
 	</p>
 	<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
 		<WarningAlt class="mt-0.5 size-4" />

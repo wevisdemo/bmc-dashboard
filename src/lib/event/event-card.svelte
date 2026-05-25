@@ -104,7 +104,7 @@
 					</div>
 					{#if proposer.district}
 						<p>
-							สก.เขต {proposer.district}
+							ส.ก. เขต{proposer.district}
 						</p>
 					{/if}
 				</div>
