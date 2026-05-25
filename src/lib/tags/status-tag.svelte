@@ -36,11 +36,13 @@
 </script>
 
 <span
-	class="wv-b6 flex items-center gap-1.5 rounded border-2 px-3 py-1 {className}"
+	class="wv-b6 flex flex-col rounded border-2 px-3 py-1.5 md:flex-row md:items-center md:gap-1 {className}"
 	style="background-color: {config.background}; border-color: {config.foreground}"
 >
-	<span class="size-2 rounded-full" style="background-color: {config.foreground}"></span>
-	<span class={reason ? 'font-bold' : ''}>{config.label}</span>
+	<div class="flex flex-row items-center gap-1">
+		<span class="size-2 rounded-full" style="background-color: {config.foreground}"></span>
+		<span class={reason ? 'font-bold' : ''}>{config.label}</span>
+	</div>
 	{#if reason}
 		<span>{reason}</span>
 	{/if}

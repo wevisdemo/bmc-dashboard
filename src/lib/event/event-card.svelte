@@ -134,13 +134,15 @@
 	</div>
 
 	{#if reference}
-		<div class="flex flex-row items-start gap-2 bg-neutral-300 p-3 md:px-8 md:py-4">
-			<Information class="mt-0.5" />
-			<p class="flex-1">{referenceText}</p>
+		<div class="flex flex-col gap-2 bg-neutral-300 p-3 md:flex-row md:px-8 md:py-4">
+			<div class="flex flex-1 flex-row gap-1">
+				<Information class="mt-0.5" />
+				<p class="flex-1">{referenceText}</p>
+			</div>
 			<a
 				href={reference}
 				target="blank"
-				class="flex flex-row items-center gap-1 rounded-lg bg-black p-2 font-bold text-white hover:bg-neutral-700 md:px-4 md:py-3"
+				class="flex flex-row items-center gap-1 self-end rounded-lg bg-black p-2 font-bold text-white hover:bg-neutral-700 md:px-4 md:py-3"
 				><Document />ดูเอกสารต้นฉบับ</a
 			>
 		</div>
