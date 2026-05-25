@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tabs } from 'bits-ui';
-	import { InfoIcon } from 'phosphor-svelte';
+	import Information from 'carbon-icons-svelte/lib/Information.svelte';
 	import type { EventGroup } from '$lib/constants';
 	import Pagination from '$lib/inputs/pagination.svelte';
 	import EventCard from '../event/event-card.svelte';
@@ -25,7 +25,7 @@
 
 <Tabs.Content {value}>
 	<div class="wv-b6 flex flex-row gap-1 px-3 md:px-5">
-		<InfoIcon class="mt-0.5" />
+		<Information class="mt-0.5" />
 		<div class="flex-1">
 			<span class="font-bold">คำอธิบาย</span>
 			<ul class="flex-1 list-disc">

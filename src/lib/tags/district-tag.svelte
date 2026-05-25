@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MapPinIcon } from 'phosphor-svelte';
+	import LocationFilled from 'carbon-icons-svelte/lib/LocationFilled.svelte';
 
 	interface Props {
 		district: string;
@@ -11,6 +11,6 @@
 <span
 	class="wv-b6 flex flex-row items-center gap-1 rounded border border-gray-300 bg-gray-100 px-2 py-0.5"
 >
-	<MapPinIcon />
+	<LocationFilled />
 	{district}
 </span>

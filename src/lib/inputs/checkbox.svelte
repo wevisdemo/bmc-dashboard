@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Checkbox, Label } from 'bits-ui';
-	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
-	import MinusIcon from 'phosphor-svelte/lib/MinusIcon';
+	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
+	import Subtract from 'carbon-icons-svelte/lib/Subtract.svelte';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -44,8 +44,8 @@
 					: ''}"
 			>
 				{#if i || c}
-					{@const Icon = i ? MinusIcon : CheckIcon}
-					<Icon class="size-3" weight="bold" />
+					{@const Icon = i ? Subtract : Checkmark}
+					<Icon class="size-3" />
 				{/if}
 			</div>
 		{/snippet}

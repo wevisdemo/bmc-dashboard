@@ -1,6 +1,6 @@
 <script lang="ts">
-	import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
-	import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
+	import CaretDown from 'carbon-icons-svelte/lib/CaretDown.svelte';
+	import CheckmarkFilled from 'carbon-icons-svelte/lib/CheckmarkFilled.svelte';
 
 	interface Item {
 		value: string;
@@ -80,7 +80,7 @@
 		onkeydown={handleKeydown}
 	/>
 	<div class="pointer-events-none absolute inset-e-1 top-1/2 size-6 -translate-y-1/2">
-		<CaretDownIcon class="size-5 transition-transform {open ? 'rotate-180' : ''}" />
+		<CaretDown class="size-5 transition-transform {open ? 'rotate-180' : ''}" />
 	</div>
 	{#if open}
 		<div
@@ -101,7 +101,7 @@
 						{item.label}
 						{#if item.value === value}
 							<div class="ml-auto">
-								<CheckIcon />
+								<CheckmarkFilled />
 							</div>
 						{/if}
 					</button>

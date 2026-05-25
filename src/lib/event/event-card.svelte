@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { ArrowUpRightIcon, UserIcon, UsersThreeIcon } from 'phosphor-svelte';
+	import ArrowUpRight from 'carbon-icons-svelte/lib/ArrowUpRight.svelte';
+	import Events from 'carbon-icons-svelte/lib/Events.svelte';
+	import User from 'carbon-icons-svelte/lib/User.svelte';
 	import { EventGroup } from '$lib/constants';
 	import type { BillStatus } from '$lib/sheets/bill';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
@@ -85,9 +87,9 @@
 						class="flex size-8 items-center justify-center rounded-full border border-neutral-200 bg-neutral-100"
 					>
 						{#if isCommittee}
-							<UsersThreeIcon class="size-5" />
+							<Events class="size-4" />
 						{:else}
-							<UserIcon class="size-4" />
+							<User class="size-4" />
 						{/if}
 					</div>
 				{/if}
@@ -111,7 +113,7 @@
 	{/if}
 
 	{#if href}
-		<ArrowUpRightIcon class="absolute right-4 bottom-4 size-4 self-end" />
+		<ArrowUpRight class="absolute right-4 bottom-4 size-4 self-end" />
 	{/if}
 {/snippet}
 

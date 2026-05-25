@@ -17,10 +17,10 @@
 	"dependencies": {
 		"@wevisdemo/ui": "^8.1.0",
 		"bits-ui": "^2.18.1",
+		"carbon-icons-svelte": "^13.11.0",
 		"d3-geo": "^3.1.1",
 		"d3-scale": "^4.0.2",
 		"d3-scale-chromatic": "^3.1.0",
-		"phosphor-svelte": "^3.1.0",
 		"runed": "^0.37.1",
 		"sheethuahua": "^3.3.0",
 		"zod": "^4.4.3"

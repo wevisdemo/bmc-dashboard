@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { CaretUpIcon, SlidersIcon, WarningIcon } from 'phosphor-svelte';
+	import CaretUp from 'carbon-icons-svelte/lib/CaretUp.svelte';
+	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
+	import WarningAlt from 'carbon-icons-svelte/lib/WarningAlt.svelte';
 	import { useSearchParams } from 'runed/kit';
 	import { untrack } from 'svelte';
 	import { slide } from 'svelte/transition';
@@ -66,7 +68,7 @@
 		สก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568
 	</p>
 	<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
-		<WarningIcon class="mt-0.5 size-4" />
+		<WarningAlt class="mt-0.5 size-4" />
 		<p class="wv-b6 flex-1">
 			1 รายการ สามารถเกี่ยวข้องได้ <strong>มากกว่า 1 ประเด็น</strong> และ
 			<strong>มากกว่า 1 เขตพื้นที่</strong>
@@ -136,9 +138,9 @@
 					class="flex flex-row items-center gap-2 p-2"
 					onclick={() => (isMobileFilterExpanded = !isMobileFilterExpanded)}
 				>
-					<SlidersIcon />
+					<SettingsAdjust />
 					<span class="wv-b6 flex-1 text-left">คัดกรองเขตพื้นที่และประเด็น</span>
-					<CaretUpIcon
+					<CaretUp
 						class="transition-transform duration-200 {isMobileFilterExpanded
 							? 'rotate-180'
 							: 'rotate-0'}"

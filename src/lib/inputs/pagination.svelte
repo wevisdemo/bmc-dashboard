@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Pagination } from 'bits-ui';
-	import CaretLeftIcon from 'phosphor-svelte/lib/CaretLeftIcon';
-	import CaretRightIcon from 'phosphor-svelte/lib/CaretRightIcon';
+	import ChevronLeft from 'carbon-icons-svelte/lib/ChevronLeft.svelte';
+	import ChevronRight from 'carbon-icons-svelte/lib/ChevronRight.svelte';
 
 	interface Props {
 		count: number;
@@ -19,7 +19,7 @@
 			<Pagination.PrevButton
 				class="inline-flex size-6 items-center justify-center rounded hover:text-neutral-500"
 			>
-				<CaretLeftIcon class="size-6" />
+				<ChevronLeft class="size-6" />
 			</Pagination.PrevButton>
 			<div class="flex items-center gap-2">
 				{#each pages as page (page.key)}
@@ -38,7 +38,7 @@
 			<Pagination.NextButton
 				class="inline-flex size-6 items-center justify-center rounded hover:text-neutral-500"
 			>
-				<CaretRightIcon class="size-6" />
+				<ChevronRight class="size-6" />
 			</Pagination.NextButton>
 		</div>
 		<p class="text-muted-foreground wv-b6 mt-2 text-center text-neutral-500">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { XCircleIcon } from 'phosphor-svelte';
+	import CloseOutline from 'carbon-icons-svelte/lib/CloseOutline.svelte';
 	import { topicColorMap } from '$lib/sheets/topic';
 
 	interface Props {
@@ -40,12 +40,12 @@
 
 {#snippet optionChip(label: string, bgColor?: string, onclick?: () => void)}
 	<button
-		class="flex shrink-0 flex-row items-center gap-1 rounded-full border-2 border-transparent px-2 py-0.5 hover:border-black"
+		class="flex shrink-0 flex-row items-center gap-1 rounded-full border-2 border-transparent px-1.5 py-0.5 hover:border-black"
 		style="background-color: {bgColor}"
 		{onclick}
 	>
 		<span class="wv-b6 ml-1 font-bold">{label}</span>
-		<XCircleIcon class="size-4" />
+		<CloseOutline class="size-4" />
 	</button>
 {/snippet}
 
