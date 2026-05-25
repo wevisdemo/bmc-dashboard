@@ -5,14 +5,14 @@ import { sheets } from './spreadsheet';
 
 const subjectSchema = Object({
 	id: Column('id', asString()),
-	output: Column('Output', asString()),
-	title: Column('Subject_Title', asString()),
-	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
-	districts: Column('District', asArray(asString())),
-	proposerName: Column('Proposer', asString()),
-	proposerDistrict: Column('Proposser_District', asString()),
+	output: Column('output', asString()),
+	title: Column('title', asString()),
+	secondaryTopics: Column('topics_secondary', asArray(asString())),
+	districts: Column('districts', asArray(asString())),
+	proposerName: Column('proposer', asString()),
+	proposerDistrict: Column('proposer_district', asString()),
 	year: Column('year', asNumber().optional()),
-	reference: Column('Link_Doc', asString())
+	reference: Column('link', asString())
 });
 
 export type Subject = StaticDecode<typeof subjectSchema> & {

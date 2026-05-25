@@ -6,12 +6,12 @@ import type { Proposer } from './proposer';
 const billCommitteeSchema = Object({
 	id: Column('id', asString()),
 	year: Column('year', asNumber()),
-	output: Column('Output', asString()),
-	committee: Column('BillCommitee_Title', asString()),
-	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
-	districts: Column('District', asArray(asString())),
-	committeeSuggestion: Column('Commitee_Suggestion', asString().optional()),
-	reference: Column('pdf_link', asString())
+	output: Column('output', asString()),
+	committee: Column('committee_title', asString()),
+	secondaryTopics: Column('topics_secondary', asArray(asString())),
+	districts: Column('districts', asArray(asString())),
+	committeeSuggestion: Column('committee_suggestion', asString().optional()),
+	reference: Column('link', asString())
 });
 
 export type BillCommittee = StaticDecode<typeof billCommitteeSchema> & {

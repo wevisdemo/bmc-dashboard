@@ -2,9 +2,9 @@ import { Column, Object, asString, type StaticDecode } from 'sheethuahua';
 import { sheets } from './spreadsheet';
 
 const topicSchema = Object({
-	main: Column('Topic_Main', asString()),
-	secondary: Column('Topic_Secondary', asString()),
-	color: Column('Color', asString())
+	main: Column('topic_main', asString()),
+	secondary: Column('topic_secondary', asString()),
+	color: Column('color', asString())
 });
 
 export type Topic = StaticDecode<typeof topicSchema>;

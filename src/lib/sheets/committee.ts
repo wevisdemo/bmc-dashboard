@@ -5,15 +5,14 @@ import type { Proposer } from './proposer';
 
 const committeeSchema = Object({
 	id: Column('id', asString()),
-	committee: Column('Commitee_Title', asString()),
+	committee: Column('committee_title', asString()),
 	year: Column('year', asNumber()),
-	output: Column('Output', asString()),
-	committeeOutput: Column('Committee_output_title', asString()),
-	secondaryTopics: Column('Topic_Secondary', asArray(asString()).optional([])),
-	districts: Column('District', asArray(asString())),
-	committeeSuggestion: Column('Commitee_Suggestion', asString().optional()),
-	reference: Column('url', asString()),
-	mentionMotion: Column('mention_motion', asArray(asString()).optional([]))
+	output: Column('output', asString()),
+	committeeOutput: Column('output_full', asString()),
+	secondaryTopics: Column('topics_secondary', asArray(asString()).optional([])),
+	districts: Column('districts', asArray(asString())),
+	committeeSuggestion: Column('committee_suggestion', asString().optional()),
+	reference: Column('link', asString())
 });
 
 export type Committee = StaticDecode<typeof committeeSchema> & {

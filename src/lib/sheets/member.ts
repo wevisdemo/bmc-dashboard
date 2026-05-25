@@ -2,11 +2,11 @@ import { Column, Object, asString, type StaticDecode } from 'sheethuahua';
 import { sheets } from './spreadsheet';
 
 const memberSchema = Object({
-	name: Column('Name', asString()),
-	position: Column('Position', asString()),
-	district: Column('District', asString()),
-	note: Column('Note', asString().optional()),
-	party: Column('Party', asString().optional()),
+	name: Column('name', asString()),
+	position: Column('position', asString()),
+	district: Column('district', asString()),
+	membershipRemark: Column('membership', asString().optional()),
+	party: Column('party', asString().optional()),
 	imageUrl: Column('image_link', asString().optional())
 });
 

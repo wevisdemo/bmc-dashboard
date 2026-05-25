@@ -21,15 +21,14 @@ export enum BillStatus {
 
 const billSchema = Obj({
 	id: Column('id', asString()),
-	status: Column('Status', asOneOf(Object.values(BillStatus))),
-	reason: Column('Reason', asString().optional()),
-	output: Column('Output', asString()),
-	title: Column('Bill_Title', asString()),
-	secondaryTopics: Column('Topic_Secondary', asArray(asString())),
-	districts: Column('District', asArray(asString())),
-	proposedDate: Column('Proposed_Date', asDate()),
-	enactedDate: Column('Enacted_Date', asDate().optional()),
-	reference: Column('Link', asString())
+	status: Column('status', asOneOf(Object.values(BillStatus))),
+	reason: Column('reason', asString().optional()),
+	output: Column('output', asString()),
+	title: Column('title', asString()),
+	secondaryTopics: Column('topics_secondary', asArray(asString())),
+	districts: Column('districts', asArray(asString())),
+	proposedDate: Column('proposed_date', asDate()),
+	reference: Column('link', asString())
 });
 
 export type Bill = StaticDecode<typeof billSchema> & {
@@ -43,10 +42,7 @@ export const bills: Bill[] = (await sheets.get('ข้อบัญญัติ',
 	return {
 		...b,
 		proposer: proposerName ? resolveProposer(proposerName) : undefined,
-		dateDisplay:
-			(b.enactedDate
-				? `วันที่ประกาศใช้ ${b.enactedDate?.toLocaleDateString('th-TH', { dateStyle: 'long' })} | `
-				: '') + `วันที่เสนอ ${b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}`,
+		dateDisplay: `วันที่เสนอ ${b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}`,
 		group: EventGroup.Bill
 	};
 });
