@@ -52,7 +52,7 @@ export function load() {
 		topics: e.secondaryTopics,
 		proposer: e.proposer,
 		dateDisplay: e.dateDisplay,
-		href: idToHref.get(e.id) ?? '#',
+		href: `${idToHref.get(e.id)}#${e.id}`,
 		group: e.group,
 		...('status' in e ? { status: e.status } : {})
 	}));

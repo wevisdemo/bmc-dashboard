@@ -18,10 +18,10 @@ export type OutputEvent = ComponentProps<typeof EventCard> & {
 type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
 
 const groupOrder = [
-	EventGroup.Subject,
+	EventGroup.Bill,
 	EventGroup.Motion,
 	EventGroup.CommitteeStudy,
-	EventGroup.Bill
+	EventGroup.Subject
 ];
 
 export function entries() {
