@@ -3,40 +3,45 @@
 
 	interface Props {
 		status: BillStatus;
+		reason?: string;
 		class?: string;
 	}
 
-	let { status, class: className }: Props = $props();
+	let { status, reason, class: className }: Props = $props();
 
 	const statusConfig = {
 		[BillStatus.ENACTED]: {
-			classes: 'bg-[#92A843] text-white',
-			dot: 'bg-[#5C623D]',
+			background: '#ebffee',
+			foreground: '#5C623D',
 			label: 'ผ่านแล้ว'
 		},
 		[BillStatus.IN_PROGRESS]: {
-			classes: 'bg-[#FAE160]',
-			dot: 'bg-[#C9A903]',
+			background: '#FAE160',
+			foreground: '#C9A903',
 			label: 'กำลังดำเนินงาน'
 		},
 		[BillStatus.REJECTED]: {
-			classes: 'bg-[#FF4040] text-white',
-			dot: 'bg-[#981313]',
+			background: '#ffdada',
+			foreground: '#981313',
 			label: 'ถูกปัดตก'
 		},
 		[BillStatus.IN_QUEUE]: {
-			classes: 'bg-[#CDC3CE]',
-			dot: 'bg-[#CCA79C]',
-			label: 'กำลังพิจารณา'
+			background: '#f5f5f5',
+			foreground: '#CCA79C',
+			label: 'รอเข้าสภา'
 		}
 	};
 
 	let config = $derived(statusConfig[status]);
 </script>
 
-{#if config}
-	<span class="wv-b6 flex items-center gap-1.5 rounded px-3 py-1 {config.classes} {className}">
-		<span class="size-2 rounded-full {config.dot}"></span>
-		{config.label}
-	</span>
-{/if}
+<span
+	class="wv-b6 flex items-center gap-1.5 rounded border-2 px-3 py-1 {className}"
+	style="background-color: {config.background}; border-color: {config.foreground}"
+>
+	<span class="size-2 rounded-full" style="background-color: {config.foreground}"></span>
+	<span class={reason ? 'font-bold' : ''}>{config.label}</span>
+	{#if reason}
+		<span>{reason}</span>
+	{/if}
+</span>

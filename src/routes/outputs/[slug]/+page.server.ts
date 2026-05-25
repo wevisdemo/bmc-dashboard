@@ -13,6 +13,7 @@ import type { ComponentProps } from 'svelte';
 
 export type OutputEvent = ComponentProps<typeof EventCard> & {
 	id: string;
+	reason?: string;
 };
 
 type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
@@ -78,6 +79,7 @@ function toEventCard(
 		dateDisplay: event.dateDisplay,
 		group: event.group,
 		...('status' in event ? { status: event.status } : {}),
+		...('reason' in event ? { reason: event.reason } : {}),
 		...('reference' in event ? { reference: event.reference } : {})
 	};
 }

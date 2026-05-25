@@ -8,6 +8,7 @@
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
 		title: string;
@@ -24,6 +25,7 @@
 		status?: BillStatus;
 		group: EventGroup;
 		reference?: string;
+		children?: Snippet;
 	}
 
 	let {
@@ -35,7 +37,8 @@
 		href,
 		status,
 		group,
-		reference
+		reference,
+		children
 	}: Props = $props();
 
 	const isCommittee = $derived(group === EventGroup.CommitteeStudy);
@@ -126,6 +129,8 @@
 				</div>
 			</div>
 		{/if}
+
+		{@render children?.()}
 	</div>
 
 	{#if reference}

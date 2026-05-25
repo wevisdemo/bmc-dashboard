@@ -1,4 +1,4 @@
-import { AdditionalDistrictOption, EventGroup } from '$lib/constants';
+import { AdditionalDistrictOption } from '$lib/constants';
 import type EventCard from '$lib/event/event-card.svelte';
 import districtsData from '$lib/explore/bangkok-districts.json';
 import { outputs } from '$lib/output';
@@ -17,7 +17,7 @@ export type TopicGroup = {
 	secondaries: Topic['secondary'][];
 };
 
-export type Event = ComponentProps<typeof EventCard> & { id: string; group: EventGroup };
+export type Event = ComponentProps<typeof EventCard> & { id: string };
 
 export function load() {
 	const topicGroups: TopicGroup[] = [
