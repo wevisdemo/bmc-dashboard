@@ -11,8 +11,8 @@
 
 	const statusConfig = {
 		[BillStatus.ENACTED]: {
-			background: '#ebffee',
-			foreground: '#5C623D',
+			background: '#92a843',
+			foreground: '#5c623d',
 			label: 'ผ่านแล้ว'
 		},
 		[BillStatus.IN_PROGRESS]: {
@@ -27,7 +27,7 @@
 		},
 		[BillStatus.IN_QUEUE]: {
 			background: '#f5f5f5',
-			foreground: '#CCA79C',
+			foreground: '#828282',
 			label: 'รอเข้าสภา'
 		}
 	};
@@ -36,7 +36,7 @@
 </script>
 
 <span
-	class="wv-b6 flex flex-col rounded border-2 px-3 py-1.5 md:flex-row md:items-center md:gap-1 {className}"
+	class="wv-b6 flex flex-col items-start gap-1 rounded border-2 px-3 py-1.5 md:flex-row md:gap-2 {className}"
 	style="background-color: {config.background}; border-color: {config.foreground}"
 >
 	<div class="flex flex-row items-center gap-1">
@@ -44,6 +44,6 @@
 		<span class={reason ? 'font-bold' : ''}>{config.label}</span>
 	</div>
 	{#if reason}
-		<span>{reason}</span>
+		<span class="flex-1">{reason}</span>
 	{/if}
 </span>
