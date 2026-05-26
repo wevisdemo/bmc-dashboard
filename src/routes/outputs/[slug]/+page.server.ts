@@ -4,17 +4,24 @@ import type EventCard from '$lib/event/event-card.svelte';
 import { outputs } from '$lib/output';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
+import { bmcMembers } from '$lib/sheets/bmc-member';
 import { committees } from '$lib/sheets/committee';
+import { committeeMembers } from '$lib/sheets/committee-member';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { motions } from '$lib/sheets/motion';
 import { subjects } from '$lib/sheets/subject';
 import { topics } from '$lib/sheets/topic';
 import type { ComponentProps } from 'svelte';
 
+type CommitteeMemberDisplay = Omit<(typeof committeeMembers)[number], 'committee'> & {
+	party?: string;
+};
+
 export type OutputEvent = ComponentProps<typeof EventCard> & {
 	id: string;
 	reason?: string;
 	committeeSuggestion?: string;
+	committeeMembers?: CommitteeMemberDisplay[];
 };
 
 type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
@@ -58,7 +65,19 @@ export function load({ params }) {
 			...('status' in event ? { status: event.status } : {}),
 			...('reason' in event ? { reason: event.reason } : {}),
 			...('reference' in event ? { reference: event.reference } : {}),
-			...('committeeSuggestion' in event ? { committeeSuggestion: event.committeeSuggestion } : {})
+			...('committeeSuggestion' in event ? { committeeSuggestion: event.committeeSuggestion } : {}),
+			...('committee' in event
+				? {
+						committeeMembers: committeeMembers
+							.filter(
+								(m) => m.committee === event.committee && event.dateDisplay.includes(`${m.year}`)
+							)
+							.map(({ committee: _, ...rest }) => ({
+								...rest,
+								party: bmcMembers.find((b) => b.name === rest.name)?.party
+							}))
+					}
+				: {})
 		});
 	}
 

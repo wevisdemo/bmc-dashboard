@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Accordion } from 'bits-ui';
-	import { Idea } from 'carbon-icons-svelte';
+	import { Events, Idea } from 'carbon-icons-svelte';
 	import { onMount } from 'svelte';
 	import { EventGroup } from '$lib/constants';
 	import AccordionItem from '$lib/event/accordion-item.svelte';
+	import CommitteeMembers from '$lib/event/committee-members.svelte';
 	import EventCard from '$lib/event/event-card.svelte';
 	import MarkdownContent from '$lib/event/markdown-content.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
@@ -52,7 +53,7 @@
 		<section class="flex flex-col gap-4">
 			<h3 class="wv-h8 wv-kondolar font-bold text-neutral-600">{EventGroupAction[group]}</h3>
 			<div class="flex flex-col gap-3">
-				{#each events as { id, status, reason, committeeSuggestion, ...event } (id)}
+				{#each events as { id, status, reason, committeeSuggestion, committeeMembers, ...event } (id)}
 					<div class="relative">
 						<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
 						<div class={focusedEvent === id ? 'highlight-blink' : ''}>
@@ -60,23 +61,38 @@
 								{#if status}
 									<StatusTag {status} {reason} />
 								{/if}
-								{#if committeeSuggestion}
+								{#if committeeMembers?.length || committeeSuggestion}
 									<Accordion.Root
+										class="space-y-2"
 										type="single"
 										value={accordionValues[id] ?? ''}
 										onValueChange={(v) =>
 											(accordionValues[id] = Array.isArray(v) ? (v[0] ?? '') : v)}
 									>
-										<AccordionItem
-											value="committeeSuggestion"
-											title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
-											onclose={() => (accordionValues[id] = '')}
-										>
-											{#snippet icon()}
-												<Idea />
-											{/snippet}
-											<MarkdownContent source={committeeSuggestion} />
-										</AccordionItem>
+										{#if committeeMembers?.length}
+											<AccordionItem
+												value="committeeMembers"
+												title="รายชื่อคณะกรรมการ"
+												onclose={() => (accordionValues[id] = '')}
+											>
+												{#snippet icon()}
+													<Events />
+												{/snippet}
+												<CommitteeMembers members={committeeMembers} />
+											</AccordionItem>
+										{/if}
+										{#if committeeSuggestion}
+											<AccordionItem
+												value="committeeSuggestion"
+												title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
+												onclose={() => (accordionValues[id] = '')}
+											>
+												{#snippet icon()}
+													<Idea />
+												{/snippet}
+												<MarkdownContent source={committeeSuggestion} />
+											</AccordionItem>
+										{/if}
 									</Accordion.Root>
 								{/if}
 							</EventCard>

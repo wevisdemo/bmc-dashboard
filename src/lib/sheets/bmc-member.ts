@@ -1,7 +1,7 @@
 import { Column, Object, asString, type StaticDecode } from 'sheethuahua';
 import { sheets } from './spreadsheet';
 
-const memberSchema = Object({
+const bmcMemberSchema = Object({
 	name: Column('name', asString()),
 	position: Column('position', asString()),
 	district: Column('district', asString()),
@@ -10,6 +10,6 @@ const memberSchema = Object({
 	imageUrl: Column('image_link', asString().optional())
 });
 
-export type Member = StaticDecode<typeof memberSchema>;
+export type BmcMember = StaticDecode<typeof bmcMemberSchema>;
 
-export const members = await sheets.get('bmc_members', memberSchema);
+export const bmcMembers = await sheets.get('bmc_members', bmcMemberSchema);

@@ -1,4 +1,4 @@
-import { members } from './member';
+import { bmcMembers } from './bmc-member';
 import memberImageMap from './member-images.json';
 
 export interface Proposer {
@@ -8,7 +8,7 @@ export interface Proposer {
 	imageUrl?: string;
 }
 
-const memberByName = new Map(members.map((m) => [m.name, m]));
+const memberByName = new Map(bmcMembers.map((m) => [m.name, m]));
 
 export function resolveProposer(name: string): Proposer | undefined {
 	const member = memberByName.get(name);

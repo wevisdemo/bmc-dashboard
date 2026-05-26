@@ -6,6 +6,7 @@
 	import { EventGroup } from '$lib/constants';
 	import type { BillStatus } from '$lib/sheets/bill';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
+	import PartyTag from '$lib/tags/party-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
 	import type { Snippet } from 'svelte';
@@ -115,9 +116,7 @@
 						<div class="flex flex-row items-center gap-2">
 							<span class="wv-b5 font-bold">{proposer.name}</span>
 							{#if proposer.party}
-								<span class="rounded-lg border border-gray-300 bg-gray-100 px-2 py-0.5"
-									>{proposer.party}</span
-								>
+								<PartyTag party={proposer.party} />
 							{/if}
 						</div>
 						{#if proposer.district}
@@ -134,7 +133,7 @@
 	</div>
 
 	{#if reference}
-		<div class="flex flex-col gap-2 bg-neutral-300 p-3 md:flex-row md:px-8 md:py-4">
+		<div class="flex flex-col items-center gap-2 bg-neutral-300 p-3 md:flex-row md:px-8 md:py-4">
 			<div class="flex flex-1 flex-row gap-1">
 				<Information class="mt-0.5" />
 				<p class="flex-1">{referenceText}</p>
