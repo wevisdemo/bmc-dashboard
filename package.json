@@ -15,6 +15,7 @@
 		"optimize-images": "vite-node src/scripts/optimize-image.ts"
 	},
 	"dependencies": {
+		"@humanspeak/svelte-markdown": "^1.5.2",
 		"@wevisdemo/ui": "^8.1.0",
 		"bits-ui": "^2.18.1",
 		"carbon-icons-svelte": "^13.11.0",

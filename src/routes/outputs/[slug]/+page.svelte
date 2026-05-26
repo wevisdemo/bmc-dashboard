@@ -5,6 +5,7 @@
 	import { EventGroup } from '$lib/constants';
 	import AccordionItem from '$lib/event/accordion-item.svelte';
 	import EventCard from '$lib/event/event-card.svelte';
+	import MarkdownContent from '$lib/event/markdown-content.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
@@ -74,9 +75,7 @@
 											{#snippet icon()}
 												<Idea />
 											{/snippet}
-											<p class="whitespace-pre-wrap">
-												{committeeSuggestion}
-											</p>
+											<MarkdownContent source={committeeSuggestion} />
 										</AccordionItem>
 									</Accordion.Root>
 								{/if}
