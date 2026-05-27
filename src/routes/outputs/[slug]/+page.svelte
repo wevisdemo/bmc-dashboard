@@ -70,14 +70,14 @@
 </div>
 
 <div class="mx-auto flex max-w-4xl flex-col gap-6 p-3 md:gap-8 md:px-5 md:py-8">
-	<h2 class="wv-h9 wv-kondolar border-b border-neutral-400 pb-2 font-bold text-neutral-600">
+	<h2 class="wv-h9 wv-kondolar border-b border-neutral-300 pb-2 font-bold text-neutral-500">
 		บทบาทในสภาของ ส.ก. ที่เกี่ยวข้องกับเรื่องนี้
 	</h2>
 
 	{#each groupOrder as group (group)}
 		{#if eventsByGroup.has(group) || remarksByGroup.has(group)}
 			<section class="flex flex-col gap-4">
-				<h3 class="wv-h8 wv-kondolar font-bold text-neutral-600">{EventGroupAction[group]}</h3>
+				<h3 class="wv-h8 wv-kondolar font-bold text-neutral-500">{EventGroupAction[group]}</h3>
 				{#if eventsByGroup.has(group)}
 					<div class="flex flex-col gap-3">
 						{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, ...event } (id)}
@@ -88,7 +88,7 @@
 										{#if status}
 											<StatusTag {status} {reason} />
 										{/if}
-										{#if group === EventGroup.CommitteeStudy}
+										{#if group === EventGroup.CommitteeStudy || group === EventGroup.Budget}
 											<Accordion.Root
 												class="space-y-2"
 												type="multiple"
@@ -112,23 +112,25 @@
 														<CommitteeMembers memberSets={committeeMembers} />
 													</AccordionItem>
 												{/if}
-												<AccordionItem
-													value="committeeSuggestion"
-													title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
-													onclose={() => closeAccordionItem(id, 'committeeSuggestion')}
-													disabled={!committeeSuggestion}
-												>
-													{#snippet icon()}
-														<Idea />
-													{/snippet}
-													{#if committeeSuggestion}
-														<MarkdownContent source={committeeSuggestion} />
-													{:else}
-														<EmptyRemark
-															text="คณะกรรมการนี้รายงานเพียงความเป็นมา ขอบเขต และผลการศึกษา ไม่มีข้อเสนอแนะหรือข้อสังเกตเพิ่มเติม"
-														/>
-													{/if}
-												</AccordionItem>
+												{#if group !== EventGroup.Budget}
+													<AccordionItem
+														value="committeeSuggestion"
+														title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
+														onclose={() => closeAccordionItem(id, 'committeeSuggestion')}
+														disabled={!committeeSuggestion}
+													>
+														{#snippet icon()}
+															<Idea />
+														{/snippet}
+														{#if committeeSuggestion}
+															<MarkdownContent source={committeeSuggestion} />
+														{:else}
+															<EmptyRemark
+																text="คณะกรรมการนี้รายงานเพียงความเป็นมา ขอบเขต และผลการศึกษา ไม่มีข้อเสนอแนะหรือข้อสังเกตเพิ่มเติม"
+															/>
+														{/if}
+													</AccordionItem>
+												{/if}
 											</Accordion.Root>
 										{/if}
 									</EventCard>

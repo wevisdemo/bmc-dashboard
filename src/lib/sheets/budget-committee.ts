@@ -10,7 +10,7 @@ const budgetCommitteeSchema = Object({
 	mainTopics: Column('topics_main', asString()),
 	secondaryTopics: Column('topics_secondary', asArray(asString())),
 	districts: Column('districts', asArray(asString())),
-	link: Object({
+	reference: Object({
 		draft: Column('link_draft', asString()),
 		committee: Column('link_committee', asString()),
 		budgetBill: Column('link_budgetbill', asString())

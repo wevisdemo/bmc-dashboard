@@ -1,4 +1,4 @@
-import { Column, Object as Obj, asOneOf, asString, type StaticDecode } from 'sheethuahua';
+import { Column, Object as Obj, asOneOf, asString } from 'sheethuahua';
 import { EventGroup } from '$lib/constants';
 import { sheets } from './spreadsheet';
 

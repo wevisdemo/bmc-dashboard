@@ -6,6 +6,7 @@ import { adhocCommitteeMembers } from '$lib/sheets/adhoc-committee-member';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
 import { bmcMembers } from '$lib/sheets/bmc-member';
+import { budgetCommittees } from '$lib/sheets/budget-committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { missingEvents } from '$lib/sheets/missing-event';
 import { motions } from '$lib/sheets/motion';
@@ -122,6 +123,8 @@ function getTableFromPrefix(prefix?: string) {
 			return generalCommittees;
 		case 'com':
 			return standingCommittees;
+		case 'budgetcom':
+			return budgetCommittees;
 		default:
 			return undefined;
 	}

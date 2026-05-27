@@ -1,5 +1,6 @@
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
+import { budgetCommittees } from '$lib/sheets/budget-committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { matchedOutputs } from '$lib/sheets/matched-output';
 import { motions } from '$lib/sheets/motion';
@@ -26,6 +27,7 @@ mergeUnlinked(generalCommittees);
 mergeUnlinked(standingCommittees);
 mergeUnlinked(billCommittees);
 mergeUnlinked(bills);
+mergeUnlinked(budgetCommittees);
 
 export const outputs: OutputEntry[] = Array.from(outputMap, ([output, ids]) => ({
 	output,
