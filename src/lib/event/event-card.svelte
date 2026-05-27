@@ -42,7 +42,7 @@
 		children
 	}: Props = $props();
 
-	const isCommittee = $derived(group === EventGroup.CommitteeStudy);
+	const isCommittee = $derived(group === EventGroup.CommitteeStudy || group === EventGroup.Budget);
 
 	const referenceText = $derived.by(() => {
 		switch (group) {
@@ -54,6 +54,8 @@
 				return 'คณะกรรมการนี้ศึกษาอะไร? อ่านรายงานผลการศึกษาเต็ม ๆ ที่เอกสารต้นฉบับ';
 			case EventGroup.Bill:
 				return 'ร่างข้อบัญญัตินี้มีรายละเอียดยังไง? และสก. เสนอร่างนี้เพราะอะไร? อ่านหลักการและเหตุผล\n				และเนื้อหาร่างข้อบัญญัติที่เอกสารต้นฉบับ';
+			case EventGroup.Budget:
+				return 'ผลการพิจารณางบประมาณมีรายละเอียดยังไง? อ่านเอกสารต้นฉบับ';
 		}
 	});
 

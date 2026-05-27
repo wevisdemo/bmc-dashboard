@@ -6,6 +6,7 @@ export enum AdditionalDistrictOption {
 export enum EventGroup {
 	Subject = 'กระทู้ถาม',
 	Motion = 'ญัตติ',
-	CommitteeStudy = 'เรื่องที่ศึกษาโดยคณะกรรมการ',
-	Bill = 'ข้อบัญญัติ'
+	CommitteeStudy = 'เรื่องที่ศึกษา',
+	Bill = 'ข้อบัญญัติ',
+	Budget = 'พิจารณางบ'
 }

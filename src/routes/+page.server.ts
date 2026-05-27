@@ -4,6 +4,7 @@ import districtsData from '$lib/explore/bangkok-districts.json';
 import { outputs } from '$lib/output';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
+import { budgetCommittees } from '$lib/sheets/budget-committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { motions } from '$lib/sheets/motion';
 import { standingCommittees } from '$lib/sheets/standing-committee';
@@ -44,7 +45,8 @@ export function load() {
 		...standingCommittees,
 		...billCommittees,
 		...generalCommittees,
-		...bills
+		...bills,
+		...budgetCommittees
 	].map((e) => ({
 		id: e.id,
 		title: e.title,

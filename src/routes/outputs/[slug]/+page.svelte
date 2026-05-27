@@ -21,14 +21,16 @@
 		EventGroup.Bill,
 		EventGroup.Motion,
 		EventGroup.CommitteeStudy,
-		EventGroup.Subject
+		EventGroup.Subject,
+		EventGroup.Budget
 	];
 
 	const EventGroupAction = {
 		[EventGroup.Subject]: 'ตั้งกระทู้',
 		[EventGroup.Motion]: 'เสนอญัตติ',
 		[EventGroup.CommitteeStudy]: 'ศึกษาในคณะกรรมการ',
-		[EventGroup.Bill]: 'เสนอข้อบัญญัติ'
+		[EventGroup.Bill]: 'เสนอข้อบัญญัติ',
+		[EventGroup.Budget]: 'พิจารณางบประมาณ'
 	};
 
 	const eventsByGroup = $derived(
