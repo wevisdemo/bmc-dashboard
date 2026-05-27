@@ -4,9 +4,9 @@ import districtsData from '$lib/explore/bangkok-districts.json';
 import { outputs } from '$lib/output';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
-import { committees } from '$lib/sheets/committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { motions } from '$lib/sheets/motion';
+import { standingCommittees } from '$lib/sheets/standing-committee';
 import { subjects } from '$lib/sheets/subject';
 import { topics, type Topic } from '$lib/sheets/topic';
 import type { FeatureCollection } from 'geojson';
@@ -41,7 +41,7 @@ export function load() {
 	const events: Event[] = [
 		...subjects,
 		...motions,
-		...committees,
+		...standingCommittees,
 		...billCommittees,
 		...generalCommittees,
 		...bills

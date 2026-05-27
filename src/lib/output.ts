@@ -1,9 +1,9 @@
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
-import { committees } from '$lib/sheets/committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { matchedOutputs } from '$lib/sheets/matched-output';
 import { motions } from '$lib/sheets/motion';
+import { standingCommittees } from '$lib/sheets/standing-committee';
 import { subjects } from '$lib/sheets/subject';
 
 type OutputEntry = { output: string; ids: string[]; slug: string };
@@ -23,7 +23,7 @@ const outputMap = new Map<string, string[]>(linkedEntries.map((e) => [e.output, 
 mergeUnlinked(subjects);
 mergeUnlinked(motions);
 mergeUnlinked(generalCommittees);
-mergeUnlinked(committees);
+mergeUnlinked(standingCommittees);
 mergeUnlinked(billCommittees);
 mergeUnlinked(bills);
 

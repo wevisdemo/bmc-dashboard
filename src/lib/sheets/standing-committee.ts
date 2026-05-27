@@ -3,7 +3,7 @@ import { EventGroup } from '$lib/constants';
 import { sheets } from './spreadsheet';
 import type { Proposer } from './proposer';
 
-const committeeSchema = Object({
+const standingCommitteeSchema = Object({
 	id: Column('id', asString()),
 	committee: Column('committee_title', asString()),
 	year: Column('year', asNumber()),
@@ -15,14 +15,16 @@ const committeeSchema = Object({
 	reference: Column('link', asString())
 });
 
-export type Committee = StaticDecode<typeof committeeSchema> & {
+export type StandingCommittee = StaticDecode<typeof standingCommitteeSchema> & {
 	proposer: Pick<Proposer, 'name'>;
 	title: string;
 	dateDisplay: string;
 	group: EventGroup.CommitteeStudy;
 };
 
-export const committees: Committee[] = (await sheets.get('สามัญ', committeeSchema)).map((c) => ({
+export const standingCommittees: StandingCommittee[] = (
+	await sheets.get('สามัญ', standingCommitteeSchema)
+).map((c) => ({
 	...c,
 	proposer: { name: c.committee },
 	title: c.committeeOutput,

@@ -5,15 +5,18 @@ import { outputs } from '$lib/output';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
 import { bmcMembers } from '$lib/sheets/bmc-member';
-import { committees } from '$lib/sheets/committee';
-import { committeeMembers } from '$lib/sheets/committee-member';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { motions } from '$lib/sheets/motion';
+import { standingCommittees } from '$lib/sheets/standing-committee';
+import { standingCommitteeMembers } from '$lib/sheets/standing-committee-member';
 import { subjects } from '$lib/sheets/subject';
 import { topics } from '$lib/sheets/topic';
 import type { ComponentProps } from 'svelte';
 
-type CommitteeMemberDisplay = Omit<(typeof committeeMembers)[number], 'committee'> & {
+type StandingCommitteeMemberDisplay = Omit<
+	(typeof standingCommitteeMembers)[number],
+	'committee'
+> & {
 	party?: string;
 };
 
@@ -21,7 +24,7 @@ export type OutputEvent = ComponentProps<typeof EventCard> & {
 	id: string;
 	reason?: string;
 	committeeSuggestion?: string;
-	committeeMembers?: CommitteeMemberDisplay[];
+	standingCommitteeMembers?: StandingCommitteeMemberDisplay[];
 };
 
 type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
@@ -68,7 +71,7 @@ export function load({ params }) {
 			...('committeeSuggestion' in event ? { committeeSuggestion: event.committeeSuggestion } : {}),
 			...('committee' in event
 				? {
-						committeeMembers: committeeMembers
+						standingCommitteeMembers: standingCommitteeMembers
 							.filter(
 								(m) => m.committee === event.committee && event.dateDisplay.includes(`${m.year}`)
 							)
@@ -111,7 +114,7 @@ function getTableFromPrefix(prefix?: string) {
 		case 'gencom':
 			return generalCommittees;
 		case 'com':
-			return committees;
+			return standingCommittees;
 		default:
 			return undefined;
 	}

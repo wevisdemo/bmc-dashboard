@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { Information } from 'carbon-icons-svelte';
-	import type { CommitteeMember } from '$lib/sheets/committee-member';
+	import type { StandingCommitteeMember } from '$lib/sheets/standing-committee-member';
 	import PartyTag from '$lib/tags/party-tag.svelte';
 
-	type Member = Omit<CommitteeMember, 'committee'> & { party?: string };
+	type Member = Omit<StandingCommitteeMember, 'committee'> & { party?: string };
 
 	let { members }: { members: Member[] } = $props();
 </script>

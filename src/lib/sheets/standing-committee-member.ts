@@ -1,7 +1,7 @@
 import { asNumber, Column, Object, asString, type StaticDecode } from 'sheethuahua';
 import { sheets } from './spreadsheet';
 
-const committeeMemberSchema = Object({
+const standingCommitteeMemberSchema = Object({
 	committee: Column('committee_title', asString()),
 	year: Column('year', asNumber()),
 	set: Column('set', asNumber().optional()),
@@ -11,9 +11,9 @@ const committeeMemberSchema = Object({
 	note: Column('note', asString().optional())
 });
 
-export type CommitteeMember = StaticDecode<typeof committeeMemberSchema>;
+export type StandingCommitteeMember = StaticDecode<typeof standingCommitteeMemberSchema>;
 
-export const committeeMembers: CommitteeMember[] = await sheets.get(
+export const standingCommitteeMembers: StandingCommitteeMember[] = await sheets.get(
 	'standing_committee_members',
-	committeeMemberSchema
+	standingCommitteeMemberSchema
 );

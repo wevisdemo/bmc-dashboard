@@ -53,7 +53,7 @@
 		<section class="flex flex-col gap-4">
 			<h3 class="wv-h8 wv-kondolar font-bold text-neutral-600">{EventGroupAction[group]}</h3>
 			<div class="flex flex-col gap-3">
-				{#each events as { id, status, reason, committeeSuggestion, committeeMembers, ...event } (id)}
+				{#each events as { id, status, reason, committeeSuggestion, standingCommitteeMembers, ...event } (id)}
 					<div class="relative">
 						<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
 						<div class={focusedEvent === id ? 'highlight-blink' : ''}>
@@ -61,7 +61,7 @@
 								{#if status}
 									<StatusTag {status} {reason} />
 								{/if}
-								{#if committeeMembers?.length || committeeSuggestion}
+								{#if standingCommitteeMembers?.length || committeeSuggestion}
 									<Accordion.Root
 										class="space-y-2"
 										type="single"
@@ -69,16 +69,16 @@
 										onValueChange={(v) =>
 											(accordionValues[id] = Array.isArray(v) ? (v[0] ?? '') : v)}
 									>
-										{#if committeeMembers?.length}
+										{#if standingCommitteeMembers?.length}
 											<AccordionItem
-												value="committeeMembers"
+												value="standingCommitteeMembers"
 												title="รายชื่อคณะกรรมการ"
 												onclose={() => (accordionValues[id] = '')}
 											>
 												{#snippet icon()}
 													<Events />
 												{/snippet}
-												<CommitteeMembers members={committeeMembers} />
+												<CommitteeMembers members={standingCommitteeMembers} />
 											</AccordionItem>
 										{/if}
 										{#if committeeSuggestion}
