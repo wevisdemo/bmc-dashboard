@@ -1,5 +1,4 @@
 import { error } from '@sveltejs/kit';
-import { EventGroup } from '$lib/constants';
 import type CommitteeMembers from '$lib/event/committee-members.svelte';
 import type EventCard from '$lib/event/event-card.svelte';
 import { outputs } from '$lib/output';
@@ -8,6 +7,7 @@ import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
 import { bmcMembers } from '$lib/sheets/bmc-member';
 import { generalCommittees } from '$lib/sheets/general-committee';
+import { missingEvents } from '$lib/sheets/missing-event';
 import { motions } from '$lib/sheets/motion';
 import { standingCommittees } from '$lib/sheets/standing-committee';
 import { standingCommitteeMembers } from '$lib/sheets/standing-committee-member';
@@ -23,15 +23,6 @@ export type OutputEvent = ComponentProps<typeof EventCard> & {
 	committeeSuggestion?: string;
 	committeeMembers?: CommitteeMemberSet[];
 };
-
-type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
-
-const groupOrder = [
-	EventGroup.Bill,
-	EventGroup.Motion,
-	EventGroup.CommitteeStudy,
-	EventGroup.Subject
-];
 
 export function entries() {
 	return outputs.map(({ slug }) => ({ slug }));
@@ -72,20 +63,16 @@ export function load({ params }) {
 		});
 	}
 
-	const groupedEvents: GroupedEvents = [
-		...events.reduce(
-			(acc, event) => acc.set(event.group, [...(acc.get(event.group) ?? []), event]),
-			new Map<EventGroup, OutputEvent[]>()
-		)
-	]
-		.map(([group, evts]) => [group, evts.toSorted((a, b) => a.id.localeCompare(b.id))] as const)
-		.toSorted(([a], [b]) => groupOrder.indexOf(a) - groupOrder.indexOf(b));
+	const remarks = missingEvents
+		.filter((e) => e.output === entry.output)
+		.map(({ group, remark }) => ({ group, remark }));
 
 	return {
 		output: entry.output,
 		topics: topics.filter((t) => allSecondaryTopics.has(t.secondary)),
 		districts: [...allDistricts],
-		groupedEvents
+		events,
+		remarks
 	};
 }
 

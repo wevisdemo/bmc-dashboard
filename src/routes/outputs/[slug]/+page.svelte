@@ -7,6 +7,7 @@
 	import CommitteeMembers from '$lib/event/committee-members.svelte';
 	import EventCard from '$lib/event/event-card.svelte';
 	import MarkdownContent from '$lib/event/markdown-content.svelte';
+	import TrafficCone from '$lib/icons/traffic-cone.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
@@ -16,12 +17,30 @@
 	let focusedEvent = $state('');
 	let accordionValues = $state<Record<string, string>>({});
 
+	const groupOrder = [
+		EventGroup.Bill,
+		EventGroup.Motion,
+		EventGroup.CommitteeStudy,
+		EventGroup.Subject
+	];
+
 	const EventGroupAction = {
 		[EventGroup.Subject]: 'ตั้งกระทู้',
 		[EventGroup.Motion]: 'เสนอญัตติ',
 		[EventGroup.CommitteeStudy]: 'ศึกษาในคณะกรรมการ',
 		[EventGroup.Bill]: 'เสนอข้อบัญญัติ'
 	};
+
+	const eventsByGroup = $derived(
+		data.events.reduce(
+			(acc, event) => acc.set(event.group, [...(acc.get(event.group) ?? []), event]),
+			new Map<EventGroup, typeof data.events>()
+		)
+	);
+
+	const remarksByGroup = $derived(
+		data.remarks.reduce((acc, r) => acc.set(r.group, r.remark), new Map<EventGroup, string>())
+	);
 
 	onMount(() => {
 		focusedEvent = window.location.hash.slice(1);
@@ -49,61 +68,75 @@
 		บทบาทในสภาของ ส.ก. ที่เกี่ยวข้องกับเรื่องนี้
 	</h2>
 
-	{#each data.groupedEvents as [group, events] (group)}
-		<section class="flex flex-col gap-4">
-			<h3 class="wv-h8 wv-kondolar font-bold text-neutral-600">{EventGroupAction[group]}</h3>
-			<div class="flex flex-col gap-3">
-				{#each events as { id, status, reason, committeeSuggestion, committeeMembers, ...event } (id)}
-					<div class="relative">
-						<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
-						<div class={focusedEvent === id ? 'highlight-blink' : ''}>
-							<EventCard {...event}>
-								{#if status}
-									<StatusTag {status} {reason} />
-								{/if}
-								{#if committeeMembers?.length || committeeSuggestion}
-									<Accordion.Root
-										class="space-y-2"
-										type="single"
-										value={accordionValues[id] ?? ''}
-										onValueChange={(v) =>
-											(accordionValues[id] = Array.isArray(v) ? (v[0] ?? '') : v)}
-									>
-										{#if committeeMembers?.length}
-											<AccordionItem
-												value="committeeMembers"
-												title="รายชื่อคณะกรรมการ"
-												onclose={() => (accordionValues[id] = '')}
-											>
-												{#snippet icon()}
-													<Events />
-												{/snippet}
-												<CommitteeMembers memberSets={committeeMembers} />
-											</AccordionItem>
+	{#each groupOrder as group (group)}
+		{#if eventsByGroup.has(group) || remarksByGroup.has(group)}
+			<section class="flex flex-col gap-4">
+				<h3 class="wv-h8 wv-kondolar font-bold text-neutral-600">{EventGroupAction[group]}</h3>
+				{#if eventsByGroup.has(group)}
+					<div class="flex flex-col gap-3">
+						{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, ...event } (id)}
+							<div class="relative">
+								<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
+								<div class={focusedEvent === id ? 'highlight-blink' : ''}>
+									<EventCard {...event}>
+										{#if status}
+											<StatusTag {status} {reason} />
 										{/if}
-										{#if committeeSuggestion}
-											<AccordionItem
-												value="committeeSuggestion"
-												title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
-												onclose={() => (accordionValues[id] = '')}
+										{#if committeeMembers?.length || committeeSuggestion}
+											<Accordion.Root
+												class="space-y-2"
+												type="single"
+												value={accordionValues[id] ?? ''}
+												onValueChange={(v) =>
+													(accordionValues[id] = Array.isArray(v) ? (v[0] ?? '') : v)}
 											>
-												{#snippet icon()}
-													<Idea />
-												{/snippet}
-												<MarkdownContent source={committeeSuggestion} />
-											</AccordionItem>
+												{#if committeeMembers?.length}
+													<AccordionItem
+														value="committeeMembers"
+														title="รายชื่อคณะกรรมการ"
+														onclose={() => (accordionValues[id] = '')}
+													>
+														{#snippet icon()}
+															<Events />
+														{/snippet}
+														<CommitteeMembers memberSets={committeeMembers} />
+													</AccordionItem>
+												{/if}
+												{#if committeeSuggestion}
+													<AccordionItem
+														value="committeeSuggestion"
+														title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
+														onclose={() => (accordionValues[id] = '')}
+													>
+														{#snippet icon()}
+															<Idea />
+														{/snippet}
+														<MarkdownContent source={committeeSuggestion} />
+													</AccordionItem>
+												{/if}
+											</Accordion.Root>
 										{/if}
-									</Accordion.Root>
-								{/if}
-							</EventCard>
-						</div>
+									</EventCard>
+								</div>
+							</div>
+						{/each}
 					</div>
-				{/each}
-			</div>
-			<a class="wv-b6 self-end text-blue-600 hover:underline" href="/?tab={group}"
-				>ดู{group}อื่นๆ ในปี 2565-2568</a
-			>
-		</section>
+				{/if}
+
+				{#if remarksByGroup.has(group)}
+					<div
+						class="flex flex-col items-center gap-4 rounded-lg border border-dashed border-neutral-500 p-4 md:p-8"
+					>
+						<TrafficCone />
+						<p class="wv-b5 max-w-md text-center text-neutral-700">{remarksByGroup.get(group)}</p>
+					</div>
+				{/if}
+
+				<a class="wv-b6 self-end text-blue-600 hover:underline" href="/?tab={group}"
+					>ดู{group}อื่นๆ ในปี 2565-2568</a
+				>
+			</section>
+		{/if}
 	{/each}
 </div>
 
