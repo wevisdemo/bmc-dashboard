@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { Information } from 'carbon-icons-svelte';
-	import type { StandingCommitteeMember } from '$lib/sheets/standing-committee-member';
 	import PartyTag from '$lib/tags/party-tag.svelte';
 
-	type Member = Omit<StandingCommitteeMember, 'committee'> & { party?: string };
+	interface Member {
+		name: string;
+		role: string;
+		district?: string;
+		note?: string;
+		party?: string;
+		set?: number;
+	}
 
 	let { members }: { members: Member[] } = $props();
 </script>
@@ -22,12 +28,18 @@
 			<span class="text-neutral-500">{member.role}</span>
 			<div class="grid grid-cols-2 gap-0.5 md:grid-cols-4">
 				<div class="col-span-2 font-bold">{member.name}</div>
-				{#if member.party}
-					<span><PartyTag party={member.party} /></span>
-				{/if}
-				{#if member.district}
-					<div><span class="text-neutral-500">ส.ก. เขต</span> {member.district}</div>
-				{/if}
+				<div>
+					{#if member.party}
+						<PartyTag party={member.party} />
+					{/if}
+				</div>
+				<div>
+					{#if member.district}
+						<span class="text-neutral-500">ส.ก. เขต</span> {member.district}
+					{:else}
+						<span class="text-neutral-500">ไม่ใช่ ส.ก.</span>
+					{/if}
+				</div>
 			</div>
 			{#if member.note}
 				<div class="text-neutral-500">* {member.note}</div>

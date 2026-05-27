@@ -1,7 +1,9 @@
 import { error } from '@sveltejs/kit';
 import { EventGroup } from '$lib/constants';
+import type CommitteeMembers from '$lib/event/committee-members.svelte';
 import type EventCard from '$lib/event/event-card.svelte';
 import { outputs } from '$lib/output';
+import { adhocCommitteeMembers } from '$lib/sheets/adhoc-committee-member';
 import { bills } from '$lib/sheets/bill';
 import { billCommittees } from '$lib/sheets/bill-committee';
 import { bmcMembers } from '$lib/sheets/bmc-member';
@@ -13,18 +15,13 @@ import { subjects } from '$lib/sheets/subject';
 import { topics } from '$lib/sheets/topic';
 import type { ComponentProps } from 'svelte';
 
-type StandingCommitteeMemberDisplay = Omit<
-	(typeof standingCommitteeMembers)[number],
-	'committee'
-> & {
-	party?: string;
-};
+type CommitteeMember = ComponentProps<typeof CommitteeMembers>['members'][number];
 
 export type OutputEvent = ComponentProps<typeof EventCard> & {
 	id: string;
 	reason?: string;
 	committeeSuggestion?: string;
-	standingCommitteeMembers?: StandingCommitteeMemberDisplay[];
+	committeeMembers?: CommitteeMember[];
 };
 
 type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
@@ -71,14 +68,15 @@ export function load({ params }) {
 			...('committeeSuggestion' in event ? { committeeSuggestion: event.committeeSuggestion } : {}),
 			...('committee' in event
 				? {
-						standingCommitteeMembers: standingCommitteeMembers
-							.filter(
+						committeeMembers: [
+							...standingCommitteeMembers.filter(
 								(m) => m.committee === event.committee && event.dateDisplay.includes(`${m.year}`)
-							)
-							.map(({ committee: _, ...rest }) => ({
-								...rest,
-								party: bmcMembers.find((b) => b.name === rest.name)?.party
-							}))
+							),
+							...adhocCommitteeMembers.filter((m) => m.committee === event.committee)
+						].map(({ committee: _, ...rest }) => ({
+							...rest,
+							party: bmcMembers.find((b) => b.name === rest.name)?.party
+						}))
 					}
 				: {})
 		});
