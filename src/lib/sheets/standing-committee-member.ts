@@ -5,6 +5,7 @@ const standingCommitteeMemberSchema = Object({
 	committee: Column('committee_title', asString()),
 	year: Column('year', asNumber()),
 	set: Column('set', asNumber().optional()),
+	period: Column('committee_date', asString().optional()),
 	name: Column('committee_member', asString()),
 	role: Column('membership', asString()),
 	district: Column('member_district', asString().optional()),

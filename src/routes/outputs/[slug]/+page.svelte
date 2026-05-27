@@ -78,7 +78,7 @@
 												{#snippet icon()}
 													<Events />
 												{/snippet}
-												<CommitteeMembers members={committeeMembers} />
+												<CommitteeMembers memberSets={committeeMembers} />
 											</AccordionItem>
 										{/if}
 										{#if committeeSuggestion}

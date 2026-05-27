@@ -15,13 +15,13 @@ import { subjects } from '$lib/sheets/subject';
 import { topics } from '$lib/sheets/topic';
 import type { ComponentProps } from 'svelte';
 
-type CommitteeMember = ComponentProps<typeof CommitteeMembers>['members'][number];
+type CommitteeMemberSet = ComponentProps<typeof CommitteeMembers>['memberSets'][number];
 
 export type OutputEvent = ComponentProps<typeof EventCard> & {
 	id: string;
 	reason?: string;
 	committeeSuggestion?: string;
-	committeeMembers?: CommitteeMember[];
+	committeeMembers?: CommitteeMemberSet[];
 };
 
 type GroupedEvents = readonly (readonly [EventGroup, OutputEvent[]])[];
@@ -67,17 +67,7 @@ export function load({ params }) {
 			...('reference' in event ? { reference: event.reference } : {}),
 			...('committeeSuggestion' in event ? { committeeSuggestion: event.committeeSuggestion } : {}),
 			...('committee' in event
-				? {
-						committeeMembers: [
-							...standingCommitteeMembers.filter(
-								(m) => m.committee === event.committee && event.dateDisplay.includes(`${m.year}`)
-							),
-							...adhocCommitteeMembers.filter((m) => m.committee === event.committee)
-						].map(({ committee: _, ...rest }) => ({
-							...rest,
-							party: bmcMembers.find((b) => b.name === rest.name)?.party
-						}))
-					}
+				? { committeeMembers: getCommitteeMembers(event.committee, event.dateDisplay) }
 				: {})
 		});
 	}
@@ -97,6 +87,38 @@ export function load({ params }) {
 		districts: [...allDistricts],
 		groupedEvents
 	};
+}
+
+function getCommitteeMembers(committee: string, dateDisplay: string): CommitteeMemberSet[] {
+	const standingSets = Object.values(
+		standingCommitteeMembers
+			.filter((m) => m.committee === committee && dateDisplay.includes(`${m.year}`))
+			.map(({ committee: _, ...rest }) => ({
+				...rest,
+				party: bmcMembers.find((b) => b.name === rest.name)?.party
+			}))
+			.reduce(
+				(acc, m) => {
+					const set = m.set ?? 1;
+					if (!acc[set]) acc[set] = { set, period: m.period, members: [] };
+					acc[set].members.push(m);
+					return acc;
+				},
+				{} as Record<number, CommitteeMemberSet>
+			)
+	);
+
+	const adhocMembers = adhocCommitteeMembers
+		.filter((m) => m.committee === committee)
+		.map(({ committee: _c, note: _n, ...rest }) => ({
+			...rest,
+			party: bmcMembers.find((b) => b.name === rest.name)?.party
+		}));
+
+	return [
+		...standingSets,
+		...(adhocMembers.length > 0 ? [{ set: 1, members: adhocMembers }] : [])
+	].sort((a, z) => a.set - z.set);
 }
 
 function getTableFromPrefix(prefix?: string) {
