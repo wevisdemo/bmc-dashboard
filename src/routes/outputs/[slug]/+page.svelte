@@ -103,7 +103,9 @@
 												{#if committeeMembers?.length}
 													<AccordionItem
 														value="committeeMembers"
-														title="รายชื่อคณะกรรมการ"
+														title="รายชื่อคณะกรรมการ{event.dateDisplay
+															? ` ประจำปี พ.ศ. ${event.dateDisplay.value}`
+															: ''}"
 														onclose={() => closeAccordionItem(id, 'committeeMembers')}
 													>
 														{#snippet icon()}

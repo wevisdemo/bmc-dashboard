@@ -1,5 +1,6 @@
 import { asArray, asNumber, Column, Object, asString, type StaticDecode } from 'sheethuahua';
 import { EventGroup } from '$lib/constants';
+import type { DateDisplay } from '$lib/types';
 import { sheets } from './spreadsheet';
 
 const budgetCommitteeSchema = Object({
@@ -20,7 +21,7 @@ const budgetCommitteeSchema = Object({
 export type BudgetCommittee = StaticDecode<typeof budgetCommitteeSchema> & {
 	proposer: { name: string };
 	title: string;
-	dateDisplay: string;
+	dateDisplay: DateDisplay;
 	group: EventGroup.Budget;
 };
 
@@ -30,6 +31,6 @@ export const budgetCommittees: BudgetCommittee[] = (
 	...bc,
 	title: bc.output,
 	proposer: { name: bc.committee },
-	dateDisplay: `ปีที่พิจารณา พ.ศ. ${bc.year}`,
+	dateDisplay: { label: 'ปีที่พิจารณา', value: `${bc.year}` },
 	group: EventGroup.Budget
 }));

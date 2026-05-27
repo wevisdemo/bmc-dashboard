@@ -8,6 +8,7 @@ import {
 	type StaticDecode
 } from 'sheethuahua';
 import { EventGroup } from '$lib/constants';
+import type { DateDisplay } from '$lib/types';
 import { billProposers } from './bill-proposer';
 import { resolveProposer, type Proposer } from './proposer';
 import { sheets } from './spreadsheet';
@@ -33,7 +34,7 @@ const billSchema = Obj({
 
 export type Bill = StaticDecode<typeof billSchema> & {
 	proposer: Proposer | undefined;
-	dateDisplay: string;
+	dateDisplay: DateDisplay;
 	group: EventGroup.Bill;
 };
 
@@ -42,7 +43,10 @@ export const bills: Bill[] = (await sheets.get('ข้อบัญญัติ',
 	return {
 		...b,
 		proposer: proposerName ? resolveProposer(proposerName) : undefined,
-		dateDisplay: `วันที่เสนอ ${b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })}`,
+		dateDisplay: {
+			label: 'วันที่เสนอ',
+			value: b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })
+		},
 		group: EventGroup.Bill
 	};
 });

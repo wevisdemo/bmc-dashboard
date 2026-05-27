@@ -11,6 +11,7 @@
 	import PartyTag from '$lib/tags/party-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
+	import type { DateDisplay } from '$lib/types';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -23,7 +24,7 @@
 			district?: string;
 			imageUrl?: string;
 		};
-		dateDisplay?: string;
+		dateDisplay?: DateDisplay;
 		href?: string;
 		status?: BillStatus;
 		group: EventGroup;
@@ -88,7 +89,8 @@
 
 			{#if dateDisplay}
 				<p class="text-neutral-500">
-					{dateDisplay}
+					<span class="font-bold">{dateDisplay.label}</span>
+					{dateDisplay.value}
 				</p>
 			{/if}
 		</div>

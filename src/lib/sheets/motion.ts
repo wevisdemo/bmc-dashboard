@@ -1,5 +1,6 @@
 import { asArray, asNumber, Column, Object, asString, type StaticDecode } from 'sheethuahua';
 import { EventGroup } from '$lib/constants';
+import type { DateDisplay } from '$lib/types';
 import { resolveProposer, type Proposer } from './proposer';
 import { sheets } from './spreadsheet';
 
@@ -17,13 +18,13 @@ const motionSchema = Object({
 
 export type Motion = StaticDecode<typeof motionSchema> & {
 	proposer: Proposer | undefined;
-	dateDisplay: string | undefined;
+	dateDisplay: DateDisplay | undefined;
 	group: EventGroup.Motion;
 };
 
 export const motions: Motion[] = (await sheets.get('ญัตติ', motionSchema)).map((m) => ({
 	...m,
 	proposer: resolveProposer(m.proposerName),
-	dateDisplay: m.year ? `ปีที่เสนอ พ.ศ. ${m.year}` : undefined,
+	dateDisplay: m.year ? { label: 'ปีที่เสนอ', value: `${m.year}` } : undefined,
 	group: EventGroup.Motion
 }));

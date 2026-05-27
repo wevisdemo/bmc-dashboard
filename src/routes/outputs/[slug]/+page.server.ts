@@ -59,7 +59,7 @@ export function load({ params }) {
 			...('reference' in event ? { reference: event.reference } : {}),
 			...('committeeSuggestion' in event ? { committeeSuggestion: event.committeeSuggestion } : {}),
 			...('committee' in event
-				? { committeeMembers: getCommitteeMembers(event.committee, event.dateDisplay) }
+				? { committeeMembers: getCommitteeMembers(event.committee, event.dateDisplay.value) }
 				: {})
 		});
 	}
@@ -77,10 +77,10 @@ export function load({ params }) {
 	};
 }
 
-function getCommitteeMembers(committee: string, dateDisplay: string): CommitteeMemberSet[] {
+function getCommitteeMembers(committee: string, dateValue: string): CommitteeMemberSet[] {
 	const standingSets = Object.values(
 		standingCommitteeMembers
-			.filter((m) => m.committee === committee && dateDisplay.includes(`${m.year}`))
+			.filter((m) => m.committee === committee && dateValue.includes(`${m.year}`))
 			.map(({ committee: _, ...rest }) => ({
 				...rest,
 				party: bmcMembers.find((b) => b.name === rest.name)?.party

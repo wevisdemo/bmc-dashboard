@@ -1,5 +1,6 @@
 import { asArray, asNumber, Column, Object, asString, type StaticDecode } from 'sheethuahua';
 import { EventGroup } from '$lib/constants';
+import type { DateDisplay } from '$lib/types';
 import { resolveProposer, type Proposer } from './proposer';
 import { sheets } from './spreadsheet';
 
@@ -17,13 +18,13 @@ const subjectSchema = Object({
 
 export type Subject = StaticDecode<typeof subjectSchema> & {
 	proposer: Proposer | undefined;
-	dateDisplay: string | undefined;
+	dateDisplay: DateDisplay | undefined;
 	group: EventGroup.Subject;
 };
 
 export const subjects: Subject[] = (await sheets.get('กระทู้ถาม', subjectSchema)).map((s) => ({
 	...s,
 	proposer: resolveProposer(s.proposerName),
-	dateDisplay: s.year ? `ปีที่เสนอ พ.ศ. ${s.year}` : undefined,
+	dateDisplay: s.year ? { label: 'ปีที่เสนอ', value: `${s.year}` } : undefined,
 	group: EventGroup.Subject
 }));

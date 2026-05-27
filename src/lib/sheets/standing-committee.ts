@@ -1,5 +1,6 @@
 import { Column, Object, asArray, asNumber, asString, type StaticDecode } from 'sheethuahua';
 import { EventGroup } from '$lib/constants';
+import type { DateDisplay } from '$lib/types';
 import { sheets } from './spreadsheet';
 import type { Proposer } from './proposer';
 
@@ -18,7 +19,7 @@ const standingCommitteeSchema = Object({
 export type StandingCommittee = StaticDecode<typeof standingCommitteeSchema> & {
 	proposer: Pick<Proposer, 'name'>;
 	title: string;
-	dateDisplay: string;
+	dateDisplay: DateDisplay;
 	group: EventGroup.CommitteeStudy;
 };
 
@@ -28,6 +29,6 @@ export const standingCommittees: StandingCommittee[] = (
 	...c,
 	proposer: { name: c.committee },
 	title: c.committeeOutput,
-	dateDisplay: `ปีที่ศึกษา พ.ศ. ${c.year}`,
+	dateDisplay: { label: 'ปีที่ศึกษา', value: `${c.year}` },
 	group: EventGroup.CommitteeStudy
 }));
