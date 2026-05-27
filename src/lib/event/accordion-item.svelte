@@ -9,21 +9,26 @@
 		title: string;
 		children: Snippet;
 		onclose?: () => void;
+		disabled?: boolean;
 	};
 
-	let { icon, title, children, onclose, ...restProps }: Props = $props();
+	let { icon, title, children, onclose, disabled = false, ...restProps }: Props = $props();
 </script>
 
-<Accordion.Item {...restProps}>
+<Accordion.Item {...restProps} {disabled}>
 	<Accordion.Header>
 		<Accordion.Trigger
-			class="flex w-full flex-1 items-center gap-1 rounded-lg bg-black p-2 text-left text-white transition-all select-none hover:bg-neutral-700 md:gap-2 md:px-4 md:py-3 [&[data-state=open]>svg:last-child]:rotate-180"
+			class="flex w-full flex-1 items-center gap-1 rounded-lg bg-black p-2 text-left text-white transition-all select-none md:gap-2 md:px-4 md:py-3 [&[data-state=open]>svg:last-child]:rotate-180 {disabled
+				? ''
+				: 'hover:bg-neutral-700'}"
 		>
 			<span class="flex size-6 shrink-0 items-center justify-center">
 				{@render icon()}
 			</span>
 			<span class="flex-1 font-bold">{title}</span>
-			<ChevronDown class="size-4 shrink-0 transition-transform duration-200" />
+			{#if !disabled}
+				<ChevronDown class="size-4 shrink-0 transition-transform duration-200" />
+			{/if}
 		</Accordion.Trigger>
 	</Accordion.Header>
 	<Accordion.Content
@@ -34,15 +39,19 @@
 			{#if open}
 				<div
 					{...props}
-					class="flex flex-col items-center gap-2 rounded border border-dashed border-neutral-400 bg-white p-2 md:gap-4 md:p-4"
+					class="flex flex-col items-center gap-2 rounded border border-dashed border-neutral-400 p-2 md:gap-4 md:p-4 {disabled
+						? 'bg-transparent'
+						: 'bg-white'}"
 					transition:slide
 				>
 					{@render children()}
-					<button
-						onclick={() => onclose?.()}
-						class="flex flex-row items-center gap-1 rounded-lg border p-2 hover:bg-neutral-300 md:px-4 md:py-2"
-						>ย่อหน้าต่างนี้</button
-					>
+					{#if !disabled}
+						<button
+							onclick={() => onclose?.()}
+							class="flex flex-row items-center gap-1 rounded-lg border p-2 hover:bg-neutral-300 md:px-4 md:py-2"
+							>ย่อหน้าต่างนี้</button
+						>
+					{/if}
 				</div>
 			{/if}
 		{/snippet}

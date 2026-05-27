@@ -5,9 +5,9 @@
 	import { EventGroup } from '$lib/constants';
 	import AccordionItem from '$lib/event/accordion-item.svelte';
 	import CommitteeMembers from '$lib/event/committee-members.svelte';
+	import EmptyRemark from '$lib/event/empty-remark.svelte';
 	import EventCard from '$lib/event/event-card.svelte';
 	import MarkdownContent from '$lib/event/markdown-content.svelte';
-	import TrafficCone from '$lib/icons/traffic-cone.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
@@ -15,7 +15,7 @@
 	let { data } = $props();
 
 	let focusedEvent = $state('');
-	let accordionValues = $state<Record<string, string>>({});
+	let accordionValues = $state<Record<string, string[]>>({});
 
 	const groupOrder = [
 		EventGroup.Bill,
@@ -41,6 +41,10 @@
 	const remarksByGroup = $derived(
 		data.remarks.reduce((acc, r) => acc.set(r.group, r.remark), new Map<EventGroup, string>())
 	);
+
+	function closeAccordionItem(eventId: string, itemValue: string) {
+		accordionValues[eventId] = (accordionValues[eventId] ?? []).filter((v) => v !== itemValue);
+	}
 
 	onMount(() => {
 		focusedEvent = window.location.hash.slice(1);
@@ -82,19 +86,23 @@
 										{#if status}
 											<StatusTag {status} {reason} />
 										{/if}
-										{#if committeeMembers?.length || committeeSuggestion}
+										{#if group === EventGroup.CommitteeStudy}
 											<Accordion.Root
 												class="space-y-2"
-												type="single"
-												value={accordionValues[id] ?? ''}
-												onValueChange={(v) =>
-													(accordionValues[id] = Array.isArray(v) ? (v[0] ?? '') : v)}
+												type="multiple"
+												value={[
+													...new Set([
+														...(accordionValues[id] ?? []),
+														...(!committeeSuggestion ? ['committeeSuggestion'] : [])
+													])
+												]}
+												onValueChange={(v) => (accordionValues[id] = Array.isArray(v) ? v : [v])}
 											>
 												{#if committeeMembers?.length}
 													<AccordionItem
 														value="committeeMembers"
 														title="รายชื่อคณะกรรมการ"
-														onclose={() => (accordionValues[id] = '')}
+														onclose={() => closeAccordionItem(id, 'committeeMembers')}
 													>
 														{#snippet icon()}
 															<Events />
@@ -102,18 +110,23 @@
 														<CommitteeMembers memberSets={committeeMembers} />
 													</AccordionItem>
 												{/if}
-												{#if committeeSuggestion}
-													<AccordionItem
-														value="committeeSuggestion"
-														title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
-														onclose={() => (accordionValues[id] = '')}
-													>
-														{#snippet icon()}
-															<Idea />
-														{/snippet}
+												<AccordionItem
+													value="committeeSuggestion"
+													title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
+													onclose={() => closeAccordionItem(id, 'committeeSuggestion')}
+													disabled={!committeeSuggestion}
+												>
+													{#snippet icon()}
+														<Idea />
+													{/snippet}
+													{#if committeeSuggestion}
 														<MarkdownContent source={committeeSuggestion} />
-													</AccordionItem>
-												{/if}
+													{:else}
+														<EmptyRemark
+															text="คณะกรรมการนี้รายงานเพียงความเป็นมา ขอบเขต และผลการศึกษา ไม่มีข้อเสนอแนะหรือข้อสังเกตเพิ่มเติม"
+														/>
+													{/if}
+												</AccordionItem>
 											</Accordion.Root>
 										{/if}
 									</EventCard>
@@ -127,8 +140,7 @@
 					<div
 						class="flex flex-col items-center gap-4 rounded-lg border border-dashed border-neutral-500 p-4 md:p-8"
 					>
-						<TrafficCone />
-						<p class="wv-b5 max-w-md text-center text-neutral-700">{remarksByGroup.get(group)}</p>
+						<EmptyRemark text={remarksByGroup.get(group) ?? ''} />
 					</div>
 				{/if}
 
