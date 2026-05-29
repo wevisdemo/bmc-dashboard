@@ -7,6 +7,8 @@
 	import ReferenceLink from '$lib/event/reference-link.svelte';
 	import type { BillStatus } from '$lib/sheets/bill';
 	import type { BudgetCommittee } from '$lib/sheets/budget-committee';
+	import type { BudgetGroup } from '$lib/sheets/organization-budget';
+	import BudgetTag from '$lib/tags/budget-tag.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import PartyTag from '$lib/tags/party-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
@@ -29,6 +31,7 @@
 		status?: BillStatus;
 		group: EventGroup;
 		reference?: string | BudgetCommittee['reference'];
+		budget?: BudgetGroup;
 		children?: Snippet;
 	}
 
@@ -42,6 +45,7 @@
 		status,
 		group,
 		reference,
+		budget,
 		children
 	}: Props = $props();
 
@@ -94,6 +98,15 @@
 				</p>
 			{/if}
 		</div>
+
+		{#if budget}
+			<div class="flex flex-wrap items-center gap-4">
+				<span class="wv-b5 font-bold">ผลการพิจารณา</span>
+				<BudgetTag variant="increase" count={budget.increase.length} />
+				<BudgetTag variant="decrease" count={budget.decrease.length} />
+				<BudgetTag variant="unchanged" count={budget.unchanged.length} />
+			</div>
+		{/if}
 
 		{#if proposer}
 			<div class="h-px bg-neutral-300"></div>

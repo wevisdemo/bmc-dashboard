@@ -1,4 +1,4 @@
-import { AdditionalDistrictOption } from '$lib/constants';
+import { AdditionalDistrictOption, EventGroup } from '$lib/constants';
 import type EventCard from '$lib/event/event-card.svelte';
 import districtsData from '$lib/explore/bangkok-districts.json';
 import { outputs } from '$lib/output';
@@ -7,6 +7,7 @@ import { billCommittees } from '$lib/sheets/bill-committee';
 import { budgetCommittees } from '$lib/sheets/budget-committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { motions } from '$lib/sheets/motion';
+import { budgetGroupsById, type BudgetGroup } from '$lib/sheets/organization-budget';
 import { standingCommittees } from '$lib/sheets/standing-committee';
 import { subjects } from '$lib/sheets/subject';
 import { topics, type Topic } from '$lib/sheets/topic';
@@ -18,7 +19,10 @@ export type TopicGroup = {
 	secondaries: Topic['secondary'][];
 };
 
-export type Event = ComponentProps<typeof EventCard> & { id: string };
+export type Event = ComponentProps<typeof EventCard> & {
+	id: string;
+	budget?: BudgetGroup;
+};
 
 export function load() {
 	const topicGroups: TopicGroup[] = [
@@ -56,7 +60,10 @@ export function load() {
 		dateDisplay: e.dateDisplay,
 		href: `${idToHref.get(e.id)}#${e.id}`,
 		group: e.group,
-		...('status' in e ? { status: e.status } : {})
+		...('status' in e ? { status: e.status } : {}),
+		...(e.group === EventGroup.Budget && budgetGroupsById.has(e.id)
+			? { budget: budgetGroupsById.get(e.id) }
+			: {})
 	}));
 
 	return { topicGroups, districts, events };
