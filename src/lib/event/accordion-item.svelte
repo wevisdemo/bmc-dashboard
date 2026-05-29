@@ -10,17 +10,24 @@
 		children: Snippet;
 		onclose?: () => void;
 		disabled?: boolean;
+		triggerClass?: string;
 	};
 
-	let { icon, title, children, onclose, disabled = false, ...restProps }: Props = $props();
+	let {
+		icon,
+		title,
+		children,
+		onclose,
+		disabled = false,
+		triggerClass = 'bg-black text-white hover:bg-neutral-700',
+		...restProps
+	}: Props = $props();
 </script>
 
 <Accordion.Item {...restProps} {disabled}>
 	<Accordion.Header>
 		<Accordion.Trigger
-			class="flex w-full flex-1 items-center gap-1 rounded-lg bg-black p-2 text-left text-white transition-all select-none md:gap-2 md:px-4 md:py-3 [&[data-state=open]>svg:last-child]:rotate-180 {disabled
-				? ''
-				: 'hover:bg-neutral-700'}"
+			class="flex w-full flex-1 items-center gap-1 rounded-lg p-2 text-left transition-all select-none md:gap-2 md:px-4 md:py-3 [&[data-state=open]>svg:last-child]:rotate-180 {triggerClass}"
 		>
 			<span class="flex size-6 shrink-0 items-center justify-center">
 				{@render icon()}

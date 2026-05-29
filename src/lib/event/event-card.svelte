@@ -100,11 +100,14 @@
 		</div>
 
 		{#if budget}
-			<div class="flex flex-wrap items-center gap-4">
-				<span class="wv-b5 font-bold">ผลการพิจารณา</span>
-				<BudgetTag variant="increase" count={budget.increase.length} />
-				<BudgetTag variant="decrease" count={budget.decrease.length} />
-				<BudgetTag variant="unchanged" count={budget.unchanged.length} />
+			<div class="wv-b5 flex flex-wrap items-center gap-4">
+				<span class="font-bold">ผลการพิจารณา</span>
+				{#each ['increase', 'decrease', 'unchanged'] as const as variant}
+					<div class="flex flex-row items-end gap-2">
+						<BudgetTag {variant} value={budget[variant].length} />
+						<span>หน่วยงาน</span>
+					</div>
+				{/each}
 			</div>
 		{/if}
 
@@ -163,7 +166,7 @@
 				<p class="flex-1">{referenceText}</p>
 			</div>
 			{#if isBudget}
-				<div class="flex flex-row flex-wrap gap-2 self-end">
+				<div class="flex flex-row flex-wrap justify-end gap-2 self-end">
 					<ReferenceLink href={reference.draft}>ดูร่างข้อบัญญัติงบประมาณ</ReferenceLink>
 					<ReferenceLink href={reference.committee}>ดูเอกสารผลพิจารณา</ReferenceLink>
 					<ReferenceLink href={reference.budgetBill}>ดูข้อบัญญัติงบประมาณ</ReferenceLink>

@@ -3,7 +3,7 @@
 
 	type BudgetVariant = 'increase' | 'decrease' | 'unchanged';
 
-	let { variant, count }: { variant: BudgetVariant; count: number } = $props();
+	let { variant, value }: { variant: BudgetVariant; value: number | string } = $props();
 
 	const config = {
 		increase: {
@@ -26,12 +26,9 @@
 	const { bg, text, Icon } = $derived(config[variant]);
 </script>
 
-<div class="wv-b5 flex items-center gap-2">
-	<span
-		class="flex flex-row items-center gap-1 rounded-lg border border-neutral-200 px-2 py-0.5 font-bold {bg} {text}"
-	>
-		<Icon size={variant === 'unchanged' ? 12 : 16} />
-		<span class="-mb-0.5">{count}</span>
-	</span>
-	<span>หน่วยงาน</span>
-</div>
+<span
+	class="flex flex-row items-center gap-1 rounded-lg border border-neutral-200 px-2 py-0.5 font-bold {bg} {text}"
+>
+	<Icon size={variant === 'unchanged' ? 12 : 16} />
+	<span class="-mb-0.5">{value}</span>
+</span>

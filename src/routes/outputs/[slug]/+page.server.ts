@@ -1,4 +1,5 @@
 import { error } from '@sveltejs/kit';
+import { EventGroup } from '$lib/constants';
 import type CommitteeMembers from '$lib/event/committee-members.svelte';
 import type EventCard from '$lib/event/event-card.svelte';
 import { outputs } from '$lib/output';
@@ -10,6 +11,7 @@ import { budgetCommittees } from '$lib/sheets/budget-committee';
 import { generalCommittees } from '$lib/sheets/general-committee';
 import { missingEvents } from '$lib/sheets/missing-event';
 import { motions } from '$lib/sheets/motion';
+import { budgetGroupsById, type BudgetGroup } from '$lib/sheets/organization-budget';
 import { standingCommittees } from '$lib/sheets/standing-committee';
 import { standingCommitteeMembers } from '$lib/sheets/standing-committee-member';
 import { subjects } from '$lib/sheets/subject';
@@ -23,6 +25,7 @@ export type OutputEvent = ComponentProps<typeof EventCard> & {
 	reason?: string;
 	committeeSuggestion?: string;
 	committeeMembers?: CommitteeMemberSet[];
+	budget?: BudgetGroup;
 };
 
 export function entries() {
@@ -60,6 +63,9 @@ export function load({ params }) {
 			...('committeeSuggestion' in event ? { committeeSuggestion: event.committeeSuggestion } : {}),
 			...('committee' in event
 				? { committeeMembers: getCommitteeMembers(event.committee, event.dateDisplay.value) }
+				: {}),
+			...(event.group === EventGroup.Budget && budgetGroupsById.has(event.id)
+				? { budget: budgetGroupsById.get(event.id) }
 				: {})
 		});
 	}

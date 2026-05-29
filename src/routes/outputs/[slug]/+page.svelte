@@ -8,6 +8,7 @@
 	import EmptyRemark from '$lib/event/empty-remark.svelte';
 	import EventCard from '$lib/event/event-card.svelte';
 	import MarkdownContent from '$lib/event/markdown-content.svelte';
+	import OrganizationBudgets from '$lib/event/organization-budgets.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
@@ -80,7 +81,7 @@
 				<h3 class="wv-h8 wv-kondolar font-bold text-neutral-500">{EventGroupAction[group]}</h3>
 				{#if eventsByGroup.has(group)}
 					<div class="flex flex-col gap-3">
-						{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, ...event } (id)}
+						{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, budget, ...event } (id)}
 							<div class="relative">
 								<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
 								<div class={focusedEvent === id ? 'highlight-blink' : ''}>
@@ -134,6 +135,9 @@
 													</AccordionItem>
 												{/if}
 											</Accordion.Root>
+										{/if}
+										{#if budget}
+											<OrganizationBudgets {budget} />
 										{/if}
 									</EventCard>
 								</div>
