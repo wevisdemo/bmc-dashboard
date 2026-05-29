@@ -48,5 +48,5 @@
 		/>
 	</svg>
 
-	<p class="wv-b5 max-w-md text-center text-neutral-700">{text}</p>
+	<p class="wv-b5 max-w-md text-center whitespace-pre-line text-neutral-700">{text}</p>
 </div>
