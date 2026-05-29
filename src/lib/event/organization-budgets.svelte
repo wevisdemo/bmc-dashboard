@@ -53,11 +53,11 @@
 	</ul>
 {/snippet}
 
-<div class="space-y-2">
+<div class="space-y-2 md:space-y-3">
 	<p class="wv-b5 font-bold">ผลการพิจารณา</p>
 
 	<Accordion.Root
-		class="space-y-2"
+		class="space-y-2 md:space-y-3"
 		type="single"
 		{value}
 		onValueChange={(v) => (value = typeof v === 'string' ? v : '')}

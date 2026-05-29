@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Accordion } from 'bits-ui';
-	import { Events, Idea } from 'carbon-icons-svelte';
+	import { Events, Idea, Information } from 'carbon-icons-svelte';
 	import { onMount } from 'svelte';
 	import { EventGroup } from '$lib/constants';
 	import AccordionItem from '$lib/event/accordion-item.svelte';
@@ -86,12 +86,19 @@
 								<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
 								<div class={focusedEvent === id ? 'highlight-blink' : ''}>
 									<EventCard {...event}>
-										{#if status}
-											<StatusTag {status} {reason} />
-										{/if}
 										{#if group === EventGroup.CommitteeStudy || group === EventGroup.Budget}
+											{#if committeeMembers?.length}
+												<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
+													<Information class="mt-0.5 size-4" />
+													<p class="wv-b6 flex-1">
+														ในบางตำแหน่ง ผู้ดำรงตำแหน่งอาจไม่ใช่ สก.
+														แต่เป็นผู้เชี่ยวชาญที่เกี่ยวข้องกับประเด็นนั้น ๆ
+														ที่ถูกเชิญมาร่วมในคณะกรรมการ
+													</p>
+												</div>
+											{/if}
 											<Accordion.Root
-												class="space-y-2"
+												class="space-y-2 md:space-y-3"
 												type="multiple"
 												value={[
 													...new Set([
@@ -138,6 +145,9 @@
 										{/if}
 										{#if budget}
 											<OrganizationBudgets {budget} />
+										{/if}
+										{#if status}
+											<StatusTag {status} {reason} />
 										{/if}
 									</EventCard>
 								</div>

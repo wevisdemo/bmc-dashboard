@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Tabs } from 'bits-ui';
-	import { Information } from 'carbon-icons-svelte';
 	import PartyTag from '$lib/tags/party-tag.svelte';
 
 	interface Member {
@@ -47,14 +46,6 @@
 		{/each}
 	</ul>
 {/snippet}
-
-<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
-	<Information class="mt-0.5 size-4" />
-	<p class="wv-b6 flex-1">
-		ในบางตำแหน่ง ผู้ดำรงตำแหน่งอาจไม่ใช่ สก. แต่เป็นผู้เชี่ยวชาญที่เกี่ยวข้องกับประเด็นนั้น ๆ
-		ที่ถูกเชิญมาร่วมในคณะกรรมการ
-	</p>
-</div>
 
 {#if memberSets.length === 1}
 	{@render MemberList(memberSets[0].members)}
