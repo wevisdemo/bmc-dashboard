@@ -12,6 +12,7 @@
 	import FilterOptions from '$lib/explore/filter-options.svelte';
 	import TabList from '$lib/explore/tab-list.svelte';
 	import TopicOverview from '$lib/explore/topic-overview.svelte';
+	import RemarkMessage from '$lib/remark-message.svelte';
 
 	const DEFAULT_DISTRICT = AdditionalDistrictOption.ALL;
 
@@ -67,15 +68,15 @@
 	<p class="wv-h6 wv-kondolar text-center font-bold">
 		ส.ก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2569
 	</p>
-	<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
-		<WarningAlt class="mt-0.5 size-4" />
-		<p class="wv-b6 flex-1">
-			1 รายการ สามารถเกี่ยวข้องได้ <strong>มากกว่า 1 ประเด็น</strong> และ
-			<strong>มากกว่า 1 พื้นที่</strong>
-			หากประเด็นหรือพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือพื้นที่อื่น ๆ ด้วย
-			<strong>ตัวกรองของประเด็นหรือพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
-		</p>
-	</div>
+	<RemarkMessage>
+		{#snippet icon(props)}
+			<WarningAlt {...props} />
+		{/snippet}
+		1 รายการ สามารถเกี่ยวข้องได้ <strong>มากกว่า 1 ประเด็น</strong> และ
+		<strong>มากกว่า 1 พื้นที่</strong>
+		หากประเด็นหรือพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือพื้นที่อื่น ๆ ด้วย
+		<strong>ตัวกรองของประเด็นหรือพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
+	</RemarkMessage>
 	<div class="flex flex-col md:gap-4 lg:flex-row-reverse">
 		<div class="flex min-w-0 flex-1 flex-col gap-3">
 			<div class="hidden flex-col gap-2 lg:flex">

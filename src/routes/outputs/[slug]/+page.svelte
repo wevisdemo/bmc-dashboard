@@ -10,6 +10,7 @@
 	import MarkdownContent from '$lib/event/markdown-content.svelte';
 	import OrganizationBudgets from '$lib/event/organization-budgets.svelte';
 	import PeopleList from '$lib/event/people-list.svelte';
+	import RemarkMessage from '$lib/remark-message.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
@@ -88,20 +89,6 @@
 								<div class={focusedEvent === id ? 'highlight-blink' : ''}>
 									<EventCard {...event}>
 										{#if coProposers?.length || committeeMembers?.length || group !== EventGroup.Budget}
-											{#if committeeMembers?.length || coProposers?.length}
-												<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
-													<Information class="mt-0.5 size-4" />
-													<p class="wv-b6 flex-1">
-														{#if committeeMembers?.length}
-															ในบางตำแหน่ง ผู้ดำรงตำแหน่งอาจไม่ใช่ ส.ก.
-															แต่เป็นผู้เชี่ยวชาญที่เกี่ยวข้องกับประเด็นนั้น ๆ
-															ที่ถูกเชิญมาร่วมในคณะกรรมการ
-														{:else}
-															พรรคที่ ส.ก. สังกัด อ้างอิงตาม พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565
-														{/if}
-													</p>
-												</div>
-											{/if}
 											<Accordion.Root
 												class="space-y-2 md:space-y-3"
 												type="multiple"
@@ -122,6 +109,12 @@
 														{#snippet icon()}
 															<Events />
 														{/snippet}
+														<RemarkMessage>
+															{#snippet icon(props)}
+																<Information {...props} />
+															{/snippet}
+															พรรคที่ ส.ก. สังกัด อ้างอิงตาม พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565
+														</RemarkMessage>
 														<PeopleList members={coProposers} />
 													</AccordionItem>
 												{/if}
@@ -136,6 +129,26 @@
 														{#snippet icon()}
 															<Events />
 														{/snippet}
+														<RemarkMessage>
+															{#snippet icon(props)}
+																<Information {...props} />
+															{/snippet}
+															<ul class="list-disc pl-4">
+																<li>
+																	สมาชิกคณะกรรมการมาจากการแต่งตั้ง ส.ก. เข้าไปดำรงตำแหน่ง
+																	โดยในบางโอกาส บุคคลภายนอก เช่น ผู้เชี่ยวชาญในประเด็นที่ศึกษา
+																	ก็สามารถถูกเชิญมาดำรงตำแหน่งร่วมด้วย
+																</li>
+																<li>
+																	ตำแหน่ง อ้างอิงตามตำแหน่งล่าสุดก่อนสิ้นสุดวาระหรือพ้นจากตำแหน่ง
+																</li>
+																<li>
+																	พรรคที่ ส.ก. สังกัด อ้างอิงตาม <strong
+																		>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong
+																	>
+																</li>
+															</ul>
+														</RemarkMessage>
 														<CommitteeMembers memberSets={committeeMembers} />
 													</AccordionItem>
 												{/if}
