@@ -8,6 +8,7 @@ import {
 	type StaticDecode
 } from 'sheethuahua';
 import { EventGroup } from '$lib/constants';
+import type { Member } from '$lib/event/people-list.svelte';
 import type { DateDisplay } from '$lib/types';
 import { billProposers } from './bill-proposer';
 import { resolveProposer, type Proposer } from './proposer';
@@ -34,15 +35,21 @@ const billSchema = Obj({
 
 export type Bill = StaticDecode<typeof billSchema> & {
 	proposer: Proposer | undefined;
+	coProposers: Member[];
 	dateDisplay: DateDisplay;
 	group: EventGroup.Bill;
 };
 
 export const bills: Bill[] = (await sheets.get('ข้อบัญญัติ', billSchema)).map((b) => {
-	const proposerName = billProposers.find((bp) => bp.id === b.id)?.proposer;
+	const [proposer, ...coProposers] = billProposers
+		.filter((bp) => bp.id === b.id)
+		.map((p) => resolveProposer(p.proposer))
+		.filter((p): p is Proposer => p !== undefined);
+
 	return {
 		...b,
-		proposer: proposerName ? resolveProposer(proposerName) : undefined,
+		proposer,
+		coProposers,
 		dateDisplay: {
 			label: 'วันที่เสนอ',
 			value: b.proposedDate.toLocaleDateString('th-TH', { dateStyle: 'long' })

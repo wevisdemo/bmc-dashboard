@@ -2,6 +2,7 @@ import { error } from '@sveltejs/kit';
 import { EventGroup } from '$lib/constants';
 import type CommitteeMembers from '$lib/event/committee-members.svelte';
 import type EventCard from '$lib/event/event-card.svelte';
+import type { Member } from '$lib/event/people-list.svelte';
 import { outputs } from '$lib/output';
 import { adhocCommitteeMembers } from '$lib/sheets/adhoc-committee-member';
 import { bills } from '$lib/sheets/bill';
@@ -25,6 +26,7 @@ export type OutputEvent = ComponentProps<typeof EventCard> & {
 	reason?: string;
 	committeeSuggestion?: string;
 	committeeMembers?: CommitteeMemberSet[];
+	coProposers?: Member[];
 	budget?: BudgetGroup;
 };
 
@@ -64,6 +66,7 @@ export function load({ params }) {
 			...('committee' in event
 				? { committeeMembers: getCommitteeMembers(event.committee, event.dateDisplay.value) }
 				: {}),
+			...('coProposers' in event ? { coProposers: event.coProposers } : {}),
 			...(event.group === EventGroup.Budget && budgetGroupsById.has(event.id)
 				? { budget: budgetGroupsById.get(event.id) }
 				: {})

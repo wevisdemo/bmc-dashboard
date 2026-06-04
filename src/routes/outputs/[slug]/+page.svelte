@@ -9,6 +9,7 @@
 	import EventCard from '$lib/event/event-card.svelte';
 	import MarkdownContent from '$lib/event/markdown-content.svelte';
 	import OrganizationBudgets from '$lib/event/organization-budgets.svelte';
+	import PeopleList from '$lib/event/people-list.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
@@ -81,19 +82,23 @@
 				<h3 class="wv-h8 wv-kondolar font-bold text-neutral-500">{EventGroupAction[group]}</h3>
 				{#if eventsByGroup.has(group)}
 					<div class="flex flex-col gap-3">
-						{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, budget, ...event } (id)}
+						{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, coProposers, budget, ...event } (id)}
 							<div class="relative">
 								<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
 								<div class={focusedEvent === id ? 'highlight-blink' : ''}>
 									<EventCard {...event}>
-										{#if group === EventGroup.CommitteeStudy || group === EventGroup.Budget}
-											{#if committeeMembers?.length}
+										{#if coProposers?.length || committeeMembers?.length || group !== EventGroup.Budget}
+											{#if committeeMembers?.length || coProposers?.length}
 												<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
 													<Information class="mt-0.5 size-4" />
 													<p class="wv-b6 flex-1">
-														ในบางตำแหน่ง ผู้ดำรงตำแหน่งอาจไม่ใช่ สก.
-														แต่เป็นผู้เชี่ยวชาญที่เกี่ยวข้องกับประเด็นนั้น ๆ
-														ที่ถูกเชิญมาร่วมในคณะกรรมการ
+														{#if committeeMembers?.length}
+															ในบางตำแหน่ง ผู้ดำรงตำแหน่งอาจไม่ใช่ สก.
+															แต่เป็นผู้เชี่ยวชาญที่เกี่ยวข้องกับประเด็นนั้น ๆ
+															ที่ถูกเชิญมาร่วมในคณะกรรมการ
+														{:else}
+															พรรคที่ ส.ก. สังกัด อ้างอิงตาม พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565
+														{/if}
 													</p>
 												</div>
 											{/if}
@@ -108,6 +113,18 @@
 												]}
 												onValueChange={(v) => (accordionValues[id] = Array.isArray(v) ? v : [v])}
 											>
+												{#if coProposers?.length}
+													<AccordionItem
+														value="coProposers"
+														title="ผู้เสนอกฎหมายร่วม"
+														onclose={() => closeAccordionItem(id, 'coProposers')}
+													>
+														{#snippet icon()}
+															<Events />
+														{/snippet}
+														<PeopleList members={coProposers} />
+													</AccordionItem>
+												{/if}
 												{#if committeeMembers?.length}
 													<AccordionItem
 														value="committeeMembers"
