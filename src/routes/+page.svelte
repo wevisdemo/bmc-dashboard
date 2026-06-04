@@ -65,15 +65,15 @@
 <div class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:pt-12 lg:pb-3">
 	<h1 class="wv-h4 wv-kondolar my-4 text-center font-bold md:my-8">รู้ไหม ส.ก. ทำอะไรได้บ้าง ?</h1>
 	<p class="wv-h6 wv-kondolar text-center font-bold">
-		ส.ก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2568
+		ส.ก. พูดคุย ศึกษา และเสนอเรื่องอะไรบ้างในปี 2565-2569
 	</p>
 	<div class="flex flex-row gap-2 rounded-lg bg-neutral-200 p-2">
 		<WarningAlt class="mt-0.5 size-4" />
 		<p class="wv-b6 flex-1">
 			1 รายการ สามารถเกี่ยวข้องได้ <strong>มากกว่า 1 ประเด็น</strong> และ
-			<strong>มากกว่า 1 เขตพื้นที่</strong>
-			หากประเด็นหรือเขตพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือเขตพื้นที่อื่น ๆ ด้วย
-			<strong>ตัวกรองของประเด็นหรือเขตพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
+			<strong>มากกว่า 1 พื้นที่</strong>
+			หากประเด็นหรือพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือพื้นที่อื่น ๆ ด้วย
+			<strong>ตัวกรองของประเด็นหรือพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
 		</p>
 	</div>
 	<div class="flex flex-col md:gap-4 lg:flex-row-reverse">

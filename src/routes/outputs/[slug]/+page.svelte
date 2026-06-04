@@ -93,7 +93,7 @@
 													<Information class="mt-0.5 size-4" />
 													<p class="wv-b6 flex-1">
 														{#if committeeMembers?.length}
-															ในบางตำแหน่ง ผู้ดำรงตำแหน่งอาจไม่ใช่ สก.
+															ในบางตำแหน่ง ผู้ดำรงตำแหน่งอาจไม่ใช่ ส.ก.
 															แต่เป็นผู้เชี่ยวชาญที่เกี่ยวข้องกับประเด็นนั้น ๆ
 															ที่ถูกเชิญมาร่วมในคณะกรรมการ
 														{:else}
@@ -182,7 +182,7 @@
 				{/if}
 
 				<a class="wv-b6 self-end text-blue-600 hover:underline" href="/?tab={group}"
-					>ดู{group}อื่นๆ ในปี 2565-2568</a
+					>ดู{group}อื่นๆ ในปี 2565-2569</a
 				>
 			</section>
 		{/if}
