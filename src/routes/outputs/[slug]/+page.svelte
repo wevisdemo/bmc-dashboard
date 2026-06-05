@@ -152,7 +152,7 @@
 														<CommitteeMembers memberSets={committeeMembers} />
 													</AccordionItem>
 												{/if}
-												{#if group !== EventGroup.Budget}
+												{#if group === EventGroup.CommitteeStudy}
 													<AccordionItem
 														value="committeeSuggestion"
 														title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
