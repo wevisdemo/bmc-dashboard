@@ -51,31 +51,37 @@
 {#if topicCounts.length === 0}
 	<EmptyListLabel class="py-12" />
 {:else}
-	<div class="flex h-full max-h-96 flex-col gap-1 overflow-y-auto">
-		{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
-			{@const isActive =
-				selectedSecondaryTopics.length === 1 && selectedSecondaryTopics[0] === topic}
-			<button
-				animate:flip={{ duration: 300 }}
-				class="flex flex-col gap-1 rounded-sm border p-2 transition-colors hover:bg-neutral-100 {isActive
-					? 'border-neutral-400'
-					: 'border-transparent'}"
-				onclick={() => onTopicClick(topic)}
-			>
-				<div class="flex flex-row text-sm font-bold">
-					<span class="flex-1 text-left">{topic}</span>
-					<span class="tabular-nums">{count}</span>
-				</div>
-				<div class="h-2 w-full rounded-xs border border-neutral-200 bg-neutral-100">
-					<div
-						class="h-full rounded-xs transition-[width] duration-300"
-						style="width:{(count / maxTopicCount) * 100}%; background-color: {topicColorMap.get(
-							topic
-						)};"
-					></div>
-				</div>
-			</button>
-		{/each}
+	<div class="flex flex-col">
+		<div class="typo-b6 flex flex-row justify-between border-b border-neutral-300 text-neutral-500">
+			<span>ประเด็น</span>
+			<span>รายการ</span>
+		</div>
+		<div class="flex h-full max-h-96 flex-col gap-1 overflow-y-auto pt-1">
+			{#each topicCounts.toSorted((a, b) => b.count - a.count) as { topic, count } (topic)}
+				{@const isActive =
+					selectedSecondaryTopics.length === 1 && selectedSecondaryTopics[0] === topic}
+				<button
+					animate:flip={{ duration: 300 }}
+					class="flex flex-col gap-1 rounded-sm border p-2 transition-colors hover:bg-neutral-100 {isActive
+						? 'border-neutral-400'
+						: 'border-transparent'}"
+					onclick={() => onTopicClick(topic)}
+				>
+					<div class="flex flex-row text-sm font-bold">
+						<span class="flex-1 text-left">{topic}</span>
+						<span class="tabular-nums">{count}</span>
+					</div>
+					<div class="h-2 w-full rounded-xs border border-neutral-200 bg-neutral-100">
+						<div
+							class="h-full rounded-xs transition-[width] duration-300"
+							style="width:{(count / maxTopicCount) * 100}%; background-color: {topicColorMap.get(
+								topic
+							)};"
+						></div>
+					</div>
+				</button>
+			{/each}
+		</div>
+		<p class="mt-2 text-gray-500">คลิกแถบเพื่อกรองตามประเด็น</p>
 	</div>
-	<p class="mt-1 text-gray-500">คลิกแถบเพื่อกรองตามประเด็น</p>
 {/if}

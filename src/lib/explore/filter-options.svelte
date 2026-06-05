@@ -28,8 +28,12 @@
 	let allSecondaries = $derived(topicGroups.flatMap((g) => g.secondaries));
 </script>
 
-<div class="flex flex-col gap-2 px-2 lg:px-0 {className}">
-	<h4 class="wv-b5 mt-2 font-bold md:m-0">สำรวจตามพื้นที่</h4>
+<div class="flex flex-col gap-2 px-2 md:gap-3 lg:px-0 {className}">
+	<div>
+		<h4 class="wv-b5 mt-2 font-bold md:m-0">สำรวจตามพื้นที่</h4>
+		<p class="wv-b6 text-neutral-500">ระบุจากชื่อเขตหรือสถานที่ในชื่อรายการ</p>
+	</div>
+
 	<Combobox
 		name="district"
 		label="ค้นหาเขตพื้นที่"
@@ -41,6 +45,7 @@
 	<div class="my-1 h-0 border-t border-neutral-300"></div>
 
 	<h4 class="wv-b5 font-bold">สำรวจตามประเด็น</h4>
+
 	<div class="flex gap-3 text-sm">
 		<button
 			class="text-blue-600 not-disabled:underline not-disabled:hover:text-blue-400 disabled:cursor-not-allowed disabled:text-neutral-400"
