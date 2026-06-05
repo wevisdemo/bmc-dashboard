@@ -20,7 +20,7 @@
 	const tabs = Object.values(EventGroup);
 </script>
 
-<div class="-mx-3 bg-neutral-300 md:m-0" bind:this={container}>
+<div id="list" class="-mx-3 bg-neutral-300 md:m-0" bind:this={container}>
 	<Tabs.Root bind:value={tab} onValueChange={ontabchange}>
 		<Tabs.List
 			class="sticky top-0 z-10 flex flex-row gap-2 overflow-x-auto border-b-12 border-neutral-300 bg-white px-3 pt-2 md:border-b-24 md:p-0"
