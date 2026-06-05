@@ -13,7 +13,7 @@
 </script>
 
 <ul class="wv-b6 flex w-full flex-col">
-	{#each members as member (member.name)}
+	{#each members as member, i (i)}
 		<li class="flex flex-col gap-0.5 border-b border-neutral-300 p-2 md:px-3">
 			{#if member.role}
 				<span class="text-neutral-500">{member.role}</span>
@@ -21,15 +21,15 @@
 			<div class="grid grid-cols-2 gap-0.5 md:grid-cols-4">
 				<div class="col-span-2 font-bold">{member.name}</div>
 				<div>
-					{#if member.party}
-						<PartyTag party={member.party} />
-					{/if}
-				</div>
-				<div>
 					{#if member.district}
 						<span class="text-neutral-500">ส.ก. เขต</span> {member.district}
 					{:else}
 						<span class="text-neutral-500">ไม่ใช่ ส.ก.</span>
+					{/if}
+				</div>
+				<div>
+					{#if member.party}
+						<PartyTag party={member.party} />
 					{/if}
 				</div>
 			</div>
