@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Accordion } from 'bits-ui';
-	import { Events, Idea, Information } from 'carbon-icons-svelte';
+	import { ChevronLeft, Events, Idea, Information } from 'carbon-icons-svelte';
 	import { onMount } from 'svelte';
 	import { EventGroup } from '$lib/constants';
 	import AccordionItem from '$lib/event/accordion-item.svelte';
@@ -55,6 +55,12 @@
 		focusedEvent = window.location.hash.slice(1);
 	});
 </script>
+
+<div class="px-3 py-2 md:px-8 md:py-3">
+	<a href="/" class="wv-b6 flex flex-row items-center gap-2 hover:text-neutral-600 md:gap-4"
+		><ChevronLeft /> สำรวจเรื่องที่ ส.ก. พูดคุย</a
+	>
+</div>
 
 <div class="bg-sky-100 p-3 md:px-5 md:py-8">
 	<div class="mx-auto flex w-full max-w-5xl flex-col gap-3 md:gap-4">
