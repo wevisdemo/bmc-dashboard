@@ -10,6 +10,7 @@
 	import MarkdownContent from '$lib/event/markdown-content.svelte';
 	import OrganizationBudgets from '$lib/event/organization-budgets.svelte';
 	import PeopleList from '$lib/event/people-list.svelte';
+	import EventIcon from '$lib/icons/event-icon.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import StatusTag from '$lib/tags/status-tag.svelte';
@@ -73,133 +74,138 @@
 </div>
 
 <div class="mx-auto flex max-w-4xl flex-col gap-6 p-3 md:gap-8 md:px-5 md:py-8">
-	<h2 class="wv-h9 wv-kondolar border-b border-neutral-300 pb-2 font-bold text-neutral-500">
+	<h2 class="wv-h9 wv-kondolar border-b border-neutral-400 pb-2 font-bold text-neutral-500">
 		บทบาทในสภาของ ส.ก. ที่เกี่ยวข้องกับเรื่องนี้
 	</h2>
 
-	{#each groupOrder as group (group)}
-		{#if eventsByGroup.has(group) || remarksByGroup.has(group)}
-			<section class="flex flex-col gap-4">
-				<h3 class="wv-h8 wv-kondolar font-bold text-neutral-500">{EventGroupAction[group]}</h3>
-				{#if eventsByGroup.has(group)}
-					<div class="flex flex-col gap-3">
-						{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, coProposers, budget, ...event } (id)}
-							<div class="relative">
-								<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
-								<div class={focusedEvent === id ? 'highlight-blink' : ''}>
-									<EventCard {...event}>
-										{#if coProposers?.length || committeeMembers?.length || group !== EventGroup.Budget}
-											<Accordion.Root
-												class="space-y-2 md:space-y-3"
-												type="multiple"
-												value={[
-													...new Set([
-														...(accordionValues[id] ?? []),
-														...(!committeeSuggestion ? ['committeeSuggestion'] : [])
-													])
-												]}
-												onValueChange={(v) => (accordionValues[id] = Array.isArray(v) ? v : [v])}
-											>
-												{#if coProposers?.length}
-													<AccordionItem
-														value="coProposers"
-														title="ผู้เสนอกฎหมายร่วม"
-														onclose={() => closeAccordionItem(id, 'coProposers')}
-													>
-														{#snippet icon()}
-															<Events />
-														{/snippet}
-														<RemarkMessage>
-															{#snippet icon(props)}
-																<Information {...props} />
+	<div class="flex flex-col gap-12 md:gap-16">
+		{#each groupOrder as group (group)}
+			{#if eventsByGroup.has(group) || remarksByGroup.has(group)}
+				<section class="flex flex-col gap-3 md:gap-4">
+					<div class="flex items-center gap-3">
+						<EventIcon {group} />
+						<h3 class="wv-h6 wv-kondolar font-bold text-neutral-500">{EventGroupAction[group]}</h3>
+					</div>
+					{#if eventsByGroup.has(group)}
+						<div class="flex flex-col gap-6 md:gap-8">
+							{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, coProposers, budget, ...event } (id)}
+								<div class="relative">
+									<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
+									<div class={focusedEvent === id ? 'highlight-blink' : ''}>
+										<EventCard {...event}>
+											{#if coProposers?.length || committeeMembers?.length || group !== EventGroup.Budget}
+												<Accordion.Root
+													class="space-y-2 md:space-y-3"
+													type="multiple"
+													value={[
+														...new Set([
+															...(accordionValues[id] ?? []),
+															...(!committeeSuggestion ? ['committeeSuggestion'] : [])
+														])
+													]}
+													onValueChange={(v) => (accordionValues[id] = Array.isArray(v) ? v : [v])}
+												>
+													{#if coProposers?.length}
+														<AccordionItem
+															value="coProposers"
+															title="ผู้เสนอกฎหมายร่วม"
+															onclose={() => closeAccordionItem(id, 'coProposers')}
+														>
+															{#snippet icon()}
+																<Events />
 															{/snippet}
-															พรรคที่ ส.ก. สังกัด อ้างอิงตาม พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565
-														</RemarkMessage>
-														<PeopleList members={coProposers} />
-													</AccordionItem>
-												{/if}
-												{#if committeeMembers?.length}
-													<AccordionItem
-														value="committeeMembers"
-														title="รายชื่อคณะกรรมการ{event.dateDisplay
-															? ` ประจำปี พ.ศ. ${event.dateDisplay.value}`
-															: ''}"
-														onclose={() => closeAccordionItem(id, 'committeeMembers')}
-													>
-														{#snippet icon()}
-															<Events />
-														{/snippet}
-														<RemarkMessage>
-															{#snippet icon(props)}
-																<Information {...props} />
+															<RemarkMessage>
+																{#snippet icon(props)}
+																	<Information {...props} />
+																{/snippet}
+																พรรคที่ ส.ก. สังกัด อ้างอิงตาม พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565
+															</RemarkMessage>
+															<PeopleList members={coProposers} />
+														</AccordionItem>
+													{/if}
+													{#if committeeMembers?.length}
+														<AccordionItem
+															value="committeeMembers"
+															title="รายชื่อคณะกรรมการ{event.dateDisplay
+																? ` ประจำปี พ.ศ. ${event.dateDisplay.value}`
+																: ''}"
+															onclose={() => closeAccordionItem(id, 'committeeMembers')}
+														>
+															{#snippet icon()}
+																<Events />
 															{/snippet}
-															<ul class="list-disc pl-4">
-																<li>
-																	สมาชิกคณะกรรมการมาจากการแต่งตั้ง ส.ก. เข้าไปดำรงตำแหน่ง
-																	โดยในบางโอกาส บุคคลภายนอก เช่น ผู้เชี่ยวชาญในประเด็นที่ศึกษา
-																	ก็สามารถถูกเชิญมาดำรงตำแหน่งร่วมด้วย
-																</li>
-																<li>
-																	ตำแหน่ง อ้างอิงตามตำแหน่งล่าสุดก่อนสิ้นสุดวาระหรือพ้นจากตำแหน่ง
-																</li>
-																<li>
-																	พรรคที่ ส.ก. สังกัด อ้างอิงตาม <strong
-																		>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong
-																	>
-																</li>
-															</ul>
-														</RemarkMessage>
-														<CommitteeMembers memberSets={committeeMembers} />
-													</AccordionItem>
-												{/if}
-												{#if group === EventGroup.CommitteeStudy}
-													<AccordionItem
-														value="committeeSuggestion"
-														title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
-														onclose={() => closeAccordionItem(id, 'committeeSuggestion')}
-														disabled={!committeeSuggestion}
-													>
-														{#snippet icon()}
-															<Idea />
-														{/snippet}
-														{#if committeeSuggestion}
-															<MarkdownContent source={committeeSuggestion} />
-														{:else}
-															<EmptyRemark
-																text="คณะกรรมการนี้รายงานเพียงความเป็นมา ขอบเขต และผลการศึกษา ไม่มีข้อเสนอแนะหรือข้อสังเกตเพิ่มเติม"
-															/>
-														{/if}
-													</AccordionItem>
-												{/if}
-											</Accordion.Root>
-										{/if}
-										{#if budget}
-											<OrganizationBudgets {budget} />
-										{/if}
-										{#if status}
-											<StatusTag {status} {reason} />
-										{/if}
-									</EventCard>
+															<RemarkMessage>
+																{#snippet icon(props)}
+																	<Information {...props} />
+																{/snippet}
+																<ul class="list-disc pl-4">
+																	<li>
+																		สมาชิกคณะกรรมการมาจากการแต่งตั้ง ส.ก. เข้าไปดำรงตำแหน่ง
+																		โดยในบางโอกาส บุคคลภายนอก เช่น ผู้เชี่ยวชาญในประเด็นที่ศึกษา
+																		ก็สามารถถูกเชิญมาดำรงตำแหน่งร่วมด้วย
+																	</li>
+																	<li>
+																		ตำแหน่ง อ้างอิงตามตำแหน่งล่าสุดก่อนสิ้นสุดวาระหรือพ้นจากตำแหน่ง
+																	</li>
+																	<li>
+																		พรรคที่ ส.ก. สังกัด อ้างอิงตาม <strong
+																			>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong
+																		>
+																	</li>
+																</ul>
+															</RemarkMessage>
+															<CommitteeMembers memberSets={committeeMembers} />
+														</AccordionItem>
+													{/if}
+													{#if group === EventGroup.CommitteeStudy}
+														<AccordionItem
+															value="committeeSuggestion"
+															title="ข้อเสนอแนะและข้อสังเกตจากคณะกรรมการ"
+															onclose={() => closeAccordionItem(id, 'committeeSuggestion')}
+															disabled={!committeeSuggestion}
+														>
+															{#snippet icon()}
+																<Idea />
+															{/snippet}
+															{#if committeeSuggestion}
+																<MarkdownContent source={committeeSuggestion} />
+															{:else}
+																<EmptyRemark
+																	text="คณะกรรมการนี้รายงานเพียงความเป็นมา ขอบเขต และผลการศึกษา ไม่มีข้อเสนอแนะหรือข้อสังเกตเพิ่มเติม"
+																/>
+															{/if}
+														</AccordionItem>
+													{/if}
+												</Accordion.Root>
+											{/if}
+											{#if budget}
+												<OrganizationBudgets {budget} />
+											{/if}
+											{#if status}
+												<StatusTag {status} {reason} />
+											{/if}
+										</EventCard>
+									</div>
 								</div>
-							</div>
-						{/each}
-					</div>
-				{/if}
+							{/each}
+						</div>
+					{/if}
 
-				{#if remarksByGroup.has(group)}
-					<div
-						class="flex flex-col items-center gap-4 rounded-lg border border-dashed border-neutral-500 p-4 md:p-8"
+					{#if remarksByGroup.has(group)}
+						<div
+							class="flex flex-col items-center gap-4 rounded-lg border border-dashed border-neutral-500 p-4 md:p-8"
+						>
+							<EmptyRemark text={remarksByGroup.get(group) ?? ''} />
+						</div>
+					{/if}
+
+					<a class="wv-b6 self-end text-blue-600 hover:underline" href="/?tab={group}"
+						>ดู{group}ทั้งหมดของ ส.ก. ชุดที่ 13</a
 					>
-						<EmptyRemark text={remarksByGroup.get(group) ?? ''} />
-					</div>
-				{/if}
-
-				<a class="wv-b6 self-end text-blue-600 hover:underline" href="/?tab={group}"
-					>ดู{group}ทั้งหมดของ ส.ก. ชุดที่ 13</a
-				>
-			</section>
-		{/if}
-	{/each}
+				</section>
+			{/if}
+		{/each}
+	</div>
 </div>
 
 <style>
