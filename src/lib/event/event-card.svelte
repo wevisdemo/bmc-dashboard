@@ -4,7 +4,7 @@
 	import Events from 'carbon-icons-svelte/lib/Events.svelte';
 	import User from 'carbon-icons-svelte/lib/User.svelte';
 	import { EventGroup } from '$lib/constants';
-	import ReferenceLink from '$lib/event/reference-link.svelte';
+	import ReferenceLink from '$lib/inputs/button-link.svelte';
 	import type { BillStatus } from '$lib/sheets/bill';
 	import type { BudgetCommittee } from '$lib/sheets/budget-committee';
 	import type { BudgetGroup } from '$lib/sheets/organization-budget';
@@ -169,12 +169,17 @@
 			</div>
 			{#if isBudget}
 				<div class="flex flex-row flex-wrap justify-end gap-2 self-end">
-					<ReferenceLink href={reference.draft}>ดูร่างข้อบัญญัติงบประมาณ</ReferenceLink>
-					<ReferenceLink href={reference.committee}>ดูเอกสารผลพิจารณา</ReferenceLink>
-					<ReferenceLink href={reference.budgetBill}>ดูข้อบัญญัติงบประมาณ</ReferenceLink>
+					<ReferenceLink href={reference.draft} target="_blank"
+						>ดูร่างข้อบัญญัติงบประมาณ</ReferenceLink
+					>
+					<ReferenceLink href={reference.committee} target="_blank">ดูเอกสารผลพิจารณา</ReferenceLink
+					>
+					<ReferenceLink href={reference.budgetBill} target="_blank"
+						>ดูข้อบัญญัติงบประมาณ</ReferenceLink
+					>
 				</div>
 			{:else}
-				<ReferenceLink href={reference}>ดูเอกสารต้นฉบับ</ReferenceLink>
+				<ReferenceLink href={reference} target="_blank">ดูเอกสารต้นฉบับ</ReferenceLink>
 			{/if}
 		</div>
 	{/if}
