@@ -9,7 +9,7 @@
 </script>
 
 <span
-	class="wv-b6 flex flex-row items-center gap-1 rounded-full border border-gray-300 bg-gray-100 px-2 py-0.5"
+	class="wv-b6 flex flex-row items-center gap-1 rounded-full border border-gray-300 bg-gray-100 px-2 py-1"
 >
 	<LocationFilled />
 	{district}

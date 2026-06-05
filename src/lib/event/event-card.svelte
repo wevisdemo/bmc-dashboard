@@ -29,6 +29,7 @@
 		dateDisplay?: DateDisplay;
 		href?: string;
 		status?: BillStatus;
+		reason?: string;
 		group: EventGroup;
 		reference?: string | BudgetCommittee['reference'];
 		budget?: BudgetGroup;
@@ -43,6 +44,7 @@
 		dateDisplay,
 		href,
 		status,
+		reason,
 		group,
 		reference,
 		budget,
@@ -83,7 +85,7 @@
 				</div>
 
 				{#if status}
-					<StatusTag {status} />
+					<StatusTag {status} {reason} expanded={!!reason} />
 				{/if}
 			</div>
 		{/if}

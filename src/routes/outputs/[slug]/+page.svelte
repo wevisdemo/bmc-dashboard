@@ -13,7 +13,6 @@
 	import EventIcon from '$lib/icons/event-icon.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
-	import StatusTag from '$lib/tags/status-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
 
 	let { data } = $props();
@@ -88,7 +87,7 @@
 					</div>
 					{#if eventsByGroup.has(group)}
 						<div class="flex flex-col gap-6 md:gap-8">
-							{#each eventsByGroup.get(group) ?? [] as { id, status, reason, committeeSuggestion, committeeMembers, coProposers, budget, ...event } (id)}
+							{#each eventsByGroup.get(group) ?? [] as { id, committeeSuggestion, committeeMembers, coProposers, budget, ...event } (id)}
 								<div class="relative">
 									<div {id} class="absolute inset-0 -top-12 h-0 md:-top-14"></div>
 									<div class={focusedEvent === id ? 'highlight-blink' : ''}>
@@ -180,9 +179,6 @@
 											{/if}
 											{#if budget}
 												<OrganizationBudgets {budget} />
-											{/if}
-											{#if status}
-												<StatusTag {status} {reason} />
 											{/if}
 										</EventCard>
 									</div>

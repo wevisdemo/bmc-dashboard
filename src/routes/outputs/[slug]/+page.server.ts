@@ -56,7 +56,6 @@ export function load({ params }) {
 		events.push({
 			id: event.id,
 			title: event.title,
-			topics: sortSecondaryTopics(event.secondaryTopics),
 			proposer: event.proposer,
 			dateDisplay: event.dateDisplay,
 			group: event.group,
