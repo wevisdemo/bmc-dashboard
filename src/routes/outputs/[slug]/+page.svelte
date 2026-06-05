@@ -195,7 +195,7 @@
 				{/if}
 
 				<a class="wv-b6 self-end text-blue-600 hover:underline" href="/?tab={group}"
-					>ดู{group}อื่นๆ ในปี 2565-2569</a
+					>ดู{group}ทั้งหมดของ ส.ก. ชุดที่ 13</a
 				>
 			</section>
 		{/if}
