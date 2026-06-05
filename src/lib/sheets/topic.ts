@@ -11,6 +11,12 @@ export type Topic = StaticDecode<typeof topicSchema>;
 
 export const topics = await sheets.get('topic', topicSchema, { range: 'P:R' });
 
+export const allSecondaryTopics = topics.map((t) => t.secondary);
+
+export function sortSecondaryTopics(topics: string[]) {
+	return topics.toSorted((a, z) => allSecondaryTopics.indexOf(a) - allSecondaryTopics.indexOf(z));
+}
+
 export const topicColorMap = new Map(
 	topics.flatMap((t) => [
 		[t.secondary, t.color],

@@ -16,7 +16,7 @@ import { budgetGroupsById, type BudgetGroup } from '$lib/sheets/organization-bud
 import { standingCommittees } from '$lib/sheets/standing-committee';
 import { standingCommitteeMembers } from '$lib/sheets/standing-committee-member';
 import { subjects } from '$lib/sheets/subject';
-import { topics } from '$lib/sheets/topic';
+import { topics, sortSecondaryTopics } from '$lib/sheets/topic';
 import type { ComponentProps } from 'svelte';
 
 type CommitteeMemberSet = ComponentProps<typeof CommitteeMembers>['memberSets'][number];
@@ -39,7 +39,7 @@ export function load({ params }) {
 	if (!entry) error(404, `Output not found: ${params.slug}`);
 
 	const events: OutputEvent[] = [];
-	const allSecondaryTopics = new Set<string>();
+	const outputTopics = new Set<string>();
 	const allDistricts = new Set<string>();
 
 	for (const id of entry.ids) {
@@ -50,12 +50,13 @@ export function load({ params }) {
 			continue;
 		}
 
-		for (const t of event.secondaryTopics) allSecondaryTopics.add(t);
+		for (const t of event.secondaryTopics) outputTopics.add(t);
 		for (const d of event.districts) allDistricts.add(d);
 
 		events.push({
 			id: event.id,
 			title: event.title,
+			topics: sortSecondaryTopics(event.secondaryTopics),
 			proposer: event.proposer,
 			dateDisplay: event.dateDisplay,
 			group: event.group,
@@ -79,7 +80,7 @@ export function load({ params }) {
 
 	return {
 		output: entry.output,
-		topics: topics.filter((t) => allSecondaryTopics.has(t.secondary)),
+		topics: topics.filter((t) => outputTopics.has(t.secondary)),
 		districts: [...allDistricts],
 		events,
 		remarks

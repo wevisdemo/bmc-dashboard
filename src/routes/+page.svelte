@@ -3,7 +3,6 @@
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import WarningAlt from 'carbon-icons-svelte/lib/WarningAlt.svelte';
 	import { useSearchParams } from 'runed/kit';
-	import { untrack } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import { z } from 'zod';
 	import { AdditionalDistrictOption, EventGroup } from '$lib/constants.js';
@@ -13,20 +12,17 @@
 	import TabList from '$lib/explore/tab-list.svelte';
 	import TopicOverview from '$lib/explore/topic-overview.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
+	import { allSecondaryTopics, sortSecondaryTopics } from '$lib/sheets/topic.js';
 
 	const DEFAULT_DISTRICT = AdditionalDistrictOption.ALL;
 
 	let { data } = $props();
 
-	const allSecondaryTopics = untrack(() => data.topicGroups.flatMap((g) => g.secondaries));
-
 	const schema = z.object({
 		district: z.string().default(DEFAULT_DISTRICT),
 		topics: z
 			.array(z.string())
-			.transform((arr) =>
-				arr.toSorted((a, z) => allSecondaryTopics.indexOf(a) - allSecondaryTopics.indexOf(z))
-			)
+			.transform((arr) => sortSecondaryTopics(arr))
 			.default(allSecondaryTopics),
 		tab: z.string().default(EventGroup.Subject),
 		page: z.number().int().positive().default(1)

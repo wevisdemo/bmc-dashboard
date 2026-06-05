@@ -10,7 +10,7 @@ import { motions } from '$lib/sheets/motion';
 import { budgetGroupsById, type BudgetGroup } from '$lib/sheets/organization-budget';
 import { standingCommittees } from '$lib/sheets/standing-committee';
 import { subjects } from '$lib/sheets/subject';
-import { topics, type Topic } from '$lib/sheets/topic';
+import { topics, sortSecondaryTopics, type Topic } from '$lib/sheets/topic';
 import type { FeatureCollection } from 'geojson';
 import type { ComponentProps } from 'svelte';
 
@@ -55,7 +55,7 @@ export function load() {
 		id: e.id,
 		title: e.title,
 		districts: e.districts,
-		topics: e.secondaryTopics,
+		topics: e.secondaryTopics ? sortSecondaryTopics(e.secondaryTopics) : [],
 		proposer: e.proposer,
 		dateDisplay: e.dateDisplay,
 		href: `${idToHref.get(e.id)}#${e.id}`,
