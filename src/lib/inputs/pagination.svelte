@@ -28,7 +28,7 @@
 					{:else}
 						<Pagination.Page
 							{page}
-							class="wv-b5 size-8 items-center justify-center rounded hover:text-neutral-500 data-selected:bg-neutral-100"
+							class="wv-b5 size-8 items-center justify-center rounded hover:text-neutral-500 data-selected:bg-neutral-200"
 						>
 							{page.value}
 						</Pagination.Page>
