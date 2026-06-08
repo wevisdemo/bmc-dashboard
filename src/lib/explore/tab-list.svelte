@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Tabs } from 'bits-ui';
 	import { EventGroup } from '$lib/constants';
+	import TabView from '$lib/inputs/tab-view.svelte';
 	import TabContent from './tab-content.svelte';
 	import type { Event } from '../../routes/+page.server';
 
@@ -20,21 +20,12 @@
 	const tabs = Object.values(EventGroup);
 </script>
 
-<div id="list" class="-mx-3 bg-neutral-100 md:m-0" bind:this={container}>
-	<Tabs.Root bind:value={tab} onValueChange={ontabchange}>
-		<Tabs.List
-			class="sticky top-0 z-10 flex flex-row gap-2 overflow-x-auto border-b-12 border-neutral-100 bg-white px-3 pt-2 md:border-b-24 md:p-0"
-		>
-			{#each tabs as value (value)}
-				<Tabs.Trigger
-					{value}
-					class="flex flex-row items-center gap-1 rounded-t-lg bg-neutral-300 p-3 data-[state=active]:bg-neutral-100"
-				>
-					<h4 class="wv-h9 font-bold whitespace-nowrap">{value}</h4>
-					<span>[{eventsByGroup[value]?.length ?? 0}]</span>
-				</Tabs.Trigger>
-			{/each}
-		</Tabs.List>
+<div id="list" class="-mx-3 md:m-0" bind:this={container}>
+	<TabView {tabs} bind:value={tab} onValueChange={ontabchange}>
+		{#snippet trigger(value)}
+			<h4 class="wv-h9 font-bold whitespace-nowrap">{value}</h4>
+			<span>[{eventsByGroup[value as EventGroup]?.length ?? 0}]</span>
+		{/snippet}
 
 		<TabContent
 			value={EventGroup.Subject}
@@ -104,5 +95,5 @@
 				ที่จัดสรรไปในแต่ละสำนักของ กทม.
 			</li>
 		</TabContent>
-	</Tabs.Root>
+	</TabView>
 </div>

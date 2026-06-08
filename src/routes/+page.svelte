@@ -75,7 +75,7 @@
 		<ButtonLink href="#explore" className="md:col-span-2"
 			>สำรวจเรื่องที่ ส.ก. เสนอในสภา <ArrowDown class="ml-2" /></ButtonLink
 		>
-		<ButtonLink href="#" variant="outlined">ส.ก. ทำอะไรได้บ้าง</ButtonLink>
+		<ButtonLink href="/duties" variant="outlined">ส.ก. ทำอะไรได้บ้าง</ButtonLink>
 		<ButtonLink href="#" variant="outlined">อ่านบทความ</ButtonLink>
 	</div>
 </Hero>
@@ -87,7 +87,7 @@
 	<p class="wv-h6 wv-kondolar text-center font-bold">
 		ส.ก. ชุดที่ 13 พูดคุย เสนอ และศึกษาอะไรในสภา กทม.
 	</p>
-	<RemarkMessage>
+	<RemarkMessage class="max-w-3xl self-center">
 		{#snippet icon(props)}
 			<WarningAlt {...props} />
 		{/snippet}

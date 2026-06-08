@@ -9,7 +9,10 @@
 
 	let { children } = $props();
 
-	const navLinks = [{ href: '/', label: 'สำรวจเรื่องที่ ส.ก. พูดคุย' }] as const;
+	const navLinks = [
+		{ href: '/', label: 'สำรวจเรื่องที่ ส.ก. พูดคุย' },
+		{ href: '/duties', label: 'ส.ก. ทำอะไรได้บ้าง' }
+	] as const;
 
 	let pathname = $derived($page.url.pathname);
 </script>
