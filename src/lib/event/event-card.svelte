@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Information } from 'carbon-icons-svelte';
 	import ArrowUpRight from 'carbon-icons-svelte/lib/ArrowUpRight.svelte';
+	import Document from 'carbon-icons-svelte/lib/Document.svelte';
 	import Events from 'carbon-icons-svelte/lib/Events.svelte';
 	import User from 'carbon-icons-svelte/lib/User.svelte';
 	import { EventGroup } from '$lib/constants';
@@ -170,16 +171,17 @@
 			{#if isBudget}
 				<div class="flex flex-row flex-wrap justify-end gap-2 self-end">
 					<ReferenceLink href={reference.draft} target="_blank"
-						>ดูร่างข้อบัญญัติงบประมาณ</ReferenceLink
+						><Document /> ดูร่างข้อบัญญัติงบประมาณ</ReferenceLink
 					>
-					<ReferenceLink href={reference.committee} target="_blank">ดูเอกสารผลพิจารณา</ReferenceLink
+					<ReferenceLink href={reference.committee} target="_blank"
+						><Document /> ดูเอกสารผลพิจารณา</ReferenceLink
 					>
 					<ReferenceLink href={reference.budgetBill} target="_blank"
-						>ดูข้อบัญญัติงบประมาณ</ReferenceLink
+						><Document /> ดูข้อบัญญัติงบประมาณ</ReferenceLink
 					>
 				</div>
 			{:else}
-				<ReferenceLink href={reference} target="_blank">ดูเอกสารต้นฉบับ</ReferenceLink>
+				<ReferenceLink href={reference} target="_blank"><Document /> ดูเอกสารต้นฉบับ</ReferenceLink>
 			{/if}
 		</div>
 	{/if}

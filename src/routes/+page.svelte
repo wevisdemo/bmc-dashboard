@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ArrowDown } from 'carbon-icons-svelte';
 	import CaretUp from 'carbon-icons-svelte/lib/CaretUp.svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 	import WarningAlt from 'carbon-icons-svelte/lib/WarningAlt.svelte';
@@ -11,7 +12,9 @@
 	import FilterOptions from '$lib/explore/filter-options.svelte';
 	import TabList from '$lib/explore/tab-list.svelte';
 	import TopicOverview from '$lib/explore/topic-overview.svelte';
+	import ButtonLink from '$lib/inputs/button-link.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
+	import Hero from '$lib/sections/hero.svelte';
 	import { allSecondaryTopics, sortSecondaryTopics } from '$lib/sheets/topic.js';
 
 	const DEFAULT_DISTRICT = AdditionalDistrictOption.ALL;
@@ -59,8 +62,28 @@
 	}
 </script>
 
-<div class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:pt-12 lg:pb-3">
-	<h1 class="wv-h4 wv-kondolar my-4 text-center font-bold md:my-8">รู้ไหม ส.ก. ทำอะไรได้บ้าง ?</h1>
+<Hero>
+	<img class="max-w-40 md:max-w-64" src="/images/logo.webp" alt="WeVis Election" />
+	<div class="flex flex-col items-center gap-1">
+		<h1 class="wv-h4 wv-kondolar text-center font-bold">เลือกตั้ง กทม. ไม่ได้มีแค่ผู้ว่าฯ</h1>
+		<p class="wv-b3 wv-kondolar font-bold">ส.ก. เสนออะไรในสภา ให้ข้อมูลช่วยเล่า</p>
+		<p class="wv-b6 mt-2 text-center text-neutral-500">
+			*ข้อมูลของ ส.ก. ชุดที่ 13 (6 มิ.ย. 65 - 21 พ.ค. 69) ข้อมูล ณ วันที่ 22 พ.ค. 69
+		</p>
+	</div>
+	<div class="grid w-full max-w-96 grid-cols-1 gap-1 md:grid-cols-2 md:gap-3">
+		<ButtonLink href="#explore" className="md:col-span-2"
+			>สำรวจเรื่องที่ ส.ก. เสนอในสภา <ArrowDown class="ml-2" /></ButtonLink
+		>
+		<ButtonLink href="#" variant="outlined">ส.ก. ทำอะไรได้บ้าง</ButtonLink>
+		<ButtonLink href="#" variant="outlined">อ่านบทความ</ButtonLink>
+	</div>
+</Hero>
+
+<div
+	id="explore"
+	class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:pt-12 lg:pb-3"
+>
 	<p class="wv-h6 wv-kondolar text-center font-bold">
 		ส.ก. ชุดที่ 13 พูดคุย เสนอ และศึกษาอะไรในสภา กทม.
 	</p>
