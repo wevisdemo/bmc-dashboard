@@ -8,7 +8,6 @@ const budgetCommitteeSchema = Object({
 	year: Column('year', asNumber()),
 	output: Column('output', asString()),
 	committee: Column('committee_title', asString()),
-	mainTopics: Column('topics_main', asString()),
 	secondaryTopics: Column('topics_secondary', asArray(asString())),
 	districts: Column('districts', asArray(asString())),
 	reference: Object({

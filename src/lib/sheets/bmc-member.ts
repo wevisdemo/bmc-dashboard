@@ -3,9 +3,7 @@ import { sheets } from './spreadsheet';
 
 const bmcMemberSchema = Object({
 	name: Column('name', asString()),
-	position: Column('position', asString()),
 	district: Column('district', asString()),
-	membershipRemark: Column('membership', asString().optional()),
 	party: Column('party', asString().optional()),
 	imageUrl: Column('image_link', asString().optional())
 });

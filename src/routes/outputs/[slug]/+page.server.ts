@@ -107,7 +107,7 @@ function getCommitteeMembers(committee: string, dateValue: string): CommitteeMem
 
 	const adhocMembers = adhocCommitteeMembers
 		.filter((m) => m.committee === committee)
-		.map(({ committee: _c, note: _n, ...rest }) => ({
+		.map(({ committee: _c, ...rest }) => ({
 			...rest,
 			party: bmcMembers.find((b) => b.name === rest.name)?.party
 		}));
