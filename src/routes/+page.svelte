@@ -84,18 +84,24 @@
 	id="explore"
 	class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:pt-12 lg:pb-3"
 >
-	<p class="wv-h6 wv-kondolar text-center font-bold">
-		ส.ก. ชุดที่ 13 พูดคุย เสนอ และศึกษาอะไรในสภา กทม.
-	</p>
-	<RemarkMessage class="max-w-3xl self-center">
-		{#snippet icon(props)}
-			<WarningAlt {...props} />
-		{/snippet}
-		1 รายการ สามารถเกี่ยวข้องได้ <strong>มากกว่า 1 ประเด็น</strong> และ
-		<strong>มากกว่า 1 พื้นที่</strong>
-		หากประเด็นหรือพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือพื้นที่อื่น ๆ ด้วย
-		<strong>ตัวกรองของประเด็นหรือพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
-	</RemarkMessage>
+	<div class="flex max-w-3xl flex-col items-center gap-3 self-center md:gap-4">
+		<p class="wv-h6 wv-kondolar text-center font-bold">
+			ส.ก. ชุดที่ 13 พูดคุย เสนอ และศึกษาอะไรในสภา กทม.
+		</p>
+		<RemarkMessage>
+			{#snippet icon(props)}
+				<WarningAlt {...props} />
+			{/snippet}
+			1 รายการ สามารถเกี่ยวข้องได้ <strong>มากกว่า 1 ประเด็น</strong> และ
+			<strong>มากกว่า 1 พื้นที่</strong>
+			หากประเด็นหรือพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือพื้นที่อื่น ๆ ด้วย
+			<strong>ตัวกรองของประเด็นหรือพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
+		</RemarkMessage>
+		<a href="/about" class="wv-b6 text-blue-600 underline hover:text-blue-800">
+			อ่านที่มาและข้อจำกัดข้อมูล
+		</a>
+	</div>
+
 	<div class="flex flex-col md:gap-4 lg:flex-row-reverse">
 		<div class="flex min-w-0 flex-1 flex-col gap-3">
 			<div class="hidden flex-col gap-2 lg:flex">

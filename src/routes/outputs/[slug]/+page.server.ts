@@ -16,7 +16,7 @@ import { budgetGroupsById, type BudgetGroup } from '$lib/sheets/organization-bud
 import { standingCommittees } from '$lib/sheets/standing-committee';
 import { standingCommitteeMembers } from '$lib/sheets/standing-committee-member';
 import { subjects } from '$lib/sheets/subject';
-import { topics, sortSecondaryTopics } from '$lib/sheets/topic';
+import { topics } from '$lib/sheets/topic';
 import type { ComponentProps } from 'svelte';
 
 type CommitteeMemberSet = ComponentProps<typeof CommitteeMembers>['memberSets'][number];

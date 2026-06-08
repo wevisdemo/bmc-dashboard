@@ -1,6 +1,4 @@
 <script lang="ts">
-	import '@wevisdemo/ui/styles/footer.css';
-	import '@wevisdemo/ui/styles/navbar.css';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/stores';
 	import WvFooter from '@wevisdemo/ui/svelte/footer.svelte';
@@ -11,7 +9,8 @@
 
 	const navLinks = [
 		{ href: '/', label: 'สำรวจเรื่องที่ ส.ก. พูดคุย' },
-		{ href: '/duties', label: 'ส.ก. ทำอะไรได้บ้าง' }
+		{ href: '/duties', label: 'ส.ก. ทำอะไรได้บ้าง' },
+		{ href: '/about', label: 'เกี่ยวกับโครงการ' }
 	] as const;
 
 	let pathname = $derived($page.url.pathname);
@@ -23,7 +22,7 @@
 </svelte:head>
 
 <div class="flex h-full min-h-lvh flex-col">
-	<WvNavbar title="BMC Dashboard" homeHref="/" animated dark>
+	<WvNavbar homeHref="/" animated dark>
 		<div class="flex flex-col items-center justify-center md:flex-row md:gap-5">
 			{#each navLinks as { href, label } (href)}
 				<a

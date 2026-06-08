@@ -2,6 +2,12 @@
 
 @layer base {
 	@import '@wevisdemo/ui/styles/typography.css';
+	@import '@wevisdemo/ui/styles/footer.css';
+	@import '@wevisdemo/ui/styles/navbar.css';
+	@import '@wevisdemo/ui/styles/button-group.css';
+	@import '@wevisdemo/ui/styles/button-link.css';
+	@import '@wevisdemo/ui/styles/container.css';
+	@import '@wevisdemo/ui/styles/paragraph-group.css';
 
 	html {
 		scroll-behavior: smooth;
