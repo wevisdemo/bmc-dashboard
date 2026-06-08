@@ -10,6 +10,7 @@
 	const navLinks = [
 		{ href: '/', label: 'สำรวจเรื่องที่ ส.ก. พูดคุย' },
 		{ href: '/duties', label: 'ส.ก. ทำอะไรได้บ้าง' },
+		{ href: '/articles', label: 'อ่านบทความ' },
 		{ href: '/about', label: 'เกี่ยวกับโครงการ' }
 	] as const;
 

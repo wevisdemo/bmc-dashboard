@@ -76,7 +76,7 @@
 			>สำรวจเรื่องที่ ส.ก. เสนอในสภา <ArrowDown class="ml-2" /></ButtonLink
 		>
 		<ButtonLink href="/duties" variant="outlined">ส.ก. ทำอะไรได้บ้าง</ButtonLink>
-		<ButtonLink href="#" variant="outlined">อ่านบทความ</ButtonLink>
+		<ButtonLink href="/articles" variant="outlined">อ่านบทความ</ButtonLink>
 	</div>
 </Hero>
 
