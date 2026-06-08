@@ -113,7 +113,7 @@
 													{#if coProposers?.length}
 														<AccordionItem
 															value="coProposers"
-															title="ผู้เสนอกฎหมายร่วม"
+															title="ผู้ร่วมเสนอข้อบัญญัติ"
 															onclose={() => closeAccordionItem(id, 'coProposers')}
 														>
 															{#snippet icon()}
