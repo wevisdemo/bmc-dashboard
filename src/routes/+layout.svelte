@@ -18,7 +18,7 @@
 </script>
 
 <div class="flex h-full min-h-lvh flex-col">
-	<WvNavbar homeHref="/" animated dark>
+	<WvNavbar homeHref={resolve('/')} animated dark>
 		<div class="flex flex-col items-center justify-center md:flex-row md:gap-5">
 			{#each navLinks as { href, label } (href)}
 				<a

@@ -11,7 +11,7 @@
 		imageUrl: string;
 		title: string;
 		children: Snippet;
-		links?: { url: string; label: string }[];
+		links?: { path: string; label: string }[];
 	} = $props();
 </script>
 
@@ -30,10 +30,10 @@
 		</div>
 		{#if links.length > 0}
 			<ul class="flex flex-col gap-1">
-				{#each links as link (link.url)}
+				{#each links as { path, label } (path)}
 					<li>
-						<a href={link.url} class="wv-b6 text-blue-600 underline hover:text-blue-800">
-							{link.label}
+						<a href={resolvePath(path)} class="wv-b6 text-blue-600 underline hover:text-blue-800">
+							{label}
 						</a>
 					</li>
 				{/each}

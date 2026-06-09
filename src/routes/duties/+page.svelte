@@ -60,10 +60,10 @@
 					title="ตรวจสอบและติดตามฝ่ายบริหาร"
 					imageUrl="/images/duties/duty-1.webp"
 					links={[
-						{ label: 'ดูญัตติทั้งหมดของ ส.ก. ชุดที่ 13', url: `/?tab=${EventGroup.Motion}#list` },
+						{ label: 'ดูญัตติทั้งหมดของ ส.ก. ชุดที่ 13', path: `/?tab=${EventGroup.Motion}#list` },
 						{
 							label: 'ดูกระทู้ทั้งหมดของ ส.ก. ชุดที่ 13',
-							url: `/?tab=${EventGroup.Subject}#list`
+							path: `/?tab=${EventGroup.Subject}#list`
 						}
 					]}
 				>
@@ -80,7 +80,10 @@
 					title="เสนอและพิจารณาร่างกฎหมาย"
 					imageUrl="/images/duties/duty-3.webp"
 					links={[
-						{ label: 'ดูข้อบัญญัติทั้งหมดของ ส.ก. ชุดที่ 13', url: `/?tab=${EventGroup.Bill}#list` }
+						{
+							label: 'ดูข้อบัญญัติทั้งหมดของ ส.ก. ชุดที่ 13',
+							path: `/?tab=${EventGroup.Bill}#list`
+						}
 					]}
 				>
 					นอกจากหน้าที่ <strong>พิจารณาและลงมติ</strong> ในร่างข้อบัญญัติที่ ฝ่ายบริหารเสนอแล้ว
@@ -97,7 +100,7 @@
 					links={[
 						{
 							label: 'ดูเรื่องที่ ส.ก. ศึกษาทั้งหมดของ ส.ก. ชุดที่ 13',
-							url: `/?tab=${EventGroup.CommitteeStudy}#list`
+							path: `/?tab=${EventGroup.CommitteeStudy}#list`
 						}
 					]}
 				>
@@ -111,7 +114,7 @@
 					links={[
 						{
 							label: 'ดูการพิจารณางบประมาณทั้งหมดของ ส.ก. ชุดที่ 13',
-							url: `/?tab=${EventGroup.Budget}#list`
+							path: `/?tab=${EventGroup.Budget}#list`
 						}
 					]}
 				>
