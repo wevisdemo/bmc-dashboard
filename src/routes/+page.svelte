@@ -101,8 +101,8 @@
 			หากประเด็นหรือพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือพื้นที่อื่น ๆ ด้วย
 			<strong>ตัวกรองของประเด็นหรือพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
 		</RemarkMessage>
-		<a href="/about" class="wv-b6 text-blue-600 underline hover:text-blue-800">
-			อ่านที่มาและข้อจำกัดข้อมูล
+		<a href="/about#data-methodology" class="wv-b6 text-blue-600 underline hover:text-blue-800">
+			อ่านที่มาและข้อจำกัดของข้อมูล
 		</a>
 	</div>
 

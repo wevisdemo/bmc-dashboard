@@ -49,6 +49,9 @@
 			การแก้ปัญหาในพื้นที่ของคุณในอีก 4 ปีหลังจากนี้
 		</p>
 	</WvParagraphGroup>
+
+	<div id="data-methodology" class="h-0 -translate-y-6"></div>
+
 	<WvParagraphGroup heading="ที่มาและข้อจำกัดของข้อมูล">
 		<h3 class="wv-h7 wv-kondolar">1. ข้อมูลเรื่องที่ ส.ก. เสนอในสภากรุงเทพมหานคร ปี 2565-2569*</h3>
 		<p>
