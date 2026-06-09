@@ -12,6 +12,7 @@
 	import PeopleList from '$lib/event/people-list.svelte';
 	import EventIcon from '$lib/icons/event-icon.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
+	import SeoHead from '$lib/seo-head.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
 
@@ -55,6 +56,8 @@
 		focusedEvent = window.location.hash.slice(1);
 	});
 </script>
+
+<SeoHead title={data.output} />
 
 <div class="px-3 py-2 md:px-8 md:py-3">
 	<a href="/" class="wv-b6 flex flex-row items-center gap-2 hover:text-neutral-600 md:gap-4"

@@ -15,6 +15,7 @@
 	import ButtonLink from '$lib/inputs/button-link.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
 	import Hero from '$lib/sections/hero.svelte';
+	import SeoHead from '$lib/seo-head.svelte';
 	import { allSecondaryTopics, sortSecondaryTopics } from '$lib/sheets/topic.js';
 
 	const DEFAULT_DISTRICT = AdditionalDistrictOption.ALL;
@@ -61,6 +62,8 @@
 		}
 	}
 </script>
+
+<SeoHead />
 
 <Hero>
 	<img class="max-w-40 md:max-w-64" src="/images/logo.webp" alt="WeVis Election" />

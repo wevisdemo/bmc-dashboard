@@ -3,7 +3,10 @@
 	import WvButtonLink from '@wevisdemo/ui/svelte/button-link.svelte';
 	import WvContainer from '@wevisdemo/ui/svelte/container.svelte';
 	import WvParagraphGroup from '@wevisdemo/ui/svelte/paragraph-group.svelte';
+	import SeoHead from '$lib/seo-head.svelte';
 </script>
+
+<SeoHead title="เกี่ยวกับโครงการ" />
 
 {#snippet TextLink(text: string, href: string, external = false)}
 	<a

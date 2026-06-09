@@ -17,11 +17,6 @@
 	let pathname = $derived($page.url.pathname);
 </script>
 
-<svelte:head>
-	<link rel="icon" href="/favicon.png" />
-	<title>BMC Dashboard</title>
-</svelte:head>
-
 <div class="flex h-full min-h-lvh flex-col">
 	<WvNavbar homeHref="/" animated dark>
 		<div class="flex flex-col items-center justify-center md:flex-row md:gap-5">

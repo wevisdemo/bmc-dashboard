@@ -6,11 +6,14 @@
 	import TabView from '$lib/inputs/tab-view.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
 	import Hero from '$lib/sections/hero.svelte';
+	import SeoHead from '$lib/seo-head.svelte';
 
 	const tabs = ['หน้าที่ตาม พ.ร.บ.', 'งานนอกเหนือจากหน้าที่ตาม พ.ร.บ.'];
 
 	const tabContentClass = 'wv-b6 flex flex-col gap-3 p-3 pt-0! md:gap-6 md:p-6';
 </script>
+
+<SeoHead title="ส.ก. ทำอะไรได้บ้าง" />
 
 <Hero>
 	<h1 class="wv-h4 wv-kondolar text-center font-bold">ส.ก. ทำอะไรได้บ้าง</h1>

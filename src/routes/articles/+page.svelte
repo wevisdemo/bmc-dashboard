@@ -1,10 +1,13 @@
 <script lang="ts">
 	import ArticleCard from '$lib/articles/article-card.svelte';
 	import Hero from '$lib/sections/hero.svelte';
+	import SeoHead from '$lib/seo-head.svelte';
 	import { SectionLabel } from '$lib/sheets/article';
 
 	let { data } = $props();
 </script>
+
+<SeoHead title="อ่านบทความเกี่ยวกับ ส.ก." />
 
 <Hero>
 	<div class="flex flex-col gap-2">
