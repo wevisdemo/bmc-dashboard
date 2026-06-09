@@ -239,7 +239,7 @@
 	</WvButtonGroup>
 </WvContainer>
 
-<style>
+<style lang="postcss">
 	@reference '../layout.css';
 
 	ul {
