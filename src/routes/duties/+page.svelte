@@ -6,6 +6,7 @@
 	import TabView from '$lib/inputs/tab-view.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
 	import Hero from '$lib/sections/hero.svelte';
+	import PageFooter from '$lib/sections/page-footer.svelte';
 	import SeoHead from '$lib/seo-head.svelte';
 
 	const tabs = ['หน้าที่ตาม พ.ร.บ.', 'งานนอกเหนือจากหน้าที่ตาม พ.ร.บ.'];
@@ -134,3 +135,18 @@
 		</Tabs.Content>
 	</TabView>
 </div>
+
+<PageFooter
+	pages={[
+		{
+			path: '/#explore',
+			text: 'ภายใต้หน้าที่เหล่านี้ ส.ก. พูดคุย เสนอ ศึกษาอะไรบ้างในสภา ตลอด 4 ปีที่ผ่านมา',
+			buttonLabel: 'เลือกสำรวจรายการต่าง ๆ'
+		},
+		{
+			path: '/articles',
+			text: 'อ่านบทความเกี่ยวกับ ส.ก. และเนื้อหาอื่น ๆ ที่เกี่ยวข้อง',
+			buttonLabel: 'อ่านบทความ'
+		}
+	]}
+/>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ArticleCard from '$lib/articles/article-card.svelte';
 	import Hero from '$lib/sections/hero.svelte';
+	import PageFooter from '$lib/sections/page-footer.svelte';
 	import SeoHead from '$lib/seo-head.svelte';
 	import { SectionLabel } from '$lib/sheets/article';
 
@@ -30,3 +31,18 @@
 		</section>
 	{/each}
 </div>
+
+<PageFooter
+	pages={[
+		{
+			path: '/#explore',
+			text: 'ส.ก. พูดคุย เสนอ ศึกษาอะไรบ้างในสภา ตลอด 4 ปีที่ผ่านมา',
+			buttonLabel: 'เลือกสำรวจรายการต่าง ๆ'
+		},
+		{
+			path: '/duties',
+			text: 'ส.ก. เป็นใคร ? ทำอะไรได้บ้าง ? มาแวะทำความเข้าใจงานต่าง ๆ ของ ส.ก. กันสักหน่อย',
+			buttonLabel: 'ส.ก. ทำอะไรได้บ้าง'
+		}
+	]}
+/>

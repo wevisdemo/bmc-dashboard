@@ -12,6 +12,7 @@
 	import PeopleList from '$lib/event/people-list.svelte';
 	import EventIcon from '$lib/icons/event-icon.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
+	import PageFooter from '$lib/sections/page-footer.svelte';
 	import SeoHead from '$lib/seo-head.svelte';
 	import DistrictTag from '$lib/tags/district-tag.svelte';
 	import TopicTag from '$lib/tags/topic-tag.svelte';
@@ -213,6 +214,21 @@
 		{/each}
 	</div>
 </div>
+
+<PageFooter
+	pages={[
+		{
+			path: '/#explore',
+			text: 'ยังมีอีกหลายเรื่องที่ ส.ก. พูดคุย เสนอ ศึกษา ผ่านกลไกสภา กทม. ตลอด 4 ปีที่ผ่านมา',
+			buttonLabel: 'เลือกสำรวจรายการอื่น ๆ'
+		},
+		{
+			path: '/duties',
+			text: 'ส.ก. เป็นใคร ? ทำอะไรได้บ้าง ? มาแวะทำความเข้าใจงานต่าง ๆ ของ ส.ก. กันสักหน่อย',
+			buttonLabel: 'ส.ก. ทำอะไรได้บ้าง'
+		}
+	]}
+/>
 
 <style>
 	@keyframes blink-shadow {

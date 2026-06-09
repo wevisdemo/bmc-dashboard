@@ -15,6 +15,7 @@
 	import ButtonLink from '$lib/inputs/button-link.svelte';
 	import RemarkMessage from '$lib/remark-message.svelte';
 	import Hero from '$lib/sections/hero.svelte';
+	import PageFooter from '$lib/sections/page-footer.svelte';
 	import SeoHead from '$lib/seo-head.svelte';
 	import { allSecondaryTopics, sortSecondaryTopics } from '$lib/sheets/topic.js';
 
@@ -85,7 +86,7 @@
 
 <div
 	id="explore"
-	class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pb-0 md:gap-6 md:px-4 md:pt-12 lg:pb-3"
+	class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pt-8 pb-0 md:gap-6 md:px-4 md:pt-18"
 >
 	<div class="flex max-w-3xl flex-col items-center gap-3 self-center md:gap-4">
 		<p class="wv-h6 wv-kondolar text-center font-bold">
@@ -160,7 +161,7 @@
 		</div>
 
 		<div
-			class="sticky inset-x-0 bottom-0 z-20 -mx-3 flex max-h-dvh shrink-0 flex-col border-t border-neutral-400 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.07)] lg:relative lg:m-0 lg:max-h-none lg:w-72 lg:border-none lg:p-0 lg:shadow-none"
+			class="sticky inset-x-0 bottom-0 z-20 -mx-3 flex max-h-dvh shrink-0 flex-col border-y border-neutral-400 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.07)] lg:relative lg:m-0 lg:max-h-none lg:w-72 lg:border-none lg:p-0 lg:shadow-none"
 		>
 			<div class="flex flex-col lg:hidden">
 				<button
@@ -209,3 +210,18 @@
 		</div>
 	</div>
 </div>
+
+<PageFooter
+	pages={[
+		{
+			path: '/duties',
+			text: 'ส.ก. เป็นใคร ? ทำอะไรได้บ้าง ? มาแวะทำความเข้าใจงานต่าง ๆ ของ ส.ก. กันสักหน่อย',
+			buttonLabel: 'ส.ก. ทำอะไรได้บ้าง'
+		},
+		{
+			path: '/articles',
+			text: 'อ่านบทความเกี่ยวกับ ส.ก. และเนื้อหาอื่น ๆ ที่เกี่ยวข้อง',
+			buttonLabel: 'อ่านบทความ'
+		}
+	]}
+/>
