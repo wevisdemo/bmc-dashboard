@@ -54,7 +54,7 @@ export function load() {
 	].map((e) => ({
 		id: e.id,
 		title: e.title,
-		districts: e.districts,
+		districts: [...e.districts].sort((a, b) => a.localeCompare(b, 'th')),
 		topics: e.secondaryTopics ? sortSecondaryTopics(e.secondaryTopics) : [],
 		proposer: e.proposer,
 		dateDisplay: e.dateDisplay,

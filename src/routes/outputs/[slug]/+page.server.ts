@@ -80,7 +80,7 @@ export function load({ params }) {
 	return {
 		output: entry.output,
 		topics: topics.filter((t) => outputTopics.has(t.secondary)),
-		districts: [...allDistricts],
+		districts: [...allDistricts].sort((a, b) => a.localeCompare(b, 'th')),
 		events,
 		remarks
 	};
