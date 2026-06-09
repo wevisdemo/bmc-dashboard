@@ -54,5 +54,6 @@
 	"lint-staged": {
 		"*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,svelte}": "oxlint --fix",
 		"*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,svelte,json,jsonc,json5,yaml,yml,toml,css,scss,less,html,md,mdx,graphql}": "oxfmt --write"
-	}
+	},
+	"packageManager": "pnpm@11.5.1"
 }
