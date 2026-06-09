@@ -6,6 +6,7 @@
 	import User from 'carbon-icons-svelte/lib/User.svelte';
 	import { EventGroup } from '$lib/constants';
 	import ReferenceLink from '$lib/inputs/button-link.svelte';
+	import { resolvePath } from '$lib/paths';
 	import type { BillStatus } from '$lib/sheets/bill';
 	import type { BudgetCommittee } from '$lib/sheets/budget-committee';
 	import type { BudgetGroup } from '$lib/sheets/organization-budget';
@@ -122,7 +123,7 @@
 				<div class="flex flex-row items-center gap-2 text-sm">
 					{#if proposer.imageUrl}
 						<img
-							src={proposer.imageUrl}
+							src={resolvePath(proposer.imageUrl)}
 							alt={proposer.name}
 							class="size-8 shrink-0 rounded-full object-cover object-top"
 						/>
@@ -189,7 +190,7 @@
 
 {#if href}
 	<a
-		{href}
+		href={resolvePath(href)}
 		rel="external noopener noreferrer"
 		class="border-2 border-neutral-200 bg-white hover:border-neutral-400 {baseClass}"
 	>

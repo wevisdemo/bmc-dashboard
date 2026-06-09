@@ -3,6 +3,7 @@
 	import WvButtonLink from '@wevisdemo/ui/svelte/button-link.svelte';
 	import WvContainer from '@wevisdemo/ui/svelte/container.svelte';
 	import WvParagraphGroup from '@wevisdemo/ui/svelte/paragraph-group.svelte';
+	import { resolvePath } from '$lib/paths';
 	import SeoHead from '$lib/seo-head.svelte';
 </script>
 
@@ -153,9 +154,10 @@
 		<p>
 			รายการข้อมูลที่มีส่วนของชื่อที่ตรงกัน และ/หรือ ในเอกสารต้นฉบับมีการอ้างอิงถึงกัน
 			จะถูกจัดกลุ่มเพื่อแสดงผลในหน้าเดียวกัน เช่น
-			<a href="/outputs/1iih2p7drl56s"
-				>ญัตติขอให้สภากรุงเทพมหานครตั้งคณะกรรมการวิสามัญศึกษาแนวทางแก้ไขปัญหาสัตว์จรจัดในกรุงเทพมหานคร-คณะกรรมการวิสามัญศึกษาแนวทางแก้ไขปัญหาสัตว์จรจัดในกรุงเทพมหานคร</a
-			>
+			{@render TextLink(
+				'ญัตติขอให้สภากรุงเทพมหานครตั้งคณะกรรมการวิสามัญศึกษาแนวทางแก้ไขปัญหาสัตว์จรจัดในกรุงเทพมหานคร-คณะกรรมการวิสามัญศึกษาแนวทางแก้ไขปัญหาสัตว์จรจัดในกรุงเทพมหานคร',
+				resolvePath('/outputs/1iih2p7drl56s')
+			)}
 		</p>
 	</WvParagraphGroup>
 

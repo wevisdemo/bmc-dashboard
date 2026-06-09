@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolvePath } from '$lib/paths';
 	import type { Snippet } from 'svelte';
 
 	let {
@@ -18,7 +19,7 @@
 	class="flex flex-1 flex-col items-center gap-6 rounded-xl bg-white px-3 py-8 md:flex-row md:gap-8 md:p-8"
 >
 	<img
-		src={imageUrl}
+		src={resolvePath(imageUrl)}
 		alt=""
 		class="size-32 shrink-0 rounded-full bg-neutral-100 object-cover md:size-48"
 	/>

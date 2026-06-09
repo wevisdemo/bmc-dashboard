@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolvePath } from '$lib/paths';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributeAnchorTarget } from 'svelte/elements';
 
@@ -10,7 +11,9 @@
 		className?: string;
 	}
 
-	let { href, children, target, variant = 'filled', className = '' }: Props = $props();
+	let { href: rawHref, children, target, variant = 'filled', className = '' }: Props = $props();
+
+	const href = $derived(rawHref.startsWith('/') ? resolvePath(rawHref) : rawHref);
 </script>
 
 <a

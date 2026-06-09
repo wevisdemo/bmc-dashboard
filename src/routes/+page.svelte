@@ -13,6 +13,7 @@
 	import TabList from '$lib/explore/tab-list.svelte';
 	import TopicOverview from '$lib/explore/topic-overview.svelte';
 	import ButtonLink from '$lib/inputs/button-link.svelte';
+	import { resolvePath } from '$lib/paths';
 	import RemarkMessage from '$lib/remark-message.svelte';
 	import Hero from '$lib/sections/hero.svelte';
 	import PageFooter from '$lib/sections/page-footer.svelte';
@@ -67,7 +68,7 @@
 <SeoHead />
 
 <Hero>
-	<img class="max-w-40 md:max-w-64" src="/images/logo.webp" alt="WeVis Election" />
+	<img class="max-w-40 md:max-w-64" src={resolvePath('/images/logo.webp')} alt="WeVis Election" />
 	<div class="flex flex-col items-center gap-1">
 		<h1 class="wv-h4 wv-kondolar text-center font-bold">เลือกตั้ง กทม. ไม่ได้มีแค่ผู้ว่าฯ</h1>
 		<p class="wv-b3 wv-kondolar font-bold">ส.ก. เสนออะไรในสภา ให้ข้อมูลช่วยเล่า</p>
@@ -101,7 +102,10 @@
 			หากประเด็นหรือพื้นที่ที่คุณเลือกมีรายการที่เกี่ยวข้องกับประเด็นหรือพื้นที่อื่น ๆ ด้วย
 			<strong>ตัวกรองของประเด็นหรือพื้นที่อื่น ๆ นั้นจะถูกแสดงโดยอัตโนมัติ</strong>
 		</RemarkMessage>
-		<a href="/about#data-methodology" class="wv-b6 text-blue-600 underline hover:text-blue-800">
+		<a
+			href={resolvePath('/about#data-methodology')}
+			class="wv-b6 text-blue-600 underline hover:text-blue-800"
+		>
 			อ่านที่มาและข้อจำกัดของข้อมูล
 		</a>
 	</div>

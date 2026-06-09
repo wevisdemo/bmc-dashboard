@@ -16,6 +16,12 @@
 - [Runed](https://runed.dev/) and [Zod](https://zod.dev/)
 - [Sheethuahua](https://punchupworld.github.io/sheethuahua/)
 
+## Environment Variables
+
+| Variable          | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| `PUBLIC_BASE_URL` | Base URL for OG images and base path derivation |
+
 ## Usage
 
 Requirements: [Node.js](https://nodejs.org/) 24+, [pnpm](https://pnpm.io/)

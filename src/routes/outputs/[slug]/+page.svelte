@@ -11,6 +11,7 @@
 	import OrganizationBudgets from '$lib/event/organization-budgets.svelte';
 	import PeopleList from '$lib/event/people-list.svelte';
 	import EventIcon from '$lib/icons/event-icon.svelte';
+	import { resolvePath } from '$lib/paths';
 	import RemarkMessage from '$lib/remark-message.svelte';
 	import PageFooter from '$lib/sections/page-footer.svelte';
 	import SeoHead from '$lib/seo-head.svelte';
@@ -61,7 +62,9 @@
 <SeoHead title={data.output} />
 
 <div class="px-3 py-2 md:px-8 md:py-3">
-	<a href="/" class="wv-b6 flex flex-row items-center gap-2 hover:text-neutral-600 md:gap-4"
+	<a
+		href={resolvePath('/')}
+		class="wv-b6 flex flex-row items-center gap-2 hover:text-neutral-600 md:gap-4"
 		><ChevronLeft /> สำรวจเรื่องที่ ส.ก. พูดคุย</a
 	>
 </div>
@@ -206,7 +209,10 @@
 						</div>
 					{/if}
 
-					<a class="wv-b6 self-end text-blue-600 hover:underline" href="/?tab={group}#list"
+					<a
+						class="wv-b6 self-end text-blue-600 hover:underline"
+						href={resolvePath(`/?tab=${group}#list`)}
+					>
 						>ดู{group}ทั้งหมดของ ส.ก. ชุดที่ 13</a
 					>
 				</section>

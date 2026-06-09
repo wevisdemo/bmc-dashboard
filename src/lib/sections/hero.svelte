@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolvePath } from '$lib/paths';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -11,7 +12,7 @@
 
 <section
 	class="relative w-full overflow-hidden bg-cover bg-center bg-no-repeat"
-	style:background-image="url('/images/hero-bg.webp')"
+	style:background-image="url({resolvePath('/images/hero-bg.webp')})"
 >
 	<div
 		class="absolute inset-x-0 top-0 h-48 bg-linear-to-b from-neutral-100 to-transparent md:h-96"
