@@ -1,11 +1,13 @@
 # BMC Dashboard
 
+Explore the topics discussed, studied, and proposed by the Bangkok Metropolitan Council (BMC) No. 13.
+
 ## Deployments
 
-| Name       | URL                              | Host/Pipeline    |
-| ---------- | -------------------------------- | ---------------- |
-| Production | -                                | -                |
-| Staging    | https://bmc-dashboard.pages.dev/ | Cloudflare Pages |
+| Name       | URL                             | Host/Pipeline                     |
+| ---------- | ------------------------------- | --------------------------------- |
+| Production | https://wevis.info/bmcdashboard | Github Actions + SSH              |
+| Staging    | https://bmc-dashboard.pages.dev | Github Actions + Cloudflare Pages |
 
 ## Tech Stack
 
@@ -54,6 +56,8 @@ pnpm run format
 - [Data Sheets](https://docs.google.com/spreadsheets/d/1vm2kIqOrKyPjWvlK9GjMAo9mFTcZEK1GSkJ3gM1gNb8/edit?usp=sharing)
 - [Figma](https://www.figma.com/design/aSpOB74URAuZqIcFcq2H9q/BMC-Dashboard)
 
-## License
+## Licenses
 
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+Regarding the data, the team intends to open it as Open Data under the [Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/) terms. This means you can use, modify, and build upon the data, but it cannot be used for commercial purposes or to seek profit from the work, and credit must be given to WeVis.
+
+Regarding the source code, the team intends to develop every project as Open Source under the [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) terms. This means you can use, modify, and build upon the work, but it cannot be used for commercial purposes or to seek profit from the work. You must provide notice and credit to the work's owner, and the resulting work must be under the same Creative Commons license conditions as the original. WeVis Ltd. and Punch Up Ltd. are joint licensors.
