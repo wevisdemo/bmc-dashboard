@@ -20,12 +20,13 @@
 <div class="flex h-full min-h-lvh flex-col">
 	<WvNavbar homeHref={resolve('/')} animated dark>
 		<div class="flex flex-col items-center justify-center md:flex-row md:gap-5">
-			{#each navLinks as { href, label } (href)}
+			{#each navLinks as link (link.href)}
+				{@const href = resolve(link.href)}
 				<a
-					href={resolve(href)}
-					class="wv-b7 p-3 md:p-0 {pathname === href ? 'underline' : 'hover:underline'}"
+					{href}
+					class="wv-ibmplex wv-b7 p-3 md:p-0 {pathname === href ? 'underline' : 'hover:underline'}"
 				>
-					{label}
+					{link.label}
 				</a>
 			{/each}
 		</div>
