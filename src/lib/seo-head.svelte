@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { resolvePath } from '$lib/paths';
 
-	const DEFAULT_DESCRIPTION =
-		'รู้จัก ส.ก. และสำรวจเรื่องที่พวกเขาพูดคุย ศึกษา และเสนอในสภาระหว่างปี 2565-2569';
+	const DEFAULT_DESCRIPTION = 'สำรวจเรื่องที่ ส.ก. ชุดที่ 13 พูดคุย ศึกษา และเสนอในสภา กทม.';
 	const baseUrl = (import.meta.env.PUBLIC_BASE_URL || 'https://bmc-dashboard.pages.dev').replace(
 		/\/$/,
 		''
@@ -32,4 +31,21 @@
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content={ogImage} />
 	<link rel="icon" href={resolvePath('/favicon.png')} />
+
+	{#if import.meta.env.MODE === 'production'}
+		<script async src="https://analytics.punchup.world/js/pa-0Bkl4SGf1i6HFNmW9M1yV.js"></script>
+		<script>
+			((window.plausible =
+				window.plausible ||
+				function () {
+					(plausible.q = plausible.q || []).push(arguments);
+				}),
+				(plausible.init =
+					plausible.init ||
+					function (i) {
+						plausible.o = i || {};
+					}));
+			plausible.init();
+		</script>
+	{/if}
 </svelte:head>
