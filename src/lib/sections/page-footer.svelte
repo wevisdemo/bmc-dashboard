@@ -3,12 +3,11 @@
 	import WvSharer from '@wevisdemo/ui/svelte/sharer.svelte';
 	import { ArrowUpRight } from 'carbon-icons-svelte';
 	import ButtonLink from '$lib/inputs/button-link.svelte';
-	import { resolvePath } from '$lib/paths';
 
 	let shareUrl = $derived(`${page.url.origin}${page.url.pathname}`);
 
 	interface PageLink {
-		path: string;
+		href: string;
 		text: string;
 		buttonLabel: string;
 	}
@@ -29,10 +28,10 @@
 	<div class="h-px w-full bg-neutral-300"></div>
 
 	<div class="flex w-full max-w-4xl flex-col justify-between md:flex-row">
-		{#each pages as { path, text, buttonLabel } (path)}
+		{#each pages as { href, text, buttonLabel } (href)}
 			<div class="flex flex-1 flex-col items-center justify-between gap-2 p-4 md:gap-4">
 				<p class="wv-b5 max-w-sm text-center">{text}</p>
-				<ButtonLink variant="outlined" href={resolvePath(path)}
+				<ButtonLink variant="outlined" {href}
 					>{buttonLabel} <ArrowUpRight class="ml-1" /></ButtonLink
 				>
 			</div>

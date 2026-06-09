@@ -12,6 +12,9 @@ const basePath = (() => {
 	}
 })();
 
+console.log(`Base URL: ${process.env.PUBLIC_BASE_URL}`);
+console.log(`Base path: ${basePath || '/'}`);
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	compilerOptions: {
@@ -21,7 +24,8 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		paths: {
-			base: basePath
+			base: basePath,
+			relative: false
 		}
 	}
 };
