@@ -123,7 +123,8 @@
 																{#snippet icon(props)}
 																	<Information {...props} />
 																{/snippet}
-																พรรคที่ ส.ก. สังกัด อ้างอิงตาม พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565
+																พรรคที่ ส.ก. สังกัด อ้างอิงตาม พรรค ณ วันที่เริ่มดำรงตำแหน่ง ส.ก. ชุดที่
+																13
 															</RemarkMessage>
 															<PeopleList members={coProposers} />
 														</AccordionItem>
