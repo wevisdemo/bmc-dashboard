@@ -42,10 +42,12 @@
 				<div class="flex justify-end">
 					<BudgetTag
 						{variant}
-						value="{((Math.abs(budget.changes) * 100) / budget.draft).toLocaleString('TH-th', {
-							minimumFractionDigits: 2,
-							maximumFractionDigits: 2
-						})}%"
+						value="{budget.draft === 0
+							? '0.00'
+							: ((Math.abs(budget.changes) * 100) / budget.draft).toLocaleString('TH-th', {
+									minimumFractionDigits: 2,
+									maximumFractionDigits: 2
+								})}%"
 					/>
 				</div>
 			</li>
