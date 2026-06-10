@@ -26,11 +26,11 @@
 	let labelId = $derived(`${inputId}-label`);
 </script>
 
-<div class="flex items-center space-x-2 {className}">
+<div class="flex shrink-0 items-center space-x-2 {className}">
 	<Checkbox.Root
 		id={inputId}
 		aria-labelledby={labelId}
-		class="flex size-4 overflow-hidden rounded-xs border border-black p-0"
+		class="flex size-4 rounded-xs border border-black p-0"
 		{name}
 		{checked}
 		{indeterminate}
@@ -38,8 +38,7 @@
 	>
 		{#snippet children({ checked: c, indeterminate: i })}
 			<div
-				class="text-background inline-flex h-full w-full items-center justify-center text-white {i ||
-				c
+				class="text-background flex h-full w-full items-center justify-center text-white {i || c
 					? 'bg-black'
 					: ''}"
 			>

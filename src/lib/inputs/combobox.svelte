@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CaretDown from 'carbon-icons-svelte/lib/CaretDown.svelte';
-	import CheckmarkFilled from 'carbon-icons-svelte/lib/CheckmarkFilled.svelte';
+	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
 
 	interface Item {
 		value: string;
@@ -101,7 +101,7 @@
 						{item.label}
 						{#if item.value === value}
 							<div class="ml-auto">
-								<CheckmarkFilled />
+								<Checkmark />
 							</div>
 						{/if}
 					</button>
