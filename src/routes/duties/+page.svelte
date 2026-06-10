@@ -11,7 +11,7 @@
 
 	const tabs = ['หน้าที่ตาม พ.ร.บ.', 'งานนอกเหนือจากหน้าที่ตาม พ.ร.บ.'];
 
-	const tabContentClass = 'wv-b6 flex flex-col gap-3 p-3 pt-0! md:gap-6 md:p-6';
+	const tabContentClass = 'wv-b6 flex flex-col gap-3 p-5 pt-0! md:gap-6 md:p-6';
 </script>
 
 <SeoHead
@@ -51,10 +51,10 @@
 	</RemarkMessage>
 </Hero>
 
-<div class="mx-auto max-w-4xl md:py-12">
-	<TabView {tabs} value={tabs[0]} triggerClass="flex-1">
+<div class="mx-auto max-w-4xl p-5 md:pt-12">
+	<TabView {tabs} value={tabs[0]} triggerClass="w-1/2">
 		{#snippet trigger(value)}
-			<h4 class="wv-h9 font-bold whitespace-nowrap">{value}</h4>
+			<h4 class="wv-h9 font-bold">{value}</h4>
 		{/snippet}
 
 		<Tabs.Content value={tabs[0]}>

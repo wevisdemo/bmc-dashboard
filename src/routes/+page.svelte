@@ -69,14 +69,16 @@
 
 <Hero>
 	<img class="max-w-40 md:max-w-64" src={resolvePath('/images/logo.webp')} alt="WeVis Election" />
-	<div class="flex flex-col items-center gap-1">
-		<h1 class="wv-h4 wv-kondolar text-center font-bold">เลือกตั้ง กทม. ไม่ได้มีแค่ผู้ว่าฯ</h1>
+	<div class="flex flex-col items-center gap-1 text-center">
+		<h1 class="wv-h4 wv-kondolar font-bold">
+			เลือกตั้ง กทม. <span class="text-nowrap">ไม่ได้มีแค่ผู้ว่าฯ</span>
+		</h1>
 		<p class="wv-b3 wv-kondolar font-bold">ส.ก. เสนออะไรในสภา ให้ข้อมูลช่วยเล่า</p>
-		<p class="wv-b6 mt-2 text-center text-neutral-500">
+		<p class="wv-b6 mt-2 text-neutral-500">
 			*ส.ก. ชุดที่ 13 (6 มิ.ย. 2565 - 21 พ.ค. 2569) ข้อมูล ณ วันที่ 22 พ.ค. 2569
 		</p>
 	</div>
-	<div class="grid w-full max-w-96 grid-cols-1 gap-1 md:grid-cols-2 md:gap-3">
+	<div class="grid w-full max-w-96 grid-cols-1 gap-2 md:grid-cols-2 md:gap-3">
 		<ButtonLink href="#explore" className="md:col-span-2"
 			>สำรวจเรื่องที่ ส.ก. เสนอในสภา <ArrowDown class="ml-2" /></ButtonLink
 		>
@@ -87,7 +89,7 @@
 
 <div
 	id="explore"
-	class="mx-auto flex max-w-7xl flex-col gap-4 p-3 pt-8 pb-0 md:gap-6 md:px-4 md:pt-18"
+	class="mx-auto flex max-w-7xl flex-col gap-4 p-5 pt-8 pb-0 md:gap-6 md:px-4 md:pt-18"
 >
 	<div class="flex max-w-3xl flex-col items-center gap-3 self-center md:gap-4">
 		<p class="wv-h6 wv-kondolar text-center font-bold">
@@ -110,7 +112,7 @@
 		</a>
 	</div>
 
-	<div class="flex flex-col md:gap-4 lg:flex-row-reverse">
+	<div class="flex flex-col md:gap-6 lg:flex-row-reverse">
 		<div class="flex min-w-0 flex-1 flex-col gap-3">
 			<div class="hidden flex-col gap-2 lg:flex">
 				<p class="wv-b6">รายการทั้งหมด <strong>{filteredEvents.length}</strong></p>
@@ -165,11 +167,11 @@
 		</div>
 
 		<div
-			class="sticky inset-x-0 bottom-0 z-20 -mx-3 flex max-h-dvh shrink-0 flex-col border-y border-neutral-400 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.07)] lg:relative lg:m-0 lg:max-h-none lg:w-72 lg:border-none lg:p-0 lg:shadow-none"
+			class="sticky inset-x-0 bottom-0 z-20 -mx-5 flex max-h-dvh shrink-0 flex-col border-y border-neutral-400 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.07)] lg:relative lg:m-0 lg:max-h-none lg:w-72 lg:border-none lg:p-0 lg:shadow-none"
 		>
 			<div class="flex flex-col lg:hidden">
 				<button
-					class="flex flex-row items-center gap-2 p-2"
+					class="flex flex-row items-center gap-2 px-4 py-2"
 					onclick={() => (isMobileFilterExpanded = !isMobileFilterExpanded)}
 				>
 					<SettingsAdjust />
@@ -184,7 +186,7 @@
 				{#if !isMobileFilterExpanded}
 					<div
 						transition:slide={{ axis: 'y', delay: 50, duration: 100 }}
-						class="flex flex-1 flex-col gap-2 overflow-hidden p-2"
+						class="flex flex-1 flex-col gap-2 overflow-hidden px-4 py-2"
 					>
 						<p class="wv-b6">รายการทั้งหมด <strong>{filteredEvents.length}</strong></p>
 						<FilterChipsBar

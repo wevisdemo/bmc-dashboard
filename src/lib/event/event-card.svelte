@@ -74,7 +74,7 @@
 </script>
 
 {#snippet content()}
-	<div class="flex flex-col gap-3 p-3 md:gap-4 md:p-4 md:px-8">
+	<div class="flex flex-col gap-3 p-4 md:gap-5 md:px-8">
 		{#if (topics?.length ?? 0) + (districts?.length ?? 0) > 0 || status}
 			<div class="flex flex-row flex-wrap items-start gap-2">
 				<div class="flex flex-1 flex-wrap gap-2">
@@ -161,9 +161,9 @@
 	{#if reference}
 		{@const isBudget = typeof reference !== 'string'}
 		<div
-			class="flex flex-col gap-2 bg-neutral-300 p-3 md:px-8 md:py-4 {isBudget
+			class="flex flex-col gap-3 bg-neutral-300 p-4 md:px-8 {isBudget
 				? ''
-				: 'items-center md:flex-row'}"
+				: 'items-end md:flex-row md:items-center'}"
 		>
 			<div class="flex flex-1 flex-row gap-1">
 				<Information class="mt-0.5" />

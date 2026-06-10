@@ -69,7 +69,7 @@
 	>
 </div>
 
-<div class="bg-sky-100 p-3 md:px-5 md:py-8">
+<div class="bg-sky-100 p-5 md:py-8">
 	<div class="mx-auto flex w-full max-w-5xl flex-col gap-3 md:gap-4">
 		<div class="flex flex-wrap items-center gap-2">
 			{#each data.topics as topic (topic.secondary)}
@@ -85,7 +85,7 @@
 	</div>
 </div>
 
-<div class="mx-auto flex max-w-4xl flex-col gap-6 p-3 md:gap-8 md:px-5 md:py-8">
+<div class="mx-auto flex max-w-4xl flex-col gap-6 p-5 pb-0 md:gap-8 md:pt-8">
 	<h2 class="wv-h9 wv-kondolar border-b border-neutral-400 pb-2 font-bold text-neutral-500">
 		บทบาทในสภาของ ส.ก. ที่เกี่ยวข้องกับเรื่องนี้
 	</h2>

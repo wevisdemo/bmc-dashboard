@@ -25,7 +25,7 @@
 
 <Tabs.Root bind:value {onValueChange}>
 	<Tabs.List
-		class="sticky top-0 z-10 flex flex-row gap-2 overflow-x-auto border-b-12 border-neutral-100 bg-white px-3 pt-2 md:border-b-24 md:p-0 {listClass}"
+		class="sticky top-0 z-10 flex flex-row gap-2 overflow-x-auto border-b-20 border-neutral-100 bg-white pt-2 md:border-b-24 {listClass}"
 	>
 		{#each tabs as tabValue (tabValue)}
 			<Tabs.Trigger

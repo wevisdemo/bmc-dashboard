@@ -20,10 +20,10 @@
 	</div>
 </Hero>
 
-<div class="mx-auto flex max-w-5xl flex-col gap-10 px-3 py-8 md:gap-16 md:py-12">
+<div class="mx-auto flex max-w-5xl flex-col gap-10 px-5 pt-8 md:gap-16 md:pt-12">
 	{#each data.sections as { section, articles }}
-		<section>
-			<h2 class="wv-h5 wv-kondolar mb-3 border-b border-neutral-300 font-bold md:mb-6">
+		<section class="flex flex-col gap-6">
+			<h2 class="wv-h5 wv-kondolar border-b border-neutral-300 pb-2 font-bold">
 				{SectionLabel[section]}
 			</h2>
 			<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">

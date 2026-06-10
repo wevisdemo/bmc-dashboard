@@ -28,9 +28,9 @@
 	let allSecondaries = $derived(topicGroups.flatMap((g) => g.secondaries));
 </script>
 
-<div class="flex flex-col gap-2 px-2 md:gap-3 lg:px-0 {className}">
+<div class="flex flex-col gap-2 px-4 md:gap-3 lg:px-0 {className}">
 	<div>
-		<h4 class="wv-b5 mt-2 font-bold md:m-0">สำรวจตามพื้นที่</h4>
+		<h4 class="wv-b5 mt-4 font-bold md:m-0">สำรวจตามพื้นที่</h4>
 		<p class="wv-b6 text-neutral-500">ระบุจากชื่อเขตหรือสถานที่ในชื่อรายการ</p>
 	</div>
 
@@ -65,7 +65,7 @@
 		>
 	</div>
 
-	<div class="wv-b6 -mx-2 flex flex-col gap-1.5 overflow-y-auto px-2 pb-4">
+	<div class="wv-b6 -mx-2 flex flex-col gap-1.5 overflow-y-auto px-2 pb-6">
 		{#each topicGroups as { main, secondaries } (main)}
 			{@const mainChecked =
 				secondaries.length > 0 && secondaries.every((s) => selectedSecondaryTopics.includes(s))}

@@ -24,7 +24,7 @@
 </script>
 
 <Tabs.Content {value}>
-	<div class="wv-b6 flex flex-row gap-1 px-3 md:px-5">
+	<div class="wv-b6 flex flex-row gap-1 px-5 md:px-6">
 		<Information class="mt-0.5" />
 		<div class="flex-1">
 			<span class="font-bold">คำอธิบาย</span>
@@ -35,7 +35,7 @@
 	</div>
 
 	{#if displayEvents.length}
-		<div class="flex flex-col gap-3 p-3 md:gap-4 md:px-6">
+		<div class="flex flex-col gap-3 p-5 md:gap-4 md:p-6">
 			{#each displayEvents as event (event.id)}
 				<EventCard {...event} />
 			{/each}

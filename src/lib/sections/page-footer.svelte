@@ -19,7 +19,7 @@
 	let { pages }: Props = $props();
 </script>
 
-<div class="flex flex-col items-center gap-10 px-3 py-10 md:gap-16 md:px-4 md:py-16">
+<div class="flex flex-col items-center gap-8 px-5 py-8 md:gap-16 md:px-4 md:py-16">
 	<div class="flex flex-col items-center gap-2">
 		<span class="wv-b5 font-bold">แชร์หน้านี้</span>
 		<WvSharer url={shareUrl} hideLabel outline />

@@ -19,7 +19,7 @@
 <a
 	{href}
 	{target}
-	class="flex flex-row items-center justify-center gap-1 rounded-lg border border-black p-2 font-bold md:px-4 {variant ===
+	class="wv-b6 flex flex-row items-center justify-center gap-1 rounded-lg border border-black px-4 py-2 font-bold md:py-2.5 {variant ===
 	'filled'
 		? 'bg-black text-white hover:bg-neutral-700'
 		: 'bg-transparent text-black hover:bg-neutral-100'} {className}">{@render children()}</a

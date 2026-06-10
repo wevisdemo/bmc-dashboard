@@ -20,7 +20,7 @@
 	const tabs = Object.values(EventGroup);
 </script>
 
-<div id="list" class="-mx-3 md:m-0" bind:this={container}>
+<div id="list" class="-mx-5 md:m-0" bind:this={container}>
 	<TabView {tabs} bind:value={tab} onValueChange={ontabchange}>
 		{#snippet trigger(value)}
 			<h4 class="wv-h9 font-bold whitespace-nowrap">{value}</h4>

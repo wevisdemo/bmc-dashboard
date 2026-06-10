@@ -7,7 +7,7 @@
 
 <a
 	href={article.link}
-	class="flex flex-col gap-3 rounded-xl border-2 border-neutral-200 bg-neutral-100 p-3 hover:border-neutral-300 md:gap-4 md:p-4"
+	class="flex flex-col gap-4 rounded-xl border-2 border-neutral-200 bg-neutral-100 p-4 hover:border-neutral-300"
 >
 	<img src={article.image} alt="" class="h-48 w-full object-cover" />
 
