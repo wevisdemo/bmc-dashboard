@@ -33,7 +33,7 @@
 			text: 'black',
 			background: '#f5f5f5',
 			foreground: '#828282',
-			label: 'รอเข้าสภา'
+			label: 'ไม่ถูกบรรจุวาระ'
 		}
 	};
 
