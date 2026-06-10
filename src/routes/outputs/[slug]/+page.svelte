@@ -65,7 +65,7 @@
 	<a
 		href={resolvePath('/')}
 		class="wv-b6 flex flex-row items-center gap-2 hover:text-neutral-600 md:gap-4"
-		><ChevronLeft /> สำรวจเรื่องที่ ส.ก. พูดคุย</a
+		><ChevronLeft /> สำรวจเรื่องที่ ส.ก. เสนอ</a
 	>
 </div>
 
@@ -162,7 +162,7 @@
 																	</li>
 																	<li>
 																		พรรคที่ ส.ก. สังกัด อ้างอิงตาม <strong
-																			>พรรค ณ วันที่ลงสมัครรับเลือกตั้งปี 2565</strong
+																			>พรรค ณ วันที่เริ่มดำรงตำแหน่ง ส.ก. ชุดที่ 13</strong
 																		>
 																	</li>
 																</ul>
@@ -213,7 +213,7 @@
 						class="wv-b6 self-end text-blue-600 hover:underline"
 						href={resolvePath(`/?tab=${group}#list`)}
 					>
-						>ดู{group}ทั้งหมดของ ส.ก. ชุดที่ 13</a
+						ดู{group}ทั้งหมดของ ส.ก. ชุดที่ 13</a
 					>
 				</section>
 			{/if}

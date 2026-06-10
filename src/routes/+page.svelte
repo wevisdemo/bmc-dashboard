@@ -73,7 +73,7 @@
 		<h1 class="wv-h4 wv-kondolar text-center font-bold">เลือกตั้ง กทม. ไม่ได้มีแค่ผู้ว่าฯ</h1>
 		<p class="wv-b3 wv-kondolar font-bold">ส.ก. เสนออะไรในสภา ให้ข้อมูลช่วยเล่า</p>
 		<p class="wv-b6 mt-2 text-center text-neutral-500">
-			*ข้อมูลของ ส.ก. ชุดที่ 13 (6 มิ.ย. 65 - 21 พ.ค. 69) ข้อมูล ณ วันที่ 22 พ.ค. 69
+			*ส.ก. ชุดที่ 13 (6 มิ.ย. 2565 - 21 พ.ค. 2569) ข้อมูล ณ วันที่ 22 พ.ค. 2569
 		</p>
 	</div>
 	<div class="grid w-full max-w-96 grid-cols-1 gap-1 md:grid-cols-2 md:gap-3">
@@ -145,7 +145,7 @@
 				</div>
 				<div class="wv-b6 flex flex-col gap-3 p-3 md:px-4">
 					<div class="flex flex-col gap-2">
-						<h3 class="wv-b3 wv-kondolar font-bold">การกระจายตามประเด็น</h3>
+						<h3 class="wv-b3 wv-kondolar font-bold">ประเด็นที่พบ</h3>
 						<p class="font-bold">• {params.district}</p>
 					</div>
 					<TopicOverview
@@ -173,7 +173,7 @@
 					onclick={() => (isMobileFilterExpanded = !isMobileFilterExpanded)}
 				>
 					<SettingsAdjust />
-					<span class="wv-b6 flex-1 text-left">คัดกรองเขตพื้นที่และประเด็น</span>
+					<span class="wv-b6 flex-1 text-left">คัดกรองพื้นที่และประเด็น</span>
 					<CaretUp
 						class="transition-transform duration-200 {isMobileFilterExpanded
 							? 'rotate-180'

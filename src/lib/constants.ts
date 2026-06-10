@@ -8,5 +8,5 @@ export enum EventGroup {
 	Motion = 'ญัตติ',
 	CommitteeStudy = 'เรื่องที่ศึกษา',
 	Bill = 'ข้อบัญญัติ',
-	Budget = 'พิจารณางบ'
+	Budget = 'พิจารณางบฯ'
 }
