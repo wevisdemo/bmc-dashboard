@@ -14,7 +14,10 @@
 	const tabContentClass = 'wv-b6 flex flex-col gap-3 p-3 pt-0! md:gap-6 md:p-6';
 </script>
 
-<SeoHead title="ส.ก. ทำอะไรได้บ้าง" />
+<SeoHead
+	title="ส.ก. ทำอะไรได้บ้าง"
+	description="รู้จัก ส.ก. และสำรวจเรื่องที่พวกเขาพูดคุย ศึกษา และเสนอในสภา กทม."
+/>
 
 <Hero>
 	<h1 class="wv-h4 wv-kondolar text-center font-bold">ส.ก. ทำอะไรได้บ้าง</h1>

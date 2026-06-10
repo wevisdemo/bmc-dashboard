@@ -8,7 +8,10 @@
 	let { data } = $props();
 </script>
 
-<SeoHead title="อ่านบทความเกี่ยวกับ ส.ก." />
+<SeoHead
+	title="อ่านบทความเกี่ยวกับ ส.ก."
+	description="รู้จัก ส.ก. และสำรวจเรื่องที่พวกเขาพูดคุย ศึกษา และเสนอในสภา กทม."
+/>
 
 <Hero>
 	<div class="flex flex-col gap-2">
