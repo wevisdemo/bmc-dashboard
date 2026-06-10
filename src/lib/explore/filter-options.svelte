@@ -12,6 +12,7 @@
 		selectedSecondaryTopics: string[];
 		ondistrictchange?: () => void;
 		ontopicschange?: () => void;
+		id?: string;
 		class?: string;
 	}
 
@@ -22,13 +23,14 @@
 		selectedSecondaryTopics = $bindable([]),
 		ondistrictchange,
 		ontopicschange,
+		id,
 		class: className = ''
 	}: Props = $props();
 
 	let allSecondaries = $derived(topicGroups.flatMap((g) => g.secondaries));
 </script>
 
-<div class="flex flex-col gap-2 px-4 md:gap-3 lg:px-0 {className}">
+<div {id} class="flex flex-col gap-2 px-4 md:gap-3 lg:px-0 {className}">
 	<div>
 		<h4 class="wv-b5 mt-4 font-bold md:m-0">สำรวจตามพื้นที่</h4>
 		<p class="wv-b6 text-neutral-500">ระบุจากชื่อเขตหรือสถานที่ในชื่อรายการ</p>

@@ -30,6 +30,7 @@
 	);
 
 	const selectedItem = $derived(items.find((item) => item.value === value));
+	const listboxId = $derived(`${name}-listbox`);
 
 	function selectItem(item: Item) {
 		value = item.value;
@@ -74,7 +75,11 @@
 		placeholder={selectedItem?.label ?? value}
 		type="text"
 		class="wv-b6 w-full rounded-xs border border-black p-2 placeholder:text-black"
+		role="combobox"
 		aria-label={label}
+		aria-expanded={open}
+		aria-controls={listboxId}
+		aria-autocomplete="list"
 		oninput={() => (open = true)}
 		onfocus={() => (open = true)}
 		onkeydown={handleKeydown}
@@ -85,6 +90,7 @@
 	{#if open}
 		<div
 			bind:this={dropdownElement}
+			id={listboxId}
 			class="absolute top-full z-50 h-96 max-h-60 w-full overflow-y-auto border bg-white"
 			role="listbox"
 			aria-label={label}

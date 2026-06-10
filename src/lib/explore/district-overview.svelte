@@ -42,6 +42,7 @@
 	let maxDistrictCount = $derived(Math.max(...districtCountMap.values(), 1));
 
 	let colorDomain = $derived(scaleLinear([minDistrictCount, maxDistrictCount], [0, 1]));
+	const listboxId = 'district-map-listbox';
 
 	const projection = geoMercator().fitSize(
 		[CANVAS_WIDTH, CANVAS_HEIGHT],
@@ -61,26 +62,46 @@
 		hoveredDistrict ? (districtCountMap.get(hoveredDistrict.name) ?? 0) : null
 	);
 
+	function handlePathKeydown(e: KeyboardEvent, name: string) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			selectedDistrict = selectedDistrict === name ? AdditionalDistrictOption.ALL : name;
+			ondistrictchange?.();
+		}
+	}
+
 	function getDistrictName(feature: Feature): string {
 		return feature.properties?.dname.replace('เขต', '');
 	}
 </script>
 
 <div class="flex flex-col">
-	<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<svg
 		viewBox="0 0 {CANVAS_WIDTH} {CANVAS_HEIGHT}"
+		role="group"
+		aria-label="แผนที่เขตกรุงเทพมหานคร แสดงจำนวนการเสนอประเด็นตามเขต"
 		class="w-full"
 		onclick={() => {
 			selectedDistrict = AdditionalDistrictOption.ALL;
 			ondistrictchange?.();
 		}}
+		onkeydown={(e) => {
+			if (e.key === 'Escape') {
+				selectedDistrict = AdditionalDistrictOption.ALL;
+				ondistrictchange?.();
+			}
+		}}
 	>
+		<title>แผนที่เขตกรุงเทพมหานคร</title>
+		<desc>แผนที่แสดงจำนวนการเสนอประเด็นในสภากรุงเทพมหานครแต่ละเขต เลือกเขตเพื่อกรองข้อมูล</desc>
 		{#each districts as { feature, name, centroid } (name)}
-			<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
 			<path
 				d={pathGen(feature)}
-				class="stroke-gray-400 stroke-[0.5] transition-colors"
+				role="button"
+				tabindex="0"
+				aria-label="เขต{name} ({districtCountMap.get(name) ?? 0} รายการ)"
+				class="stroke-gray-400 stroke-[0.5] transition-colors focus:outline-none focus-visible:stroke-blue-600 focus-visible:stroke-2"
 				style="fill: {interpolateYlGn(
 					colorDomain(districtCountMap.get(name) ?? minDistrictCount)
 				)};"
@@ -91,6 +112,7 @@
 					selectedDistrict = selectedDistrict === name ? AdditionalDistrictOption.ALL : name;
 					ondistrictchange?.();
 				}}
+				onkeydown={(e) => handlePathKeydown(e, name)}
 			/>
 		{/each}
 		{#if selectedFeature}

@@ -177,6 +177,8 @@
 			<div class="flex flex-col lg:hidden">
 				<button
 					class="flex flex-row items-center gap-2 px-4 py-2"
+					aria-expanded={isMobileFilterExpanded}
+					aria-controls="mobile-filter-panel"
 					onclick={() => (isMobileFilterExpanded = !isMobileFilterExpanded)}
 				>
 					<SettingsAdjust />
@@ -208,6 +210,7 @@
 			</div>
 
 			<FilterOptions
+				id="mobile-filter-panel"
 				class="sticky top-4 flex transition-[max-height] duration-250 ease-in-out md:overflow-y-visible lg:h-[calc(100dvh-1rem)] lg:max-h-none {isMobileFilterExpanded
 					? 'max-h-lvh overflow-y-auto'
 					: 'max-h-0 overflow-y-hidden'}"
