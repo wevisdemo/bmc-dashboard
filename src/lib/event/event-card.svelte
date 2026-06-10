@@ -92,7 +92,7 @@
 			</div>
 		{/if}
 
-		<div class="space-y-1">
+		<div class="space-y-2">
 			<h4 class="wv-h9 wv-kondolar font-bold">{title}</h4>
 
 			{#if dateDisplay}
@@ -140,15 +140,15 @@
 					{/if}
 					<div class="flex flex-col gap-0.5">
 						<div class="flex flex-row items-center gap-2">
-							<span class="wv-b5 font-bold">{proposer.name}</span>
+							<span class="wv-b5">{proposer.name}</span>
 							{#if proposer.party}
 								<PartyTag party={proposer.party} />
 							{/if}
 						</div>
 						{#if proposer.district}
-							<p class="text-neutral-500">
+							<span class="wv-b6 text-neutral-500">
 								ส.ก. เขต{proposer.district}
-							</p>
+							</span>
 						{/if}
 					</div>
 				</div>
