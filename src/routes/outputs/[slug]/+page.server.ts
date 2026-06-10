@@ -44,7 +44,7 @@ export function load({ params }) {
 
 	for (const id of entry.ids) {
 		const prefix = id.split('_')[0];
-		const event = getTableFromPrefix(prefix)?.find((t) => t.id === id);
+		const event = tableIndexByPrefix.get(prefix)?.get(id);
 		if (!event) {
 			console.warn(`[outputs/${entry.slug}] event id "${id}" not found`);
 			continue;
@@ -138,3 +138,10 @@ function getTableFromPrefix(prefix?: string) {
 			return undefined;
 	}
 }
+
+const tableIndexByPrefix = new Map(
+	['subject', 'motion', 'bill', 'billcom', 'gencom', 'com', 'budgetcom'].map((prefix) => [
+		prefix,
+		new Map(getTableFromPrefix(prefix)?.map((e) => [e.id, e]) ?? [])
+	])
+);

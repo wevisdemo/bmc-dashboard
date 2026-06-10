@@ -45,12 +45,13 @@
 
 	let isMobileFilterExpanded = $state(false);
 
+	let showAllTopics = $derived(params.topics.length === 0);
 	let filteredEvents = $derived(
 		data.events.filter(
 			(event) =>
 				(params.district === AdditionalDistrictOption.ALL ||
 					event.districts?.some((d) => d === params.district)) &&
-				event.topics?.some((t) => params.topics.length === 0 || params.topics.includes(t))
+				(showAllTopics || event.topics?.some((t) => params.topics.includes(t)))
 		)
 	);
 
