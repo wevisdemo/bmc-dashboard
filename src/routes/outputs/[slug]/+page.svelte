@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	import { page } from '$app/state';
 	import { Accordion } from 'bits-ui';
 	import { ChevronLeft, Events, Idea, Information } from 'carbon-icons-svelte';
 	import { onMount } from 'svelte';
+	import { derived } from 'svelte/store';
 	import { EventGroup } from '$lib/constants';
 	import AccordionItem from '$lib/event/accordion-item.svelte';
 	import CommitteeMembers from '$lib/event/committee-members.svelte';
@@ -63,7 +66,9 @@
 
 <div class="px-3 py-2 md:px-8 md:py-3">
 	<a
-		href={resolvePath('/')}
+		href={resolvePath(
+			browser ? `/${page.url.search ? page.url.search : ''}${page.url.hash ? '#list' : ''}` : '/'
+		)}
 		class="wv-b6 flex flex-row items-center gap-2 hover:text-neutral-600 md:gap-4"
 		><ChevronLeft /> สำรวจเรื่องที่ ส.ก. เสนอ</a
 	>

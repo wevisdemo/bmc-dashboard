@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	import { page } from '$app/state';
 	import { ArrowDown } from 'carbon-icons-svelte';
 	import CaretUp from 'carbon-icons-svelte/lib/CaretUp.svelte';
 	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
@@ -159,7 +161,10 @@
 				</div>
 			</div>
 			<TabList
-				events={filteredEvents}
+				events={filteredEvents.map((e) => ({
+					...e,
+					href: e.href ? `${e.href}${browser ? page.url.search : ''}#${e.id}` : undefined
+				}))}
 				bind:tab={params.tab}
 				bind:page={params.page}
 				ontabchange={resetPageNumber}
