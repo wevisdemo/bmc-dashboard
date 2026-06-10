@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { page } from '$app/state';
-	import { ArrowDown } from 'carbon-icons-svelte';
-	import CaretUp from 'carbon-icons-svelte/lib/CaretUp.svelte';
-	import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
-	import WarningAlt from 'carbon-icons-svelte/lib/WarningAlt.svelte';
+	import { ArrowDown, CaretUp, SettingsAdjust, WarningAlt } from 'carbon-icons-svelte';
 	import { useSearchParams } from 'runed/kit';
 	import { slide } from 'svelte/transition';
 	import { z } from 'zod';

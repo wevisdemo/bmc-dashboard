@@ -1,6 +1,5 @@
 <script lang="ts">
-	import CaretDown from 'carbon-icons-svelte/lib/CaretDown.svelte';
-	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
+	import { CaretDown, Checkmark } from 'carbon-icons-svelte';
 
 	interface Item {
 		value: string;

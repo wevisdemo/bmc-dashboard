@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Accordion, type WithoutChildrenOrChild } from 'bits-ui';
-	import ChevronDown from 'carbon-icons-svelte/lib/ChevronDown.svelte';
+	import { ChevronDown } from 'carbon-icons-svelte';
 	import { slide } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
 

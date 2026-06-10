@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Checkbox, Label } from 'bits-ui';
-	import Checkmark from 'carbon-icons-svelte/lib/Checkmark.svelte';
-	import Subtract from 'carbon-icons-svelte/lib/Subtract.svelte';
+	import { Checkmark, Subtract } from 'carbon-icons-svelte';
 	import type { Snippet } from 'svelte';
 
 	interface Props {

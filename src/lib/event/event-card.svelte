@@ -1,9 +1,5 @@
 <script lang="ts">
-	import { Information } from 'carbon-icons-svelte';
-	import ArrowUpRight from 'carbon-icons-svelte/lib/ArrowUpRight.svelte';
-	import Document from 'carbon-icons-svelte/lib/Document.svelte';
-	import Events from 'carbon-icons-svelte/lib/Events.svelte';
-	import User from 'carbon-icons-svelte/lib/User.svelte';
+	import { ArrowUpRight, Document, Events, Information, User } from 'carbon-icons-svelte';
 	import { EventGroup } from '$lib/constants';
 	import ReferenceLink from '$lib/inputs/button-link.svelte';
 	import { resolvePath } from '$lib/paths';

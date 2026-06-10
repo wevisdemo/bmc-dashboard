@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LocationFilled from 'carbon-icons-svelte/lib/LocationFilled.svelte';
+	import { LocationFilled } from 'carbon-icons-svelte';
 
 	interface Props {
 		district: string;

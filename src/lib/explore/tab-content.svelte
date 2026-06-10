@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tabs } from 'bits-ui';
-	import Information from 'carbon-icons-svelte/lib/Information.svelte';
+	import { Information } from 'carbon-icons-svelte';
 	import type { EventGroup } from '$lib/constants';
 	import Pagination from '$lib/inputs/pagination.svelte';
 	import EventCard from '../event/event-card.svelte';

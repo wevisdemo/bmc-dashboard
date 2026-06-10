@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Pagination } from 'bits-ui';
-	import ChevronLeft from 'carbon-icons-svelte/lib/ChevronLeft.svelte';
-	import ChevronRight from 'carbon-icons-svelte/lib/ChevronRight.svelte';
+	import { ChevronLeft, ChevronRight } from 'carbon-icons-svelte';
 
 	interface Props {
 		count: number;
