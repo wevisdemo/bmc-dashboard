@@ -1,5 +1,6 @@
 import { AdditionalDistrictOption, EventGroup } from '$lib/constants';
 import type EventCard from '$lib/event/event-card.svelte';
+import { compareEventOrder } from '$lib/event/sort';
 import districtsData from '$lib/explore/bangkok-districts.json';
 import { outputs } from '$lib/output';
 import { bills } from '$lib/sheets/bill';
@@ -46,9 +47,7 @@ export function load() {
 	const events: Event[] = [
 		...subjects,
 		...motions,
-		...standingCommittees,
-		...billCommittees,
-		...generalCommittees,
+		...[...standingCommittees, ...billCommittees, ...generalCommittees].sort(compareEventOrder),
 		...bills,
 		...budgetCommittees
 	].map((e) => ({

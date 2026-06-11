@@ -4,7 +4,6 @@
 	import { Accordion } from 'bits-ui';
 	import { ChevronLeft, Events, Idea, Information } from 'carbon-icons-svelte';
 	import { onMount } from 'svelte';
-	import { derived } from 'svelte/store';
 	import { EventGroup } from '$lib/constants';
 	import AccordionItem from '$lib/event/accordion-item.svelte';
 	import CommitteeMembers from '$lib/event/committee-members.svelte';
@@ -13,6 +12,7 @@
 	import MarkdownContent from '$lib/event/markdown-content.svelte';
 	import OrganizationBudgets from '$lib/event/organization-budgets.svelte';
 	import PeopleList from '$lib/event/people-list.svelte';
+	import { compareEventOrder } from '$lib/event/sort';
 	import EventIcon from '$lib/icons/event-icon.svelte';
 	import { resolvePath } from '$lib/paths';
 	import RemarkMessage from '$lib/remark-message.svelte';
@@ -42,12 +42,16 @@
 		[EventGroup.Budget]: 'พิจารณางบประมาณ'
 	};
 
-	const eventsByGroup = $derived(
-		data.events.reduce(
+	const eventsByGroup = $derived.by(() => {
+		const grouped = data.events.reduce(
 			(acc, event) => acc.set(event.group, [...(acc.get(event.group) ?? []), event]),
 			new Map<EventGroup, typeof data.events>()
-		)
-	);
+		);
+		const committeeStudy = grouped.get(EventGroup.CommitteeStudy);
+		if (committeeStudy)
+			grouped.set(EventGroup.CommitteeStudy, committeeStudy.toSorted(compareEventOrder));
+		return grouped;
+	});
 
 	const remarksByGroup = $derived(
 		data.remarks.reduce((acc, r) => acc.set(r.group, r.remark), new Map<EventGroup, string>())
