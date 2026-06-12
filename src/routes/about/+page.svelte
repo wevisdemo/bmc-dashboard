@@ -192,9 +192,7 @@
 		<p>
 			{@render TextLink('WeVis', 'https://wevis.info/', true)}
 			ได้รับการสนับสนุนทุนในการดำเนินงานจาก
-			{@render TextLink('National Endowment for Democracy (NED)', 'https://www.ned.org/', true)}
-			และ
-			{@render TextLink('International Republican Institute', 'https://www.iri.org/', true)} ซึ่งนำมาใช้เป็นต้นทุนในการรวมรวมข้อมูล
+			{@render TextLink('National Endowment for Democracy (NED)', 'https://www.ned.org/', true)} ซึ่งนำมาใช้เป็นต้นทุนในการรวมรวมข้อมูล
 			ออกแบบ พัฒนาเว็บไซต์ ประสานงาน บริหารจัดการ ตลอดจนการจัดประชุมเพื่อดำเนินโครงการ
 		</p>
 		<p>
